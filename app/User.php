@@ -33,6 +33,9 @@ class User extends Authenticatable
 
 
    
+    public function jovem () {
+        return $this->belongsTo(Jovem::class);
+    }
 
 
     //regra que o usuário está vinculado

@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
 
         $permissions = Permission::with('roles')->get();
         foreach ($permissions as $permission)
-        //dd($permissions);
+      
              
         {
             $gate->define($permission->name, function(User $user) use ($permission){
@@ -36,6 +36,13 @@ class AuthServiceProvider extends ServiceProvider
                 return $user->hasPermission($permission);
             });
         }   
+
+            //verificar se o usuário logado é adm 
+            $gate->before(function(User $user, $ability)
+            { 
+                if ($user->hasAnyRoles('adm'))
+                     return true;
+            });
 
     }
 }

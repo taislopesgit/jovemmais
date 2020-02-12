@@ -15,6 +15,9 @@ class Jovem extends Model
     protected $primaryKey = 'id_jovem';
 
 
+
+ 
+
     public function user()
     {
         
@@ -228,14 +231,45 @@ class Jovem extends Model
             'tb_contato.nome'
         )
       
-    
+        //->where('id_user', auth()->user()->id)
         ->where('tb_contato.id_contato', $id)
         ->orderBy('tb_contato.nome')
+        //->toSql();dd($gestores);
         ->paginate(50);
-       
-         //dd($gestores);
+      
         return $gestores;
         }
 
+
+
+        public function test(int $id)
+    {
+       
+        $testId = DB::table('users')
+        ->join('tb_jovem', 'users.id', '=', 'tb_jovem.id_jovem')
+       // ->join('roles', 'roles.id', '=', 'roles.id')
+       
+
+        ->select(
+               'tb_jovem.id_jovem',
+              // 'tb_jovem.id_user',
+               'users.id',
+               'users.name',
+              // 'roles.name',
+              // 'users.email',
+              // 'tb_jovem.email',
+               'tb_jovem.nome'
+           
+        )
+
+        //->where('tb_jovem.id_user')
+        
+        //->toSql();dd($testId);
+        ->paginate(10);
+       // dd($testId);
+        return $testId;
+        }
+
+       
 }
 
