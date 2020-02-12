@@ -16,8 +16,6 @@ class Jovem extends Model
 
 
 
- 
-
     public function user()
     {
         
@@ -204,9 +202,7 @@ class Jovem extends Model
     
 
     public function Gestor(int $id)
-    {
-       
-        
+    { 
         $gestores = DB::table('tb_jovem')
         ->join('tb_matricula', 'tb_jovem.id_jovem', '=', 'tb_matricula.id_jovem')
         ->join('tb_cliente', 'tb_matricula.id_cliente', '=', 'tb_cliente.id_cliente')
@@ -230,45 +226,15 @@ class Jovem extends Model
             'tb_cliente.nome_fantasia as empresa',  
             'tb_contato.nome'
         )
-      
-        //->where('id_user', auth()->user()->id)
+    
         ->where('tb_contato.id_contato', $id)
         ->orderBy('tb_contato.nome')
-        //->toSql();dd($gestores);
         ->paginate(50);
       
         return $gestores;
         }
 
 
-
-        public function test(int $id)
-    {
-       
-        $testId = DB::table('users')
-        ->join('tb_jovem', 'users.id', '=', 'tb_jovem.id_jovem')
-       // ->join('roles', 'roles.id', '=', 'roles.id')
-       
-
-        ->select(
-               'tb_jovem.id_jovem',
-              // 'tb_jovem.id_user',
-               'users.id',
-               'users.name',
-              // 'roles.name',
-              // 'users.email',
-              // 'tb_jovem.email',
-               'tb_jovem.nome'
-           
-        )
-
-        //->where('tb_jovem.id_user')
-        
-        //->toSql();dd($testId);
-        ->paginate(10);
-       // dd($testId);
-        return $testId;
-        }
 
        
 }

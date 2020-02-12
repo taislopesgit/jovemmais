@@ -135,7 +135,7 @@ return [
             'text'        => 'Home',
             'url'         => 'home',
             'icon'        => 'fa fa-home',
-            'can'         => 'adm',
+            //'can'         => 'adm',
        
         ],
         
@@ -176,7 +176,7 @@ return [
                   'submenu' => [
                 [
                     'text' => 'Relação Jovens',
-                   // 'url'  => 'gestor',
+                    'url'  => 'home',
                     //'icon' => 'fa fa-share',
                    // 'icon_color' => 'green',
                    
@@ -189,7 +189,7 @@ return [
                      'submenu' => [
                         [
                             'text' => 'Evolução',
-                            'url'  => 'jovem',
+                            'url'  => 'show',
                            // 'icon' => 'fa fa-share',
                            // 'icon_color' => 'green',
                            

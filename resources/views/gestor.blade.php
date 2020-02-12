@@ -1,10 +1,5 @@
 @extends('adminlte::page') @section('title', 'AdminLTE') @section('content_header')
-<section class="content-header">
-    <ol class="breadcrumb">
-        <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Perfil</li>
-    </ol>
-</section>
+
 <section class="content">
     <!-- Info boxes -->
     @foreach ($gestores as $gestor)

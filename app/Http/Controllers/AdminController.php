@@ -39,17 +39,6 @@ class AdminController extends Controller
 
        
     }*/
-
-    
-    public function jovem()
-    {
-       
-        
-        return view('jovem');
-
-
-    }
-    
  
     public function usuario()
     {
@@ -107,13 +96,19 @@ class AdminController extends Controller
     {
         
         $gestores = $jovem->gestor($id);
-        
      return view('gestor', compact('gestores','gestor'));
 }
 
-
+    public function jovem(int $id)
+{  
+    
+    $jovem = Jovem::findOrFail($id);
+    $verJovens = $jovem->jovemDados($id);
+    $sobreJovem = $jovem->jovemSobre($id);
+    $evolucoes = $jovem->jovemEvolucao($id);
    
+    return view('jovem', compact('jovem','verJovens','jovemDados','sobreJovem','jovemSobre','evolucoes', 'jovemEvolucao'));
+}
 
 
- 
 }

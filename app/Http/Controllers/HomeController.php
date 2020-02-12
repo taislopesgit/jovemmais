@@ -56,11 +56,8 @@ class HomeController extends Controller
         $verJovens = $jovem->jovemDados($id);
         $sobreJovem = $jovem->jovemSobre($id);
         $evolucoes = $jovem->jovemEvolucao($id);
-        $testId = $jovem->test($id);
-
-        $user = auth()->user()->id;
-        dd($user);
-        return view('show', compact('jovem','verJovens','jovemDados','sobreJovem','jovemSobre','evolucoes', 'jovemEvolucao', 'testId', 'test'));
+       
+        return view('show', compact('jovem','verJovens','jovemDados','sobreJovem','jovemSobre','evolucoes', 'jovemEvolucao'));
 
     }
 
@@ -75,21 +72,8 @@ class HomeController extends Controller
 
     }
 
-    public function rolesPermissions()
-    {
-       auth()->user()->name;
-       
-    }
 
-    
-    public function jovem()
-    {
-       
-        
-        return view('jovem');
-
-
-    }
+   
     
    
   
