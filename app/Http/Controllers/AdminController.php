@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Jovem;
+use App\Perfil;
 use App\Cliente;
-use App\User;
-use App\Role;
-use App\Permission;
+use App\Usuario;
+use App\Papel;
+use App\Permissao;
 
 class AdminController extends Controller
 {
@@ -31,6 +32,8 @@ class AdminController extends Controller
      */
 
     
+<<<<<<< HEAD
+=======
    
 /*
     public function rolesPermissions()
@@ -61,8 +64,8 @@ class AdminController extends Controller
         return view('usuario', compact('funcoes'));
     }
 
+>>>>>>> ed3e3108c46b3ab9969a6adfa7ee778cb1176bee
     
-
     public function gestores()
     {
         $dominio= DB::table('tb_jovem')
@@ -83,8 +86,7 @@ class AdminController extends Controller
             'tb_contato.nome'
         )
       
-    
-        
+
         ->orderBy('tb_contato_cliente.id_contato_cliente')
         ->Paginate(10);    
         return view('gestores', compact('dominio'));
@@ -96,6 +98,31 @@ class AdminController extends Controller
     {
         
         $gestores = $jovem->gestor($id);
+<<<<<<< HEAD
+        return view('gestor', compact('gestores','gestor'));
+}
+
+
+    public function jovem(Request $request, Jovem $jovem)
+    {  
+    
+        $usuarios = Jovem::where('id_usuario', Auth::id())->get();
+        $verJovens = $jovem->jovemDados2();
+        $sobreJovem = $jovem->jovemSobre2();
+        $evolucoes = $jovem->jovemEvolucao2();
+   
+    return view('perfil-jovem', compact('verJovens','jovemDados2','sobreJovem','jovemSobre2',
+    'evolucoes', 'jovemEvolucao2','usuarios'));
+}
+
+
+        public function perfilJovem(Request $request, Jovem $jovem)
+        {  
+            $gestores = Jovem::where('id_usuario', Auth::id())->get();
+            $jovemPerfil = $jovem->perfilJovem();
+           return view('perfil-gestor', compact('gestores','jovemPerfil','perfilJovem'));
+        }
+=======
      return view('gestor', compact('gestores','gestor'));
 }
 
@@ -109,6 +136,7 @@ class AdminController extends Controller
    
     return view('jovem', compact('jovem','verJovens','jovemDados','sobreJovem','jovemSobre','evolucoes', 'jovemEvolucao'));
 }
+>>>>>>> ed3e3108c46b3ab9969a6adfa7ee778cb1176bee
 
 
 }

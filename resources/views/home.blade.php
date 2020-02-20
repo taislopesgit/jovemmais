@@ -15,10 +15,13 @@
 </section>
 @stop
 @section('content')
+
+<br>
+
 <div class="row">
     <div class="col-lg-3 col-xs-6">
         <!-- box de frequencia -->
-        <div class="small-box bg-teal">
+        <div class="small-box bg-teal-active color-palette">
             <div class="inner">
             @foreach ($sobre as $programa)
             
@@ -35,7 +38,7 @@
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
-        <div class="small-box bg-yellow">
+        <div class="small-box bg-teal-active color-palette">
             <div class="inner">
             @foreach ($sobre as $programa)
             
@@ -51,7 +54,7 @@
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
-        <div class="small-box bg-olive">
+        <div class="small-box bg-teal-active color-palette">
             <div class="inner">
            @foreach ($sobre as $programa)
                 <h3>+{{$programa->jovens}}</h3>
@@ -65,7 +68,7 @@
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
-        <div class="small-box bg-maroon">
+        <div class="small-box bg-teal-active color-palette">
             <div class="inner">
             @foreach ($sobre as $programa)
                 <h3>+{{$programa->cliente}}</h3>
@@ -79,144 +82,70 @@
     <!-- ./col -->
 </div>
 <div class="row">
-<div class="col-md-12">
-<div class="box">
-    <div class="box-header with-border">
-        <a class="accordion-toggle pull-right collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false">
-        <i class="fa fa-search"></i>Filtrar
-        </a>
-        <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-            <h4 class="box-title">Busca detalhada</h4>
-            <div class="panel-body">
-                <form action="{{route('home')}}"  method="post">
-                    {{ csrf_field() }}
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label>ID</label>
-                            <input type="search"  name="id" class="form-control">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label> Nome</label>
-                            <input type="search"  name="nome" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label>Sexo</label>
-                        <select class="form-control" name="sexo">
-                            <option selected></option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Feminino">Feminino</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>Cliente</label>
-                        <select name="cliente" class="form-control">
-                            <option> </option>
-                            @foreach ($clientes as $cliente)
-                            <option value="{{$cliente->nome_fantasia}}">{{$cliente->razao_social}} - {{$cliente->nome_fantasia}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>Curso</label>
-                        <select  name="curso" class="form-control">
-                            <option></option>
-                            @foreach ($cursos as $curso)
-                            <option value="{{$curso->nome}}">{{$curso->nome}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>Data inicio</label>
-                        <input name="data-inicio" type="date" class="form-control">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>Data fim</label>
-                        <input name="data-fim" type="date" class="form-control">
-                    </div>
-                    <div class="form-group col-md-2">
-                        <input type="submit"  class="btn btn-primary" value="Filtrar">
-                    </div>
-                    <div>  
-                    </div>
-            </div>
-        </div>
-    </div>
-    </form>
-</div>
-<!-- /relacaoJovens -->
-<div class="row">
-    <div class="col-md-12">
-        <div class="box box-solid box-primary">
-            <div class="box-header">
-                <h3 class="box-title">Jovens no Programa</h3>
-            </div>
-            <div class="box-body table-responsive">
-                <table class="table">
-                    <thead class="bg-aqua">
-                    <tbody>
-                        <tr>
-                            <th class="align-middle text-center">ID</th>
-                            <th class="align-middle text-center">Nome</th>
-                            <th class="align-middle text-center">Sexo</th>
-                            <th class="align-middle text-center">Email</th>
-                            <th class="align-middle text-center">Curso</th>
-                            <th class="align-middle text-center">Cliente</th>
-                            <th class="align-middle text-center">Data de nascimento</th>
-                            <th class="align-middle text-center">Data de matrícula</th>
-                            <th class="align-middle text-center">Status</th>
-                            <th class="align-middle text-center">&nbsp;</th>
-                        </tr>
-                        @foreach ($jovens as $jovem)
-                        <tr>
-                            <td class="align-middle text-center">{{$jovem->id_jovem}}</td>
-                            <td class="align-middle text-center">{{$jovem->nome}}</td>
-                            <td class="align-middle text-center">{{$jovem->sexo}}</td>
-                            <td class="align-middle text-center">{{$jovem->email}}</td>
-                            <td class="align-middle text-center">{{$jovem->nome_curso}}</td>
-                            <td class="align-middle text-center">{{$jovem->nome_fantasia}}</td>
-                            <td class="align-middle text-center">
-                                {{date( 'd/m/Y' , strtotime($jovem->data_nascimento))}}
-                            </td>
-                            </td>
-                            <td class="align-middle text-center">
-                                {{date( 'd/m/Y' , strtotime($jovem->data_inicio))}}
-                            </td>
-                            <td class="align-middle text-center">
-                                @if (
-                                !is_null($jovem->data_desligamento)
-                                )
-                                <small class="label bg-red">Inativo</small>
-                                @else
-                                <small class="label bg-olive">Ativo</small>
-                                @endif
-                            </td>
-                            
-                            <td class="align-middle text-center"> </td>
-                            <td class="align-middle text-center">
-                                <a href="{{route('show', $jovem->id_jovem)}}" class="text-blue" title="Visualizar" data-toggle="tooltip" data-placement="top">
-                                <i class="fa fa-eye">&nbsp;</i>
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                
-                <div class="box-tools">
-                    @if (isset($dadosFiltro))
-                    {{ $jovens->appends($dadosFiltro)->links() }}
-                    @else
-                    {{ $jovens->links() }}
-                    @endif
+    <div class="col-md-6">
+        <div class="box box-solid">
+          <div class="box-header with-border">
+            <h3 class="box-title">Atividades</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1" class="active"></li>
+            
+              </ol>
+              <div class="carousel-inner">
+                <div class="item">
+                  <img src="https://s3.uninove.br/app/uploads/2019/09/02132054/1567452052-1567452052-60edbb8a-58f5-4195-9e1b-c0e37019db7d-1024x538.jpg" alt="Jovens">
+
+                  <div class="carousel-caption">
+                    Jovens
+                  </div>
                 </div>
+                <div class="item active">
+                  <img src="https://i.ytimg.com/vi/G2_LZSpTVA0/maxresdefault.jpg" alt="Feira">
+                  <div class="carousel-caption">
+                   Feira
+                  </div>
+                </div>
+              
+                </div>
+              </div>
+              <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                <span class="fa fa-angle-left"></span>
+              </a>
+              <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                <span class="fa fa-angle-right"></span>
+              </a>
             </div>
-        </div>
-    </div>
-</div>
+          </div>
+          <!-- /.box-body -->
+       
+        <!-- /.box -->
+      </div>
+      <div class="col-md-6">
+      
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-ban"></i> Atenção:</h4>
+         Neste feriado de carnaval não teremos atividade na terça-feira dia 25 de Fevereiro de 2019 mas 
+         retornaremos na quarta-feira dia 26 ás 12h. Consulte seu calendário!
+      </div> 
+      <div class="alert alert-warning alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-info"></i> Importante:</h4>
+         Não esqueçam de entregar o número do Registro Escolar - RA, solicitado.
+         Prazo: 03 de Março de 2019
+         Consulte seu instrutor
+      </div> 
+      <div class="alert alert-success  alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa  fa-calendar"></i> Nos próximos dias:</h4>
+        Atividade externa: Bovespa | Dia 29 de Fevereiro de 2020 |
+        Consulte seu instrutor 
+      </div></div>
 
-
-
-
+      
 @stop
        

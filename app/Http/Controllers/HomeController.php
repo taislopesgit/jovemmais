@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use App\Jovem;
-use App\User;
+use App\Perfil;
+use App\Usuario;
 use App\Cliente;
 use App\Curso;
 use App\Polo;
@@ -34,9 +36,8 @@ class HomeController extends Controller
      */
     public function index(Request $request, Jovem $jovem)
     {
-       
-        $nameUser = auth()->user()->name;
-        $auth = $jovem->where('id_user', auth()->user()->id)->get();
+        
+
         $dadosFiltro = $request->except('_token');
         $jovens = $jovem->filtroDados($dadosFiltro);
         $clientes = Cliente::orderBy('razao_social','asc')->orderBy('nome_fantasia','asc')->get();
@@ -45,7 +46,7 @@ class HomeController extends Controller
       
         
 
-        return view('home', compact('jovens','dadosFiltro','clientes','cursos','sobre', 'ususarios'));
+        return view('home', compact('jovens','dadosFiltro','clientes','cursos','sobre', 'usuarios'));
 
     }
   
@@ -53,11 +54,15 @@ class HomeController extends Controller
     {
 
         $jovem = Jovem::findOrFail($id);
-        $verJovens = $jovem->jovemDados($id);
-        $sobreJovem = $jovem->jovemSobre($id);
+        $verJovens = $jovem->jovemDados1($id);
+        $sobreJovem = $jovem->jovemSobre1($id);
         $evolucoes = $jovem->jovemEvolucao($id);
        
+<<<<<<< HEAD
+        return view('show', compact('jovem','verJovens','jovemDados1','sobreJovem','jovemSobre1','evolucoes', 'jovemEvolucao'));
+=======
         return view('show', compact('jovem','verJovens','jovemDados','sobreJovem','jovemSobre','evolucoes', 'jovemEvolucao'));
+>>>>>>> ed3e3108c46b3ab9969a6adfa7ee778cb1176bee
 
     }
 
@@ -72,11 +77,14 @@ class HomeController extends Controller
 
     }
 
+<<<<<<< HEAD
+=======
 
    
     
    
   
 
+>>>>>>> ed3e3108c46b3ab9969a6adfa7ee778cb1176bee
    
 }

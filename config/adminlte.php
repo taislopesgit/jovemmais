@@ -129,7 +129,7 @@ return [
 
     'menu' => [
         
-        ['header' => 'MENU'],
+        ['header' => 'JOVEM+'],
        
         [
             'text'        => 'Home',
@@ -143,7 +143,7 @@ return [
         [
             'text'    => 'ADM',
             'icon'    => 'fas fa-fw fa-cogs',
-             'can'     => 'adm',
+             'can'     => '',
                   'submenu' => [
                 [
                     'text' => 'Relação Jovens',
@@ -170,30 +170,47 @@ return [
             
             ], ],
         [
-            'text'    => 'Gestor',
+            'text'    => 'Perfil Gestor',
             'icon'    => 'fas fa-fw fa-users',
-             'can'     => 'gestor',
+             'can'     => 'view_gestor',
                   'submenu' => [
                 [
                     'text' => 'Relação Jovens',
+<<<<<<< HEAD
+                    'url'  => 'gestor',
+=======
                     'url'  => 'home',
+>>>>>>> ed3e3108c46b3ab9969a6adfa7ee778cb1176bee
                     //'icon' => 'fa fa-share',
                    // 'icon_color' => 'green',
                    
                 ],   ], ],
         
         [
-            'text'    => 'Jovem',
+            'text'    => 'Perfil Jovem',
             'icon'    => 'fas fa-fw fa-user',
-            'can'     => 'jovem',
+            'can'     => 'view_jovem',
                      'submenu' => [
                         [
                             'text' => 'Evolução',
+<<<<<<< HEAD
+                            'url'  => 'jovem',
+                            //'icon' => 'fas fa-fw fa-users',
+                            //'icon_color' => 'green',
+=======
                             'url'  => 'show',
                            // 'icon' => 'fa fa-share',
                            // 'icon_color' => 'green',
+>>>>>>> ed3e3108c46b3ab9969a6adfa7ee778cb1176bee
                            
-                        ],   ], ],
+                        ],  
+                        [
+                            'text' => 'Buscar Sala',
+                            'url'  => '',
+                           // 'icon' => 'fa fa-cog',
+                            //'icon_color' => 'green',
+                           
+                        ],    ], ],
                                 
         
         

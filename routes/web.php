@@ -19,8 +19,14 @@ Route::group(['prefix' => 'home'], function () {
 
 Route::get('/usuario', 'adminController@usuario')->name('usuario');
 Route::get('/gestores', 'adminController@gestores')->name('gestores');	
+<<<<<<< HEAD
+Route::get( '/jovem', 'adminController@jovem')->name('perfil-jovem');
+Route::get('/gestor', 'adminController@perfilJovem')->name('perfil-gestor');
+Route::match(['get', 'post'], '{admin}', 'adminController@show')->name('gestor');
+=======
 Route::get( '/jovem', 'adminController@jovem')->name('jovem');
 Route::match(['get', 'post'], '/{admin}', 'adminController@show')->name('gestor');
+>>>>>>> ed3e3108c46b3ab9969a6adfa7ee778cb1176bee
 
 
 

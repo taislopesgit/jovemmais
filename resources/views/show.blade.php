@@ -208,7 +208,7 @@
                                 <th>Saída </th>
                             </tr>
                             @foreach ($verJovens as $verJovem)
-                                @can ('view_jovem',$verJovem)
+                              
                             <tr>
                                 <td class="align-center">  {{date( 'd/m/y' , strtotime($verJovem->data_disciplina))}}</td>
                                 <td class="align-center">{{is_null($verJovem->hora_primeira_marcacao) ? null : date( 'H:i' , strtotime($verJovem->hora_primeira_marcacao))}}</td>
@@ -216,7 +216,7 @@
                                 <td class="align-middle">{{is_null($verJovem->hora_terceira_marcacao) ? null : date( 'H:i' , strtotime($verJovem->hora_terceira_marcacao))}}</td>
                                 <td class="align-middle">{{is_null($verJovem->hora_quarta_marcacao) ? null : date( 'H:i' , strtotime($verJovem->hora_quarta_marcacao))}}</td>
                                 </td>
-                               @endcan
+                              
                                 @endforeach
                             </tr>
                         </tbody>
