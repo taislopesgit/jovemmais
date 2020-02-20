@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Usuario;
+use App\User;
 use App\Jovem;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -19,12 +19,12 @@ class JovemPolicy
     {
         //
     }
-/*
-    public function index($usuario, Jovem $jovem)
+
+    public function index(User $user, Jovem $jovem)
     {
-        return $usuario->id == $jovem->id;
+        return $user->id == $jovem->user_id;
         
-    }*/
+    }
 
 
 }

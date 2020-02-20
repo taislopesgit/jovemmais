@@ -129,7 +129,7 @@ return [
 
     'menu' => [
         
-        ['header' => 'JOVEM+'],
+        ['header' => 'MENU'],
        
         [
             'text'        => 'Home',
@@ -143,7 +143,7 @@ return [
         [
             'text'    => 'ADM',
             'icon'    => 'fas fa-fw fa-cogs',
-             'can'     => '',
+             'can'     => 'adm',
                   'submenu' => [
                 [
                     'text' => 'Relação Jovens',
@@ -170,47 +170,30 @@ return [
             
             ], ],
         [
-            'text'    => 'Perfil Gestor',
+            'text'    => 'Gestor',
             'icon'    => 'fas fa-fw fa-users',
-             'can'     => 'view_gestor',
+             'can'     => 'gestor',
                   'submenu' => [
                 [
                     'text' => 'Relação Jovens',
-<<<<<<< HEAD
-                    'url'  => 'gestor',
-=======
                     'url'  => 'home',
->>>>>>> ed3e3108c46b3ab9969a6adfa7ee778cb1176bee
                     //'icon' => 'fa fa-share',
                    // 'icon_color' => 'green',
                    
                 ],   ], ],
         
         [
-            'text'    => 'Perfil Jovem',
+            'text'    => 'Jovem',
             'icon'    => 'fas fa-fw fa-user',
-            'can'     => 'view_jovem',
+            'can'     => 'jovem',
                      'submenu' => [
                         [
                             'text' => 'Evolução',
-<<<<<<< HEAD
-                            'url'  => 'jovem',
-                            //'icon' => 'fas fa-fw fa-users',
-                            //'icon_color' => 'green',
-=======
                             'url'  => 'show',
                            // 'icon' => 'fa fa-share',
                            // 'icon_color' => 'green',
->>>>>>> ed3e3108c46b3ab9969a6adfa7ee778cb1176bee
                            
-                        ],  
-                        [
-                            'text' => 'Buscar Sala',
-                            'url'  => '',
-                           // 'icon' => 'fa fa-cog',
-                            //'icon_color' => 'green',
-                           
-                        ],    ], ],
+                        ],   ], ],
                                 
         
         
