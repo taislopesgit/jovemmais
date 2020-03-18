@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App\usuario;
+
 
 class LoginController extends Controller
 {
@@ -25,13 +28,40 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+       
+
+    //protected $redirectTo = 'inicial';
+
+
+
+    protected function redirectTo(){
+        $redirecionamento = Auth::user()->papeis; 
+        switch ($redirecionamento[0]->nome) {
+            case 'adm':
+                return route('home');
+                break;
+            case 'gestor':
+                return route('gestor');
+                break; 
+            case 'jovem':
+                return route('jovem');
+                break; 
+            default:
+                return route('inicial'); 
+                break; 
+        }
+    }
+
+
+
+
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');

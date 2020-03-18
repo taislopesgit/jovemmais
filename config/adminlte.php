@@ -106,7 +106,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'inicial',
 
     'logout_url' => 'logout',
 
@@ -129,71 +129,73 @@ return [
 
     'menu' => [
         
-        ['header' => 'MENU'],
+        ['header' => ''],
        
-        [
-            'text'        => 'Home',
-            'url'         => 'home',
-            'icon'        => 'fa fa-home',
-            //'can'         => 'adm',
-       
-        ],
+      
         
-        ['header' => 'Navegação Principal'],
+        ['header' => ''],
         [
-            'text'    => 'ADM',
+            'text'    => 'Perfil Administrador ',
             'icon'    => 'fas fa-fw fa-cogs',
-             'can'     => 'adm',
+             'can'     => '',
+
                   'submenu' => [
+
+                [
+                    'text'        => 'Painel',
+                    'icon'    => 'fa fa-info-circle',
+                    'url'         => 'inicial',
+                
+                    ], 
                 [
                     'text' => 'Relação Jovens',
-                    'url'  => '/home',
-                    //'icon' => 'fas fa-fw fa-user',
-                    //'icon_color' => 'green',
+                    'icon'    => 'fa fa-id-badge',
+                    'url'  => 'home',
+                   
                    
                 ],  
                 [
                     'text' => 'Relação Gestores',
+                    'icon'    => 'fa fa-id-badge',
                     'url'  => 'gestores',
-                    //'icon' => 'fas fa-fw fa-users',
-                    //'icon_color' => 'green',
                    
                 ],  
-                [
-                    'text' => 'Configuração usuário',
-                    'url'  => 'usuario',
-                   // 'icon' => 'fa fa-cog',
-                    //'icon_color' => 'green',
-                   
-                ],  
-            
-            
+               
             ], ],
+
+            
         [
-            'text'    => 'Gestor',
-            'icon'    => 'fas fa-fw fa-users',
+            'text'    => 'Perfil Gestor',
+            'icon'    => 'fa fa-id-badge',
              'can'     => 'gestor',
                   'submenu' => [
                 [
-                    'text' => 'Relação Jovens',
-                    'url'  => 'home',
-                    //'icon' => 'fa fa-share',
-                   // 'icon_color' => 'green',
+                    'text' => 'Painel',
+                    'icon'    => 'fas fa-fw fa-user',
+                    'url'  => 'perfil-gestor',
                    
-                ],   ], ],
+                ],  
+             ], ],
         
         [
-            'text'    => 'Jovem',
-            'icon'    => 'fas fa-fw fa-user',
+            'text'    => 'Perfil Jovem',
+            'icon'    => 'fa fa-id-badge',
             'can'     => 'jovem',
                      'submenu' => [
                         [
+                            'text'        => 'Painel',
+                            'icon'    => 'fa fa-info-circle',
+                            'url'         => 'inicial',
+                    
+                        ], 
+                        [
                             'text' => 'Evolução',
-                            'url'  => 'show',
-                           // 'icon' => 'fa fa-share',
-                           // 'icon_color' => 'green',
-                           
-                        ],   ], ],
+                            'icon'    => "fa fa-signal",
+                            'url'  => 'perfil-jovem',
+                            
+                        ],
+                        
+                         ], ],
                                 
         
         

@@ -1,10 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'AdminLTE')
 @section('content_header')
-
-   
 <section class="content-header">
-
     <h2>
         Jovem+
     </h2>
@@ -18,11 +15,11 @@
 <div class="row">
     <div class="col-lg-3 col-xs-6">
         <!-- box de frequencia -->
-        <div class="small-box bg-teal">
+        <div class="small-box bg-blue">
             <div class="inner">
             @foreach ($sobre as $programa)
             
-            <h3>+{{$programa->valor}}<sup style="font-size: 20px"></sup></h3>
+            <h3>R$ {{$programa->valor}}<sup style="font-size: 20px"></sup></h3>
                 
             <p>Em beneficios aos jovens</p>
             </div>@endforeach
@@ -35,11 +32,11 @@
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
-        <div class="small-box bg-yellow">
+        <div class="small-box bg-green">
             <div class="inner">
             @foreach ($sobre as $programa)
             
-                <h3>+{{$programa->dias}}<sup style="font-size: 20px"></sup></h3>
+                <h3>+{{$programa->aulas}}<sup style="font-size: 20px"></sup></h3>
                
                 <p>Aulas ministradas</p>
             </div>@endforeach
@@ -51,7 +48,7 @@
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
-        <div class="small-box bg-olive">
+        <div class="small-box bg-yellow">
             <div class="inner">
            @foreach ($sobre as $programa)
                 <h3>+{{$programa->jovens}}</h3>
@@ -65,7 +62,7 @@
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
-        <div class="small-box bg-maroon">
+        <div class="small-box bg-red">
             <div class="inner">
             @foreach ($sobre as $programa)
                 <h3>+{{$programa->cliente}}</h3>
@@ -216,7 +213,4 @@
 </div>
 
 
-
-
 @stop
-       

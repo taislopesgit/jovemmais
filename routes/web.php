@@ -10,6 +10,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
 Route::group(['prefix' => 'home'], function () {
     Route::match(['get', 'post'], '/', 'homeController@index')->name('home');
     Route::match(['get', 'post'], '/{home}', 'homeController@show')->name('show');	
@@ -17,11 +18,13 @@ Route::group(['prefix' => 'home'], function () {
     
 });
 
-Route::get('/usuario', 'adminController@usuario')->name('usuario');
-Route::get('/gestores', 'adminController@gestores')->name('gestores');	
-Route::get( '/jovem', 'adminController@jovem')->name('jovem');
-Route::match(['get', 'post'], '/{admin}', 'adminController@show')->name('gestor');
 
+Route::get('/inicial', 'jovemController@home')->name('inicial');
+Route::get( '/perfil-jovem', 'jovemController@jovemPerfil')->name('jovem');
+Route::get('/perfil-gestor', 'jovemController@jovemGestor')->name('gestor');
 
+	
+Route::get('/gestores', 'gestorController@gestores')->name('gestores');
+Route::match(['get', 'post'], '/{gestor}', 'gestorController@show')->name('gestorId');
 
 

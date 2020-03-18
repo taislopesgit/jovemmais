@@ -4,61 +4,58 @@
         Jovem+
     </h2>
     <ol class="breadcrumb">
-        <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="inicial"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li class="active">Perfil</li>
     </ol>
 </section>
-
-
 <section class="content">
     <div class="row">
     <div class="col-md-3">
         <div class="box box-primary">
             <div class="box-body box-profile">
-                <img class="profile-user-img img-responsive img-circle" src="https://www.vocacao.org.br/jovemaprendiz/feedback-gestor/images/{{$jovem->id_jovem}}.jpg" alt="User profile picture">
+                @foreach ($usuarios as $usuario)
+                <img class="profile-user-img img-responsive img-circle" src="https://www.vocacao.org.br/jovemaprendiz/feedback-gestor/images/{{$usuario->id_jovem}}.jpg" alt="User profile picture">
                 <h3 class="profile-username text-center"></h3>
                 <p class="text-muted text-center">@if (
-                    !is_null($jovem->matriculas()->get()->max('data_desligamento'))
+                    !is_null($usuario->matriculas()->get()->max('data_desligamento'))
                     )
                     <small class="label bg-red">Inativo</small>
                     @else
                     <small class="label bg-green">Ativo</small>
                     @endif
                 </p>
-                
                 <!-- /.info-box-content -->
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
-                        <b>ID</b> <a class="pull-right">{{$jovem->id_jovem}}</a>
+                        <b>ID</b> <a class="pull-right">{{$usuario->id_jovem}}</a>
                     </li>
                     <li class="list-group-item">
-                        <b>CPF</b> <a class="pull-right">{{$jovem->cpf}}</a>
+                        <b>CPF</b> <a class="pull-right">{{$usuario->cpf}}</a>
                     </li>
                     <li class="list-group-item">
-                        <b>Celular</b> <a class="pull-right">{{$jovem->celular}}</a>
-                        
+                        <b>Celular</b> <a class="pull-right">{{$usuario->celular}}</a>
                     </li>
                     <li class="list-group-item">
-                        <b>Email</b> <a class="pull-right">{{$jovem->email}}</a>
+                        <b>Email</b> <a class="pull-right">{{$usuario->email}}</a>
                     </li>
                     <li class="list-group-item">
-                        <b>Data de nascimento</b> <a class="pull-right">{{$jovem->data_nascimento}}</a>
+                        <b>Data de nascimento</b> <a class="pull-right">{{$usuario->data_nascimento}}</a>
                     </li>
                     <li class="list-group-item">
-                        <b>Raça</b> <a class="pull-right">{{$jovem->raca}}</a>
+                        <b>Raça</b> <a class="pull-right">{{$usuario->raca}}</a>
                     </li>
                     <li class="list-group-item">
-                        <b>CEP</b> <a class="pull-right">{{$jovem->cep}}</a>
+                        <b>CEP</b> <a class="pull-right">{{$usuario->cep}}</a>
                     </li>
                     <li class="list-group-item">
-                        <b>Endereço</b> <a class="pull-right">{{$jovem->endereco}}</a>
+                        <b>Endereço</b> <a class="pull-right">{{$usuario->endereco}}</a>
                     </li>
                     <li class="list-group-item">
-                        <b>N°</b> <a class="pull-right">{{$jovem->numero}}</a>
+                        <b>N°</b> <a class="pull-right">{{$usuario->numero}}</a>
                     </li>
                     @foreach ($sobreJovem as $sobre)
                     <li class="list-group-item">
-                        <b>Cliente</b> <a class="pull-right">{{$sobre->nome_fantasia}}</a>@endforeach
+                        <b>Cliente</b> <a class="pull-right">{{$sobre->empresa}}</a>@endforeach
                     </li>
                     @foreach ($sobreJovem as $sobre)
                     <li class="list-group-item">
@@ -69,39 +66,38 @@
                         <b>Polo</b> <a class="pull-right">{{$sobre->nomePolo}}</a>@endforeach
                     </li>
                 </ul>
+                @endforeach
             </div>
         </div>
         <!--Fimboxprimary-->         
-        <div class="box box-primary">
-            <div class="box-body">  
-
-
-                
-            <div> @foreach ($sobreJovem as $sjovem)
-            <ul class="list-group list-group-unbordered">
-            <li class="list-group-item">
-                       <b>Data de início </b> <a class="pull-right"> {{date( 'd/m/Y' , strtotime($sjovem->data_inicio))}}  <i class="fa fa-toggle-on" style="font-size:20px"></i> </a>
-                    </li>
-           <li class="list-group-item">
-                        <b> Data fim </b> <a class="pull-right"> {{date( 'd/m/Y' , strtotime($sjovem->data_fim))}} <i class="fa fa-toggle-off" style="font-size:20px"></i>  </a>
-                    </li>
-
-                   </ul>
-                   
-                  @endforeach
-          </div>
-          </div> 
-    </div> </div> 
+        <div class="box box-teal">
+            <div class="box-body">
+                <div>
+                    @foreach ($sobreJovem as $sjovem)
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>Data de início </b> <a class="pull-right"> {{date( 'd/m/Y' , strtotime($sjovem->data_inicio))}}  <i class="fa fa-toggle-on" style="font-size:20px"></i> </a>
+                        </li>
+                        <li class="list-group-item">
+                            <b> Data fim </b> <a class="pull-right"> {{date( 'd/m/Y' , strtotime($sjovem->data_fim))}} <i class="fa fa-toggle-off" style="font-size:20px"></i>  </a>
+                        </li>
+                    </ul>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-md-9 ">
     <div class="row">
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
-            <div class="small-box bg-teal">
-           
+            <div class="small-box bg-blue">
                 <div class="inner">
-                    <h3>%</h3>
+                    @foreach ($frequencias as $presenca)
+                    <h3>{{$presenca->frequencia}}<sup style="font-size: 20px">%</sup></h3>
                     <p>Presença aula</p>
                 </div>
+                @endforeach
                 <div class="icon">
                     <i class="fa fa-check-circle" style="font-size:48px"></i>
                 </div>
@@ -110,12 +106,13 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
-            <div class="small-box bg-yellow">
+            <div class="small-box bg-green">
                 <div class="inner">
-                @foreach ($evolucoes as $evolucao)
+                    @foreach ($evolucoes as $evolucao)
                     <h3>{{$evolucao->atraso}}<sup style="font-size: 20px">%</sup></h3>
                     <p>Aulas com atraso</p>
-                </div>@endforeach
+                </div>
+                @endforeach
                 <div class="icon">
                     <i class="fas fa-stopwatch" style="font-size:48px"></i>
                 </div>
@@ -124,12 +121,13 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
-            <div class="small-box bg-olive">
+            <div class="small-box bg-yellow">
                 <div class="inner">
-                @foreach ($evolucoes as $evolucao)
+                    @foreach ($evolucoes as $evolucao)
                     <h3>{{$evolucao->aulaconcluida}}%</h3>
                     <p>Aulas completadas</p>
-                </div>@endforeach
+                </div>
+                @endforeach
                 <div class="icon">
                     <i class="fa fa-book" style="font-size:48px"></i>
                 </div>
@@ -138,12 +136,13 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
-            <div class="small-box bg-maroon">
-                <div class="inner">   
-                @foreach ($evolucoes as $evolucao)
+            <div class="small-box bg-red">
+                <div class="inner">
+                    @foreach ($evolucoes as $evolucao)
                     <h3>{{$evolucao->aulafim}}</h3>
                     <p>Aulas para a conclusão</p>
-                </div>@endforeach
+                </div>
+                @endforeach
                 <div class="icon">
                     <i class="fa fa-graduation-cap" style="font-size:48px"></i>
                 </div>
@@ -173,7 +172,6 @@
                     </div>
                     <th>Data</th>
                     <th>Status</th>
-                    <!--<th>Status</th>-->
                     </tr>   
                     @foreach ($verJovens as $verJovem)
                     <tr>
@@ -181,8 +179,6 @@
                     <td class="align-middler text-center">{{$verJovem->descricao}}</td>
                     <td class="align-middle">{{date( 'd/m/Y' , strtotime($verJovem->data_disciplina))}}</td>
                     <td class="align-center">{{$verJovem->justificativa}}</td>
-                    <!--<td class="align-middle">{{$verJovem->justificativa}}</td>-->
-                   
                     @endforeach
                     </tr>  
                     </tbody>   
@@ -208,7 +204,6 @@
                                 <th>Saída </th>
                             </tr>
                             @foreach ($verJovens as $verJovem)
-                                @can ('view_jovem',$verJovem)
                             <tr>
                                 <td class="align-center">  {{date( 'd/m/y' , strtotime($verJovem->data_disciplina))}}</td>
                                 <td class="align-center">{{is_null($verJovem->hora_primeira_marcacao) ? null : date( 'H:i' , strtotime($verJovem->hora_primeira_marcacao))}}</td>
@@ -216,7 +211,6 @@
                                 <td class="align-middle">{{is_null($verJovem->hora_terceira_marcacao) ? null : date( 'H:i' , strtotime($verJovem->hora_terceira_marcacao))}}</td>
                                 <td class="align-middle">{{is_null($verJovem->hora_quarta_marcacao) ? null : date( 'H:i' , strtotime($verJovem->hora_quarta_marcacao))}}</td>
                                 </td>
-                               @endcan
                                 @endforeach
                             </tr>
                         </tbody>
@@ -230,10 +224,8 @@
                 </div>
                 </div>
                 <br>
-               
             </div>
         </div>
     </div>
-   
 </section>
 @stop

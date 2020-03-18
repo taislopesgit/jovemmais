@@ -35,16 +35,13 @@ class HomeController extends Controller
     public function index(Request $request, Jovem $jovem)
     {
        
-        $nameUser = auth()->user()->name;
-        $auth = $jovem->where('id_user', auth()->user()->id)->get();
+     
         $dadosFiltro = $request->except('_token');
         $jovens = $jovem->filtroDados($dadosFiltro);
         $clientes = Cliente::orderBy('razao_social','asc')->orderBy('nome_fantasia','asc')->get();
         $cursos = Curso::orderBy('nome')->get();
         $sobre = $jovem->programaSobre();
-      
         
-
         return view('home', compact('jovens','dadosFiltro','clientes','cursos','sobre', 'ususarios'));
 
     }
@@ -53,11 +50,14 @@ class HomeController extends Controller
     {
 
         $jovem = Jovem::findOrFail($id);
-        $verJovens = $jovem->jovemDados($id);
-        $sobreJovem = $jovem->jovemSobre($id);
-        $evolucoes = $jovem->jovemEvolucao($id);
-       
-        return view('show', compact('jovem','verJovens','jovemDados','sobreJovem','jovemSobre','evolucoes', 'jovemEvolucao'));
+        $verJovens = $jovem->jovemDadosId($id);
+        $sobreJovem = $jovem->jovemSobreId($id);
+        $evolucoes = $jovem->jovemEvolucaoId($id);
+        $frequencia = $jovem->frequenciaJovem($id);
+
+        return view('show', compact('jovem','verJovens','jovemDadosId','sobreJovem',
+        'jovemSobreId','evolucoes', 'jovemEvolucaoId','frequencia','frequenciaJovem'
+       ));
 
     }
 
@@ -71,12 +71,4 @@ class HomeController extends Controller
         return view('gestor', compact('jovem','verJovens'));
 
     }
-
-
-   
-    
-   
-  
-
-   
 }

@@ -1,13 +1,15 @@
 <?php
 
+
+
 namespace App\Providers;
 
 
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use App\User;
-use App\Permission;
+use App\Usuario;
+use App\Permissao;
 
 class AppServiceProvider extends ServiceProvider
 {
