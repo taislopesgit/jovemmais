@@ -604,4 +604,49 @@ class Jovem extends Model
 
 
 
-}}
+}
+
+    public function faceToface () {
+        $face = DB::table('tb_jovem')
+        ->select (
+        'tb_jovem.id_jovem',
+        'tb_jovem.nome'
+        
+        )
+        ->paginate(10);
+        //dd($face);
+        return $face;
+    }
+
+
+    public function ocorrenciaJovem()
+    { 
+        $ocorrencias = DB::table('tb_cronograma')
+        ->join('tb_matricula', 'tb_cronograma.id_matricula', '=', 'tb_matricula.id_matricula')
+        ->join('tb_contato_matricula', 'tb_matricula.id_matricula', '=', 'tb_contato_matricula.id_matricula')
+        ->join('tb_contato_cliente', 'tb_contato_matricula.id_contato_cliente', '=', 'tb_contato_cliente.id_contato_cliente')
+        ->join('tb_contato', 'tb_contato_cliente.id_contato', '=', 'tb_contato.id_contato')
+        ->join('tb_ocorrencia', 'tb_cronograma.id_cronograma', '=', 'tb_ocorrencia.id_cronograma')
+        ->join('tb_tipo_ocorrencia', 'tb_ocorrencia.id_tipo_ocorrencia', '=', 'tb_tipo_ocorrencia.id_tipo_ocorrencia')
+        ->join('tb_natureza_ocorrencia', 'tb_tipo_ocorrencia.id_natureza_ocorrencia', '=', 'tb_natureza_ocorrencia.id_natureza_ocorrencia')  
+      
+        
+        ->select(
+            'tb_ocorrencia.id_jovem',
+            'tb_ocorrencia.descricao',
+            'tb_natureza_ocorrencia.descricao as natureza',
+            'tb_tipo_ocorrencia.nome',
+
+            DB::raw('(SELECT COUNT(*) FROM tb_ocorrencia as o WHERE o.id_ocorrencia = 4) as ocorrencia ')
+             
+        )
+        
+       -> where('tb_contato.id_usuario', Auth::id())
+       -> where('tb_matricula.data_desligamento', null) 
+        ->get();
+      //dd($ocorrencias);
+        return $ocorrencias;
+        }
+
+
+}

@@ -171,10 +171,28 @@ return [
                   'submenu' => [
                 [
                     'text' => 'Painel',
-                    'icon'    => 'fas fa-fw fa-user',
+                    'icon'    => "fa fa-desktop",
                     'url'  => 'perfil-gestor',
                    
                 ],  
+                [
+                    'text' => 'Perfil',
+                    'icon'    => "fas fa-fw fa-user",
+                    'url'  => 'face',
+                    
+                ],
+                [
+                    'text' => 'Ocorrência',
+                    'icon'    => "fa fa-sticky-note",
+                    'url'  => 'ocorrencia-jovem',
+                    
+                ],
+                [
+                    'text' => 'Avaliação',
+                    'icon'    => 'fas fa-signal',
+                    'url'  => '',
+                    
+                ],
              ], ],
         
         [

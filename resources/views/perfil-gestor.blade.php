@@ -71,9 +71,9 @@
    <div class="col-md-3">
       <div class="small-box bg-red">
          <div class="inner">
-            @foreach ($dashOcorrencias as $ocorrencia)
-            <h3>{{$ocorrencia->ocorrencia}}</h3>
-            @endforeach  
+            
+            <h3>1</h3>
+            
             <p>Ocorrências</p>
          </div>
          <div class="icon">
@@ -86,6 +86,7 @@
    <div class="box box-warning">
       <div class="box-header with-border">
          <h3 class="box-title">Jovens responsável</h3>
+         <br>
          <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
             </button>
@@ -96,6 +97,7 @@
             <div class="table-responsive">
                <table class="table no-margin">
                   <tr>
+                     
                      <th class="align-middle">Nome</th>
                      <th class="align-middle text-center">&nbsp;</th>
                      <th class="align-middle text-center">Progresso</th>
@@ -105,8 +107,12 @@
                   </tr>
                   @foreach ($relatorioJovem as $perfil)
                   <tr>
-                     <td class="align-middle">{{$perfil->jovem}}</td>
-                     <!--avisoOcorrencia-->
+            
+                    <td class="align-middle">
+                     
+                     {{$perfil->jovem}}</td>
+
+                   <!--
                      <td class="align-middle">
                         @if (
                            !is_null($perfil->data_desligamento)
@@ -117,7 +123,7 @@
                                 @endif
                         
                      </td>
-                     <!--fimOcorrencia-->
+                     fimOcorrencia-->
                      
                      <td class="align-middle text-center">  
                         <div class="progress progress-xs">
@@ -265,7 +271,8 @@
             </div>
          </div>
       </div>
-       
+      
+   
 </section>
 @stop
 
@@ -321,4 +328,5 @@
     });
 </script>
 <!--fimFeedBack-->
+
 @stop

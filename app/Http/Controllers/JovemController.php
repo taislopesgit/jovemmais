@@ -39,6 +39,43 @@ class JovemController extends Controller
 
     }
     
+    
+    public function faceJovem(Request $request, Jovem $jovem)
+    {  
+    
+        $face = $jovem->faceToface();
+        $relatorioJovem = $jovem->RelacaoJovemGestor();
+        $dashFrequencia = $jovem->frequencia();
+        
+   
+        return view('face', compact('face','faceToface','relatorioJovem','RelacaoJovemGestor','dashFrequencia', 'frequencia'));
+
+    }
+    
+    public function ocorrenciaJovem(Request $request, Jovem $jovem)
+    {  
+    
+        
+   
+        $face = $jovem->faceToface();
+        $relatorioJovem = $jovem->RelacaoJovemGestor();
+        $ocorrencias = $jovem ->ocorrenciaJovem();
+   
+        return view('ocorrencia-jovem', compact('ocorrencias','ocorrenciaJovem','face','faceToface','relatorioJovem','RelacaoJovemGestor'));
+
+    }
+
+        
+    public function avaliacaoJovem(Request $request, Jovem $jovem)
+    {  
+    
+    
+        return view('avaliacao-jovem');
+
+    }
+    
+
+
 
     public function jovemPerfil(Request $request, Jovem $jovem)
     {  
