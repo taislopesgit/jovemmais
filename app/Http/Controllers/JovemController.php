@@ -46,9 +46,16 @@ class JovemController extends Controller
         $face = $jovem->faceToface();
         $relatorioJovem = $jovem->RelacaoJovemGestor();
         $dashFrequencia = $jovem->frequencia();
+        $dashSatisfacao = $jovem->satisfacao();
+        $jovemParticipante = $jovem->participante();
+        $nome = $jovem->nomeGestor();
+        $progressoJovem = $jovem->RelacaoProgresso();
+        $concluidoJovem = $jovem->RelacaoConcluido();
         
    
-        return view('face', compact('face','faceToface','relatorioJovem','RelacaoJovemGestor','dashFrequencia', 'frequencia'));
+        return view('face', compact('face','faceToface','relatorioJovem','RelacaoJovemGestor',
+        'dashFrequencia', 'frequencia', 'dashSatisfacao', 'satisfacao','jovemParticipante','participante',
+    'nome','nomeGestor','RelacaoProgresso','progressoJovem','concluidoJovem', 'RelacaoConcluido'));
 
     }
     

@@ -348,7 +348,7 @@ class Jovem extends Model
                -> where('tb_contato.id_usuario', Auth::id())
                -> where('tb_matricula.data_desligamento', null) 
                 ->get();
-               //dd($dashOcorrencias);
+                //dd($dashOcorrencias);
                 return $dashOcorrencias;
                 }
         
@@ -648,5 +648,126 @@ class Jovem extends Model
         return $ocorrencias;
         }
 
+       public function participante()
+        { 
+            $jovemParticipante = DB::select('SELECT
+            COUNT(DISTINCT j.id_jovem) AS jovens,
+            CEIL (
+            100 -
+            (
+            (
+            SUM(
+            CASE
+            WHEN c.id_justificativa = 2 THEN 1
+            ELSE 0
+            END
+            ) * 100
+            ) / COUNT(c.id_cronograma)
+            )
+            ) AS frequencia
+            FROM
+            tb_matricula AS m
+            INNER JOIN tb_jovem AS j ON j.id_jovem = m.id_jovem
+            INNER JOIN tb_cronograma AS c ON c.id_matricula = m.id_matricula
+            INNER JOIN tb_contato_matricula AS cm ON cm.id_matricula = m.id_matricula
+            INNER JOIN tb_contato_cliente AS cc ON cc.id_contato_cliente = cm.id_contato_cliente AND cc.id_tipo_cargo = 5
+            INNER JOIN tb_contato AS co ON co.id_contato = cc.id_contato
+            WHERE
+           c.data_disciplina < CURRENT_DATE()
+            AND co.id_usuario = ?', [Auth::id()]);
+           
+            //dd($jovemParticipante);
+            return $jovemParticipante;
+            }
 
+
+
+            public function RelacaoProgresso()
+            { 
+               $progressoJovem = DB::table('tb_jovem')
+               ->join('tb_matricula', 'tb_jovem.id_jovem', '=', 'tb_matricula.id_jovem')
+               ->join('tb_cliente', 'tb_matricula.id_cliente', '=', 'tb_cliente.id_cliente')
+               ->join('tb_contato_matricula', 'tb_matricula.id_matricula', '=', 'tb_contato_matricula.id_matricula')
+               ->join('tb_contato_cliente', 'tb_contato_matricula.id_contato_cliente', '=', 'tb_contato_cliente.id_contato_cliente')
+               ->join('tb_contato', 'tb_contato_cliente.id_contato', '=', 'tb_contato.id_contato')
+       
+               ->select(
+                      
+                  'tb_jovem.data_nascimento',
+                   'tb_matricula.data_inicio',
+                  'tb_matricula.data_desligamento',
+                  'tb_jovem.email',
+                   'tb_jovem.nome as jovem',
+                   'tb_jovem.sexo',
+                   'tb_jovem.id_jovem',
+                   'tb_contato.id_contato',
+                   'tb_contato_cliente.id_contato',
+                   'tb_contato.email',
+                   'tb_contato.celular',
+                   'tb_cliente.nome_fantasia as empresa',
+       
+                   DB::raw('CEIL((SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_contato_matricula.id_matricula AND c.data_disciplina) *
+                   (SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_contato_matricula.id_matricula	AND c.data_disciplina <= CURRENT_DATE())
+                     / 100)  as aulaconcluida'),
+       
+
+                    
+       
+                   DB::raw('(SELECT REVERSE(SUBSTRING(GROUP_CONCAT(c.id_justificativa ORDER BY c.data_disciplina DESC) FROM 1 FOR 9)) 
+                     FROM
+                     tb_cronograma AS c
+                     INNER JOIN tb_matricula AS m ON m.id_matricula = c.id_matricula
+                     INNER JOIN tb_jovem AS j ON j.id_jovem = m.id_jovem
+                     WHERE
+                     c.id_matricula = tb_matricula.id_matricula
+                     AND c.data_disciplina <= CURRENT_DATE)as presenca')
+                   
+                  
+               )
+               -> where('tb_matricula.data_desligamento', null)        
+               -> where('tb_contato.id_usuario', Auth::id())->paginate(1); 
+               //dd($progressoJovem);
+       
+               
+               return $progressoJovem;
+               }
+
+               public function RelacaoConcluido()
+               { 
+                  $concluidoJovem = DB::table('tb_jovem')
+                  ->join('tb_matricula', 'tb_jovem.id_jovem', '=', 'tb_matricula.id_jovem')
+                  ->join('tb_cliente', 'tb_matricula.id_cliente', '=', 'tb_cliente.id_cliente')
+                  ->join('tb_contato_matricula', 'tb_matricula.id_matricula', '=', 'tb_contato_matricula.id_matricula')
+                  ->join('tb_contato_cliente', 'tb_contato_matricula.id_contato_cliente', '=', 'tb_contato_cliente.id_contato_cliente')
+                  ->join('tb_contato', 'tb_contato_cliente.id_contato', '=', 'tb_contato.id_contato')
+          
+                  ->select(
+                         
+                     'tb_jovem.data_nascimento',
+                      'tb_matricula.data_inicio',
+                     'tb_matricula.data_desligamento',
+                     'tb_jovem.email',
+                      'tb_jovem.nome as jovem',
+                      'tb_jovem.sexo',
+                      'tb_jovem.id_jovem',
+                      'tb_contato.id_contato',
+                      'tb_contato_cliente.id_contato',
+                      'tb_contato.email',
+                      'tb_contato.celular',
+                      'tb_cliente.nome_fantasia as empresa',
+          
+                      DB::raw('CEIL((SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_contato_matricula.id_matricula AND c.data_disciplina) *
+                      (SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_contato_matricula.id_matricula	AND c.data_disciplina <= CURRENT_DATE())
+                        / 100)  as aulaconcluida')
+          
+              
+                     
+                  )
+                  -> where('tb_matricula.data_fim')        
+                  -> where('tb_contato.id_usuario', Auth::id())->paginate(10); 
+                  //dd($concluidoJovem);
+          
+                  
+                  return $concluidoJovem;
+                  }
 }

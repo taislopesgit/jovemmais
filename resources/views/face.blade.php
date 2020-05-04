@@ -12,37 +12,83 @@
 </section>
 @stop
 @section('content')
-<h4> Nome gestor, você está na tela de perfis:</h4>
-<br>
+
+<!--
+@foreach ($nome as $gestor)
+<h4>{{$gestor->nome}}, veja o perfil dos jovens
+   </h4>
+@endforeach-->
+
       <div class="row">
    <div class="col-md-3">
       <div class="small-box bg-blue">
-         <div class="inner">
+      <div class="inner">
          @foreach ($dashFrequencia as $jovens)
-            <h3>{{$jovens->jovens}}</h3>
+            <div class="icon">
+               <i class="fa fa-user"></i>
+            </div>
+            <h3>{{$jovens->jovens}}  @endforeach 
+            @foreach ($jovemParticipante  as $participante)
+            <sup style="font-size: 20px">/{{$participante->jovens}} </sup></h3>
+            @endforeach 
             <p>Jovens ativos</p>
          </div>
-         @endforeach
-         <div class="icon">
-            <i class="fa fa-user"></i>
          </div>
-      </div>
-   </div>
+         </div>
    <!-- ./fim -->
    <div class="col-md-3">
       <div class="small-box bg-green">
-         <div class="inner">
-            
-            <h3><sup style="font-size: 20px">0</sup></h3>
-            <p>Férias</p>
+      <div class="inner">
+         @foreach ($dashFrequencia as $jovens)
+            <div class="icon">
+               <i class="fa fa-plane"></i>
+            </div>
+            <h3>{{$jovens->jovens}}  @endforeach 
+            @foreach ($jovemParticipante  as $participante)
+            <sup style="font-size: 20px">/{{$participante->jovens}} </sup></h3>
+            @endforeach 
+            <p>Jovens em férias</p>
          </div>
-        
-         <div class="icon">
-            <i class="ion ion-stats-bars"></i>
          </div>
-      </div>
-   </div>
+         </div>
    <!-- ./fim -->
+      <!-- ./fim -->
+      <div class="col-md-3">
+      <div class="small-box bg-orange">
+      <div class="inner">
+        
+            <div class="icon">
+               <i class="fa fa-book"></i>
+            </div>
+            @foreach($progressoJovem as $progresso) 
+            <h3>{{$progresso->aulaconcluida}}%
+            @endforeach 
+            <sup style="font-size: 20px"> </sup></h3>
+           
+            <p>Andamento aprendizado</p>
+         </div>
+         </div>
+         </div>
+   <!-- ./fim -->
+      <!-- ./fim -->
+      <div class="col-md-3">
+      <div class="small-box bg-red">
+      <div class="inner">
+         @foreach ($dashFrequencia as $jovens)
+            <div class="icon">
+               <i class="fa fa-graduation-cap"></i>
+            </div>
+            <h3>{{$jovens->jovens}}  @endforeach 
+            @foreach ($jovemParticipante  as $participante)
+            <sup style="font-size: 20px">/{{$participante->jovens}} </sup></h3>
+            @endforeach 
+            <p>Desligamento</p>
+         </div>
+         </div>
+         </div>
+   <!-- ./fim -->
+   
+      
    
    <div class="col-md-12">
    <div class="box box-warning">
