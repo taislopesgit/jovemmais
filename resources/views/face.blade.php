@@ -141,7 +141,7 @@
                         @endif    
                      </td>
                      <td class="align-middle text-center">
-                        <a href="" class="text-blue" title="Visualizar" data-toggle="tooltip" data-placement="top">
+                        <a href="{{route('show', $face->id_jovem)}}" class="text-blue" title="Visualizar" data-toggle="tooltip" data-placement="top">
                         <i class="fa fa-eye">&nbsp;</i>
                         </a>
                      </td>
