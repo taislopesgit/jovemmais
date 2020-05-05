@@ -163,6 +163,7 @@
                             <th class="align-middle text-center">Data de matrícula</th>
                             <th class="align-middle text-center">Status</th>
                             <th class="align-middle text-center">&nbsp;</th>
+                            <th class="align-middle text-center">&nbsp;</th>
                         </tr>
                         @foreach ($jovens as $jovem)
                         <tr>
@@ -193,6 +194,12 @@
                             <td class="align-middle text-center">
                                 <a href="{{route('show', $jovem->id_jovem)}}" class="text-blue" title="Visualizar" data-toggle="tooltip" data-placement="top">
                                 <i class="fa fa-eye">&nbsp;</i>
+                                </a>
+                            </td>
+                            <td class="align-middle text-center">
+                            <a href="" class="text-orange" title="Editar" data-toggle="tooltip" data-placement="top">
+                            <i class="fa fa-paint-brush" aria-hidden="true"></i>
+
                                 </a>
                             </td>
                         </tr>

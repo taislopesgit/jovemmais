@@ -758,13 +758,16 @@ class Jovem extends Model
           
                       DB::raw('CEIL((SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_contato_matricula.id_matricula AND c.data_disciplina) *
                       (SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_contato_matricula.id_matricula	AND c.data_disciplina <= CURRENT_DATE())
-                        / 100)  as aulaconcluida')
-          
+                        / 100)  as aulaconcluida'),
+                    
+                        DB::raw('(SELECT(c.id_matricula) FROM tb_matricula AS c WHERE c.id_matricula = tb_contato_matricula.id_matricula AND c.data_desligamento) <
+                      (SELECT(c.id_matricula) FROM tb_matricula AS c WHERE c.id_matricula = tb_contato_matricula.id_matricula AND c.data_fim ) <= CURRENT_DATE()  as fim')
               
                      
                   )
-                  -> where('tb_matricula.data_fim')        
-                  -> where('tb_contato.id_usuario', Auth::id())->paginate(10); 
+                  -> where('tb_matricula.data_desligamento')        
+                  -> where('tb_contato.id_usuario', Auth::id())
+                  ->paginate(30); 
                   //dd($concluidoJovem);
           
                   
