@@ -156,9 +156,12 @@
     <div class="nav-tabs-custom">
     <div class="box-body table-responsive">
         <ul class="nav nav-tabs nav-tabs-responsive" >
-            <li class="active"> <a href="#calendario" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-check bg-dark"></i>&nbsp;&nbsp;Calendário</a></li>
+            <li class="active"> <a href="#treinamento" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-check bg-dark"></i>&nbsp;&nbsp;Treinamento</a></li>
+            <li class="active"> <a href="#calendario" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar-check bg-dark"></i>&nbsp;&nbsp;Calendário</a></li>
             <li class=""><a href="#marcacao" data-toggle="tab" aria-expanded="false"> <i class="fa fa-history bg-dark"></i>&nbsp;&nbsp; Marcações</a></li>
-            <!--  <li class=""><a href="#editar" data-toggle="tab" aria-expanded="false"> <i class="fa fa-id-card bg-dark"></i>&nbsp;&nbsp; Dados</a></li>-->
+            <li class=""><a href="#ocorrencia" data-toggle="tab" aria-expanded="false"> <i class="fa fa-history bg-dark"></i>&nbsp;&nbsp; Ocorrências</a></li>
+            <li class=""><a href="#contrato" data-toggle="tab" aria-expanded="false"> <i class="fa fa-history bg-dark"></i>&nbsp;&nbsp; Contrato</a></li>
+            <li class=""><a href="#editar" data-toggle="tab" aria-expanded="false"> <i class="fa fa-id-card bg-dark"></i>&nbsp;&nbsp;Editar Dados</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="calendario">

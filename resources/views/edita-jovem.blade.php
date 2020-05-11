@@ -4,7 +4,7 @@
         Jovem+
     </h2>
     <ol class="breadcrumb">
-        <li><a href="/perfil-gestor"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li class="active">Perfil</li>
     </ol>
 </section>
