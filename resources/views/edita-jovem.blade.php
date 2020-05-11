@@ -33,7 +33,7 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id" value="{{ $jovem->id }}">
                 
-                <div class="form-rw">
+                <div class="form-row">
                         <div class="form-group col-md-4">
                             <label>ID</label>
                             <input type="text" class="form-control" name="id" value="{{ $jovem->id_jovem }}">
@@ -43,7 +43,7 @@
                             <input type="text" name="nome"  class="form-control" value="{{ $jovem->nome }}" required>
                             
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label>Email</label>
                             <input type="text" name="email"  class="form-control" value="{{$jovem->email}}" required>
                         </div>
@@ -77,18 +77,11 @@
                             <input type="text" name="bairro"  class="form-control" value="{{$jovem->bairro}}" required>
                             
                         </div>
-                        <div class="form-group col-md-3">
-                            <label>Data Nascimento</label>
-                            <input type="text" name="datanascimento"  class="form-control" value="{{$jovem->data_nascimento}}" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label>Raça</label>
-                            <input type="text" name="raca"  class="form-control" value="{{$jovem->raca}}" required>
-                        </div>
+                        
                         <div align="center">
                         <div class="form-group col-md-12">
                         <br> <br>
-                        <input type="submit"  class="btn btn-primary" value="Alterar">
+                        <input type="submit"  class="btn btn-primary btn-lg btn-block" value="Alterar">
                     </div></div>
             </form>
     </div>
