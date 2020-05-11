@@ -14,6 +14,7 @@ Auth::routes();
 Route::group(['prefix' => 'home'], function () {
     Route::match(['get', 'post'], '/', 'homeController@index')->name('home');
     Route::match(['get', 'post'], '/{home}', 'homeController@show')->name('show');	
+    Route::get('/edita-jovem/{id}', 'homeController@edit')->name('edit');
     Route::get('/gestores', 'homeController@gestores')->name('gestores');	
     
 });

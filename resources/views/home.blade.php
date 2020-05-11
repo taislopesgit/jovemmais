@@ -197,7 +197,7 @@
                                 </a>
                             </td>
                             <td class="align-middle text-center">
-                            <a href="" class="text-orange" title="Editar" data-toggle="tooltip" data-placement="top">
+                            <a href="{{route('edit', $jovem->id_jovem)}}" class="text-orange" title="Editar" data-toggle="tooltip" data-placement="top">
                             <i class="fa fa-paint-brush" aria-hidden="true"></i>
 
                                 </a>

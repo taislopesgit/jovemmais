@@ -61,7 +61,12 @@ class HomeController extends Controller
 
     }
 
-
+    public function edit($id)
+    {
+        $jovem = Jovem::findOrFail($id);
+         
+        return view('edita-jovem',compact('jovem'));
+    }
     public function perfilGestor($id)
     {
 
