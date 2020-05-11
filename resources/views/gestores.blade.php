@@ -45,6 +45,7 @@
         <!--fimSearch-->
         <div class="box box-warning">
             <div class="box-header">
+            <br>
                 <h3 class="box-title">Relação de Gestores</h3>
             </div>
             <div class="box-body table-responsive">
@@ -62,9 +63,8 @@
                             @foreach ($dominio as $gestor)
                             <td class="align-middle text-center">{{$gestor->id_contato}}</td>
                             <td class="align-middle text-center">{{$gestor->nome}}</td>
+                            <td class="align-middle text-center">{{$gestor->email}}</td>
                             <td class="align-middle text-center">{{$gestor->nome_fantasia}}</td>
-                            <td class="align-middle text-center">
-                            <td class="white-space: pre-line;">{{$gestor->email}}</td>
                             <td class="align-middle text-center">
                                 <a href="{{route('gestorId', $gestor->id_contato)}}" class="text-blue" title="Visualizar" data-toggle="tooltip" data-placement="top">
                                 <i class="fa fa-eye">&nbsp;</i>

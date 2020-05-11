@@ -1,10 +1,14 @@
 @extends('adminlte::page') @section('title', 'AdminLTE') @section('content_header')
-
-<section class="content">
-    <!-- Info boxes -->
-    
-    <div class="row">
-    </div>
+<section class="content-header">
+    <h2>
+        Jovem+
+    </h2>
+    <br>
+    <ol class="breadcrumb">
+        <li><a href="/inicial"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li class="active">Perfil</li>
+    </ol>
+</section>
     <div class="row">
         <div class="col-md-3">
             <div class="box box-warning">

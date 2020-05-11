@@ -8,65 +8,6 @@
 </section>
 @stop
 @section('content')
-<br>
-
-</section>
-
-<div class="row">
-    <div class="col-md-3">
-        <div class="small-box bg-blue">
-            <div class="inner">
-                @foreach ($sobre as $programa)
-                <h3>R${{$programa->valor}}<sup style="font-size: 20px"></sup></h3>
-                <p>Em beneficios aos jovens</p>
-            </div>
-            @endforeach
-            <div class="icon">
-                <i class="fas fa-wallet" style="font-size:38px"></i>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="small-box bg-green">
-            <div class="inner">
-                @foreach ($sobre as $programa)
-                <h3>+{{$programa->aulas}}<sup style="font-size: 20px"></sup></h3>
-                <p>Aulas ministradas</p>
-            </div>
-            @endforeach
-            <div class="icon">
-                <i class="fas fa-calendar-check" style="font-size:38px"></i>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="small-box bg-yellow">
-            <div class="inner">
-                @foreach ($sobre as $programa)
-                <h3>+{{$programa->jovens}}</h3>
-                <p>Jovens assistidos </p>
-            </div>
-            @endforeach
-            <div class="icon">
-                <i class="ion ion-person-add" style="font-size:38px"></i>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="small-box bg-red">
-            <div class="inner">
-                @foreach ($sobre as $programa)
-                <h3>+{{$programa->cliente}}</h3>
-                <p>Parceiros</p>
-            </div>
-            @endforeach
-            <div class="icon">
-                <i class="far fa-address-card" style="font-size:38px"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="row">
  <div class="col-md-12">
      <div class="box">

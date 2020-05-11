@@ -137,7 +137,7 @@ return [
         [
             'text'    => 'Perfil Administrador ',
             'icon'    => 'fas fa-fw fa-cogs',
-             'can'     => '',
+             'can'     => 'adm',
 
                   'submenu' => [
 

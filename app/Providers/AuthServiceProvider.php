@@ -35,12 +35,13 @@ class AuthServiceProvider extends ServiceProvider
             });
         }
        
+/** Permitir acesso integral ao administrador */
 
-            $gate->before(function(Usuario $usuario, $ability){
+            //$gate->before(function(Usuario $usuario, $ability){
 
-                if ( $usuario->getPapelPermissao('adm') )
-                    return true;
+               // if ( $usuario->getPapelPermissao('adm') )
+                 //   return true;
 
-            });
+           // });
     }
-}
+}   

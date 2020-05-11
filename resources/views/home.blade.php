@@ -6,7 +6,7 @@
         Jovem+
     </h2>
     <ol class="breadcrumb">
-        <li><a href="/jovem"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="/inicial"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li class="active">Perfil</li>
     </ol>
 </section>
