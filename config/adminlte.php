@@ -131,11 +131,10 @@ return [
         
         ['header' => ''],
        
-      
-        
+    
         ['header' => ''],
         [
-            'text'    => 'Perfil Administrador ',
+            'text'    => 'Administrador ',
             'icon'    => 'fas fa-fw fa-cogs',
              'can'     => 'adm',
 
@@ -155,8 +154,9 @@ return [
                    
                 ],  
                 [
+                   
                     'text' => 'Relação Gestores',
-                    'icon'    => 'fa fa-id-badge',
+                    'icon'    => 'fas fa-user-tie',
                     'url'  => 'gestores',
                    
                 ],  
@@ -165,7 +165,7 @@ return [
 
             
         [
-            'text'    => 'Perfil Gestor',
+            'text'    => 'Gestor',
             'icon'    => 'fa fa-id-badge',
              'can'     => 'gestor',
                   'submenu' => [
@@ -187,16 +187,12 @@ return [
                     'url'  => 'ocorrencia-jovem',
                     
                 ],
-                [
-                    'text' => 'Avaliação',
-                    'icon'    => 'fas fa-signal',
-                    'url'  => '',
-                    
-                ],
-             ], ],
+                
+                ], 
+            ],
         
         [
-            'text'    => 'Perfil Jovem',
+            'text'    => 'Perfil',
             'icon'    => 'fa fa-id-badge',
             'can'     => 'jovem',
                      'submenu' => [

@@ -25,7 +25,12 @@ Route::get( '/face', 'jovemController@faceJovem')->name('face');
 Route::get( '/avaliacao-jovem', 'jovemController@avaliacaoJovem')->name('avaliacao');
 Route::get( '/ocorrencia-jovem', 'jovemController@ocorrenciaJovem')->name('ocorrencia');
 Route::get( '/perfil-jovem', 'jovemController@jovemPerfil')->name('jovem');
+
+Route::get( '/perfil-edit/{id}/edit' , 'jovemController@jovemEdit')->name('editar');
+Route::post( '/perfil-edit/{id}' , 'jovemController@jovemUpdate')->name('atualizar');
+
 Route::get('/perfil-gestor', 'jovemController@jovemGestor')->name('gestor');
+Route::get('/calendar', 'jovemController@calendario')->name('calendario');
 
 	
 Route::get('/gestores', 'gestorController@gestores')->name('gestores');

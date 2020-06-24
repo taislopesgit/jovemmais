@@ -14,14 +14,13 @@
 @section('content')
 <div class="row">
     <div class="col-lg-3 col-xs-6">
-        <!-- box de frequencia -->
         <div class="small-box bg-blue">
             <div class="inner">
-            @foreach ($sobre as $programa)
+            @foreach ($evolucoes as $programa)
             
-            <h3>R$ {{$programa->valor}}<sup style="font-size: 20px"></sup></h3>
+            <h3>{{$programa->aulaconcluida}}<sup style="font-size: 20px">%</sup></h3>
                 
-            <p>Em beneficios aos jovens</p>
+            <p>Índice de conclusão</p>
             </div>@endforeach
            
             <div class="icon">

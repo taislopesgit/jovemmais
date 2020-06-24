@@ -39,11 +39,11 @@
    <div class="col-md-3">
       <div class="small-box bg-green">
       <div class="inner">
-         @foreach ($dashFrequencia as $jovens)
+         
             <div class="icon">
                <i class="fa fa-plane"></i>
             </div>
-            <h3>{{$jovens->jovens}}  @endforeach 
+            <h3>0
             @foreach ($jovemParticipante  as $participante)
             <sup style="font-size: 20px">/{{$participante->jovens}} </sup></h3>
             @endforeach 
@@ -74,11 +74,11 @@
       <div class="col-md-3">
       <div class="small-box bg-red">
       <div class="inner">
-         @foreach ($dashFrequencia as $jovens)
+         
             <div class="icon">
                <i class="fa fa-graduation-cap"></i>
             </div>
-            <h3>{{$jovens->jovens}}  @endforeach 
+            <h3>4
             @foreach ($jovemParticipante  as $participante)
             <sup style="font-size: 20px">/{{$participante->jovens}} </sup></h3>
             @endforeach 

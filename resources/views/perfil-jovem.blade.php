@@ -1,4 +1,6 @@
+
 @extends('adminlte::page') @section('title', 'AdminLTE') @section('content_header')
+
 <section class="content-header">
     <h2>
         Jovem+
@@ -7,14 +9,21 @@
         <li><a href="inicial"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li class="active">Perfil</li>
     </ol>
+    
 </section>
 <section class="content">
     <div class="row">
     <div class="col-md-3">
         <div class="box box-primary">
             <div class="box-body box-profile">
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success')}}
+            </div>
+            @endif
                 @foreach ($usuarios as $usuario)
-                <img class="profile-user-img img-responsive img-circle" src="https://www.vocacao.org.br/jovemaprendiz/feedback-gestor/images/{{$usuario->id_jovem}}.jpg" alt="User profile picture">
+              
+                <img class="avatar" src="https://www.vocacao.org.br/jovemaprendiz/feedback-gestor/images/{{$usuario->id_jovem}}.jpg" alt="User profile picture">
                 <h3 class="profile-username text-center"></h3>
                 <p class="text-muted text-center">@if (
                     !is_null($usuario->matriculas()->get()->max('data_desligamento'))
@@ -24,8 +33,15 @@
                     <small class="label bg-green">Ativo</small>
                     @endif
                 </p>
+                <p class="text-muted text-center">
+                <a href="{{route('editar', $usuario->id_jovem)}}" class="text-blue" title="editar" data-toggle="tooltip" data-placement="top">
+                <small class="label bg-orange">Editar dados</small>
+                                </a> </p>
                 <!-- /.info-box-content -->
                 <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                        <b>Nome</b> <a class="pull-right">{{$usuario->nome}}</a>
+                    </li>
                     <li class="list-group-item">
                         <b>ID</b> <a class="pull-right">{{$usuario->id_jovem}}</a>
                     </li>
@@ -155,17 +171,24 @@
     <div class="box-body table-responsive no-padding">
     <div class="nav-tabs-custom">
     <div class="box-body table-responsive">
-        <ul class="nav nav-tabs nav-tabs-responsive" >
-        <li class="active"> <a href="#calendario" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-check bg-dark"></i>&nbsp;&nbsp;Calendário</a></li>
-            <li class="active"> <a href="#treinamento" data-toggle="tab" aria-expanded="false"><i class="fas fa-book"></i></i>&nbsp;&nbsp;Treinamento</a></li>
-            <li class=""><a href="#marcacao" data-toggle="tab" aria-expanded="false"> <i class="fa fa-history bg-dark"></i>&nbsp;&nbsp; Marcações</a></li>
-            <li class=""><a href="#ocorrencia" data-toggle="tab" aria-expanded="false"> <i class="fas fa-exclamation-circle"></i></i>&nbsp;&nbsp; Ocorrências</a></li>
-            <li class=""><a href="#contrato" data-toggle="tab" aria-expanded="false"> <i class="fas fa-sticky-note"></i></i>&nbsp;&nbsp; Contrato</a></li>
-            <li class=""><a href="#editar" data-toggle="tab" aria-expanded="false"> <i class="fa fa-id-card bg-dark"></i>&nbsp;&nbsp;Editar Dados</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="calendario">
-                <table class="table table-striped">
+    <div class="col-md-">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#calendario" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-check bg-dark"></i>&nbsp;&nbsp;Calendário</a> </li>
+              <li class=""><a href="#treinamento" data-toggle="tab" aria-expanded="false"><i class="fas fa-book"></i></i>&nbsp;&nbsp;Treinamento</a></li>
+              <li class=""><a href="#marcacao" data-toggle="tab" aria-expanded="false"><i class="fa fa-history bg-dark"></i>&nbsp;&nbsp;Marcação</a></li>
+              <li class=""><a href="#ocorrencia" data-toggle="tab" aria-expanded="false"><i class="fas fa-exclamation-circle"></i></i>&nbsp;&nbsp;Ocorrência</a></li>
+              <li class=""><a href="#contrato" data-toggle="tab" aria-expanded="false"><i class="fas fa-sticky-note"></i></i>&nbsp;&nbsp;Contrato</a></li>
+              <!--<li class=""><a href="#dados" data-toggle="tab" aria-expanded="false"><i class="fa fa-id-card bg-dark"></i>&nbsp;&nbsp;Editar Dados</a></li>-->
+            </ul>
+            <div class="tab-content">
+            <!--inicioCalendario-->
+   
+
+              <!--fimCalendario-->
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="treinamento">
+              <table class="table table-striped">
                     <br>
                     <div class="user-block">
                         <tbody>
@@ -193,9 +216,10 @@
                     {{ $verJovens->links() }}
                     @endif
                 </div>
-            </div>
-            <br>
-            <div class="tab-pane" id="marcacao">
+              </div>
+              <!--fimtreinamento-->
+                <!-- /.tab-pane -->
+                <div class="tab-pane" id="marcacao">
                 <table class="table table-striped">
                     <div class="user-block">
                         <tbody>
@@ -225,10 +249,104 @@
                 {{ $verJovens->links() }}
                 @endif
                 </div>
-                </div>
-                <br>
+                
+              </div>
+            <!--fimmarcacao-->
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="ocorrencia">
+              <div class="table-responsive">
+              <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th class="align-middle">ID Ocorrência</th>
+                    <th class="align-middle text-center">Tipo de ocorrência</th>
+                    <th class="align-middle text-center">Descrição</th>
+                    
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                  <td class="align-middle">&nbsp;&nbsp;</td>
+                  <td class="align-middle text-center"></td>
+                  <td class="align-middle text-center"></td>
+                  
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              </div>
+              <!--fimOcorrencia-->
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="contrato">
+            
+              <div class="table-responsive">
+              <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th class="align-middle">Documento</th>
+                    <th class="align-middle text-center">Baixar cópia</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                  <td class="align-middle">Contrato de Trabalho</td>
+                  <td class="align-middle text-center">
+                  <a download="pagina.html" href="data:text/html;charset=utf-8,<html><body><h1>conteúdo/h1></body></html>"><i class="fa fa-download">&nbsp;</i></a></td>
+                  </td>
+                  </tr>
+                  </tbody>
+                </table>
+              
+          </div>
+          </div>
+          
+           
+
+    <!--alterarfoto--
+<div class="col-md-4">
+   
+             
+    @if($errors->all())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                    <li>
+                        {{ $error }}
+                    </li>
+                    @endforeach
+                </ul>
             </div>
-        </div>
-    </div>
+            @endif
+       
+            <form action="" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="id" value="">
+            <h4> Alterar foto </h4>
+            <div align="center">
+            <img src="" alt="Avatar" class="avatar">
+            <br> <br>
+            <input type="file" name="foto-aprendiz" class="btn btn-default"  accept="image/png, image/jpeg" multiple /> 
+            </div>
+
+            </form>
+    </div>-->
+
 </section>
+
+<style>
+
+.avatar {
+  background: white;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: block;
+
+
+}
+</style>
+
+
 @stop

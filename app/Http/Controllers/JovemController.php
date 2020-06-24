@@ -38,8 +38,42 @@ class JovemController extends Controller
         return view('inicial', compact('sobre','programaSobre'));
 
     }
+    public function calendario()
+    {
+        
+       
+        return view('calendar');
+
+    }
+
+  
+    public function jovemEdit($id)
+    {
+        $jovem = Jovem::find($id);
+        return view('perfil-edit',compact('jovem'));
+    }
+  
+    public function jovemUpdate(Request $request, $id)
+    {
+
+        
+        $form = $request ->all();
+        $update = auth()->user()->update($form);
+      
     
-    
+        if($update)
+            return redirect()
+                        ->route('jovem')
+                        ->with('success', 'Dados atualizados com sucesso!');
+            return redirect()
+                        ->back()
+                        ->with('error', 'Falha ao atualizar o perfil');
+            }
+        
+
+
+
+
     public function faceJovem(Request $request, Jovem $jovem)
     {  
     
@@ -148,7 +182,7 @@ class JovemController extends Controller
 
             } 
             
-            $competencias['combo1'] = round(($competencias['combo1'] * 100) / $competencias['total'], 2); 
+            $competencias['combo1'] = round(($competencias['combo1'] * 100)  / $competencias['total'], 2); 
             $competencias['combo2'] = round(($competencias['combo2'] * 100) / $competencias['total'], 2); 
             $competencias['combo3'] = round(($competencias['combo3'] * 100) / $competencias['total'], 2); 
             $competencias['combo4'] = round(($competencias['combo4'] * 100) / $competencias['total'], 2); 

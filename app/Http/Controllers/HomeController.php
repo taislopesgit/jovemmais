@@ -41,8 +41,9 @@ class HomeController extends Controller
         $clientes = Cliente::orderBy('razao_social','asc')->orderBy('nome_fantasia','asc')->get();
         $cursos = Curso::orderBy('nome')->get();
         $sobre = $jovem->programaSobre();
+        $evolucoes = $jovem->admEvolucao();
         
-        return view('home', compact('jovens','dadosFiltro','clientes','cursos','sobre', 'ususarios'));
+        return view('home', compact('evolucoes', 'admEvolucao','jovens','dadosFiltro','clientes','cursos','sobre', 'ususarios'));
 
     }
   

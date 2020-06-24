@@ -15,8 +15,9 @@
 
 <div class="row">
 <div class="col-md-12">
-<div class="box">
+<div class="row">
     <div class="box-header with-border">
+            <!-- inserirOcorrencia
         <a class="accordion-toggle pull-right collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false">
         <i class="fa fa-arrow-alt-circle-up"></i>
         </a>
@@ -57,16 +58,18 @@
                     </form>
                     </div>
             </div>
+        </div>-->
         </div>
         </div>
-        </div>
-        <div class="col-md-12">
+
+        
    <div class="box box-warning">
       <div class="box-header with-border">
               <h3 class="box-title">Relação Ocorrências</h3>
               <br> <br>
+              
               <div class="table-responsive">
-                <table class="table no-margin">
+              <table class="table table-striped">
                   <thead>
                   <tr>
                     <th class="align-middle text-center">Perfil</th>
@@ -74,17 +77,19 @@
                     <th class="align-middle text-center">ID Ocorrência</th>
                     <th class="align-middle text-center">Tipo</th>
                     <th class="align-middle text-center">Descrição</th>
-                    <th class="align-middle text-center">Status</th>
+                   
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
-                  <td class="align-middle text-center"><img src=https://image.freepik.com/vetores-gratis/perfil-de-avatar-de-homem-no-icone-redondo_24640-14044.jpg alt="Avatar" class="avatar"></td>
-                  <td class="align-middle text-center">3102</td>
-                  <td class="align-middle text-center">13</td>
-                  <td class="align-middle text-center">Crachá</td>
-                  <td class="align-middle text-center">Esquecimento frenquente de crachá</td>
-                    <td class="align-middle text-center"><span class="label label-success">Concluida</span></td> 
+   
+                  <td class="align-middle text-center"></td>
+                  <td class="align-middle text-center"></td>
+                  
+                  <td class="align-middle text-center"></td>
+                  <td class="align-middle text-center"></td>
+                  <td class="align-middle text-center"></td>
+                    
                     <td class="align-middle text-center">
                       <div class="sparkbar" data-color="#00a65a" data-height="20"><canvas width="34" height="20" style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas></div>
                    </td>                    

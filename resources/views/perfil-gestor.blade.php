@@ -70,11 +70,9 @@
    <!-- ./fim-->
    <div class="col-md-3">
       <div class="small-box bg-red">
-         <div class="inner">
-            
-            <h3>1</h3>
-            
-            <p>Ocorrências</p>
+      <div class="inner">      
+         <h3>0</h3>
+         <p>Ocorrências</p>
          </div>
          <div class="icon">
             <i class="fa fa-edit"></i>
@@ -88,11 +86,7 @@
          <br>
          <h3 class="box-title">Jovens responsável</h3>
          <br><br>
-         <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-         </div>
+         
          <!-- /.box-header -->
          <div class="box-body">
             <div class="table-responsive">
@@ -100,11 +94,11 @@
                   <tr>
                      
                      <th class="align-middle">Nome</th>
-                     <th class="align-middle text-center">&nbsp;</th>
                      <th class="align-middle">Progresso</th>
+                     <th>&nbsp; </th>
                      <th class="align-middle text-center">Presença</th> 
                      <th class="align-middle text-center">&nbsp;</th>
-                     <th class="align-middle text-center">&nbsp;</th>
+                     
                      
                   </tr>
                   @foreach ($relatorioJovem as $perfil)
@@ -171,20 +165,13 @@
                         <a href="{{route('show', $perfil->id_jovem)}}" class="text-blue" title="Visualizar" data-toggle="tooltip" data-placement="top">
                         <i class="fa fa-eye">&nbsp;</i>
                         </a>
-                     </td>
-                
-                     <td class="align-middle text-center">
-                            @if (
-                           !is_null($perfil->data_desligamento)
-                           )
-                           <a> <i class="fa fa-hand-paper" aria-hidden="true" style="color:red"></i></a>
-                              @else
-                                <a> <i class="fa fa-hand-paper" aria-hidden="true" style="color:green"></i></a>
-                                @endif
-
-                        <a href="{{route('show', $perfil->id_jovem)}}" class="text-blue" title="Visualizar" data-toggle="tooltip" data-placement="top">
+                        &nbsp;
+                        <a href="{{route('ocorrencia', $perfil->id_jovem)}}" class="text-red" title="ocorrencia" data-toggle="tooltip" data-placement="top">
+                        <i class="fa fa-edit">&nbsp;</i>
                         </a>
                      </td>
+                
+      
                   @endforeach
                   </tr>
                   
