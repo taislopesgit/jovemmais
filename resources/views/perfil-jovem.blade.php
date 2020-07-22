@@ -394,8 +394,7 @@
         events: [  @foreach ( $verJovens as $events )
                    { 
                        
-                      title: '{{$events-> descricao}}' ,
-                      description: '{{$events-> nome}}' ,
+                      title: '{{$events-> nome}}' ,
                       start : '{{$events-> data_disciplina}}',
                      
                      

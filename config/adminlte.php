@@ -165,37 +165,41 @@ return [
 
             
         [
-            'text'    => 'Gestor',
-            'icon'    => 'fa fa-id-badge',
+            'text'    => 'GESTOR',
+            'icon'    => '',
              'can'     => 'gestor',
-                  'submenu' => [
+            ],
+            
                 [
                     'text' => 'Painel',
                     'icon'    => "fa fa-desktop",
                     'url'  => 'perfil-gestor',
+                    'can'     => 'gestor',
                    
                 ],  
                 [
-                    'text' => 'Perfil',
+                    'text' => 'Perfil', 
                     'icon'    => "fas fa-fw fa-user",
                     'url'  => 'face',
+                    'can'     => 'gestor',
                     
                 ],
                 [
                     'text' => 'Avaliação do Programa',
                     'icon'    => "fa fa-check",
                     'url'  => 'avaliacao-programa',
+                    'can'     => 'gestor',
                     
                 ],
                 [
                     'text' => 'Ocorrência',
                     'icon'    => "fa fa-sticky-note",
                     'url'  => 'ocorrencia-jovem',
+                    'can'     => 'gestor',
                     
                 ],
                 
-                ], 
-            ],
+                
         
         [
             'text'    => 'Perfil',

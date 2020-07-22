@@ -22,7 +22,11 @@
          <div class="inner">
             @foreach ($dashFrequencia as $jovens)
             <h3>{{$jovens->jovens}}</h3>
-            <p>Jovens ativos</p>
+            <div class="a:link ">
+            <a href="{{route('face')}}">
+                        <p>Jovens ativos</p>
+                        </a>
+         </div>
          </div>
          @endforeach
          <div class="icon">
@@ -76,7 +80,11 @@
       <div class="small-box bg-red">
       <div class="inner">      
          <h3>0</h3>
-         <p>Ocorrências</p>
+         <div class="a:link ">
+            <a href="{{route('ocorrencia')}}">
+                        <p>Ocorrências</p>
+                        </a>
+         </div>
          </div>
          <div class="icon">
             <i class="fa fa-edit"></i>
@@ -220,6 +228,12 @@
       
    
 </section>
+
+<style>
+   a {color: #ffffff;}
+</style>
+
+
 @stop
 
 

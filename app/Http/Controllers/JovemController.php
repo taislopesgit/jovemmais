@@ -13,6 +13,7 @@ use App\Usuario;
 use App\Papel;
 use App\Permissao;
 
+
 class JovemController extends Controller
 {
     /**
@@ -122,7 +123,7 @@ class JovemController extends Controller
         $frequencias = $jovem->frequenciaUser();
         
 
-        //$calendar=array();
+        /**$calendar=array();
         
        foreach ($verJovens as $events) {
            $data [] = array (
@@ -131,7 +132,7 @@ class JovemController extends Controller
             'Data'   => $events->data_disciplina
            );
           }
-          //echo json_encode($data);
+          //echo json_encode($data);*/
    
     return view('perfil-jovem', compact('data','verJovens','jovemDadosUser','sobreJovem','jovemSobreUser',
     'evolucoes', 'jovemEvolucaoUser','usuarios','frequencias','frequenciaUser'));
@@ -221,12 +222,18 @@ class JovemController extends Controller
             $dashOcorrencias = $jovem->ocorrencia();
 
 
-            $pesquisa = $jovem->testePesquisa();
-            $pesquisa02 = $jovem->pesquisa02();
-            $pesquisa03 = $jovem->pesquisa03();
+            $dataIni = date('Y-m-d', strtotime('-180 days', strtotime('now')));
+            $dataFim = date('Y-m-d');
 
-            return view('avaliacao-programa', compact('pesquisa03', 'pesquisa03','pesquisa02', 'pesquisa02','gestores','relatorioJovem','RelacaoJovemGestor', 'nome', 'nomeGestor','dashSatisfacao',
-            'satisfacao','frequencia','dashFrequencia','ativos','dashOcorrencias','ocorrencia','pesquisa','testePesquisa','competencias'));
+            $pesquisa01 =$jovem->getResultadoAvaliacao(2,$dataIni, $dataFim);
+            $pesquisa02 =$jovem->getResultadoAvaliacao(1,$dataIni, $dataFim);
+            $pesquisa03 =$jovem->getResultadoAvaliacao(6,$dataIni, $dataFim);
+            $pesquisa04 =$jovem->getResultadoAvaliacao(5,$dataIni, $dataFim);
+            $pesquisa05 =$jovem->getResultadoAvaliacao(4,$dataIni, $dataFim);
+            $pesquisa06 =$jovem->getResultadoAvaliacao(3,$dataIni, $dataFim);
+
+            return view('avaliacao-programa', compact('pesquisa06','pesquisa05','pesquisa04','pesquisa03','pesquisa01','pesquisa02','gestores','relatorioJovem','RelacaoJovemGestor', 'nome', 'nomeGestor','dashSatisfacao',
+            'satisfacao','frequencia','dashFrequencia','ativos','dashOcorrencias','ocorrencia','pesquisa','competencias'));
          }
     
     }

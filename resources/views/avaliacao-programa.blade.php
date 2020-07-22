@@ -19,30 +19,45 @@
    <h4> Bem vindo(a), {{$gestor->nome}}</h4>
    @endforeach 
    </br>
-<div class='row'>
-   <div class="col-md-12">
+
+   <div class='row'>
    <div class="box box-warning">
       <div class="box-header with-border">
          <h3 class="box-title">Avaliação dos jovens ao treinamento:</h3>
-            <br><br>s
-    <div class='col-xs-12 col-sm-6 minha-classe'>
-        <canvas id="doughnut-chart" max-width:  500px></canvas>
- </div>
-    <div class='col-xs-12 col-sm-6 minha-classe'>
-        <canvas id="pie-chart" max-width:  500px></canvas>
- </div>
-    </div>
+         <br><br>
+         <div class='col-xs-12 col-sm-6 minha-classe'>
+            <canvas id="doughnut-chart" max-width:  500px></canvas>
          </div>
-            </div>  
-
- <div class='row'>
-   <div class="col-md-12">
+         <div class='col-xs-12 col-sm-6 minha-classe'>
+            <canvas id="pie-chart" max-width:  500px></canvas>
+         </div>
+      </div>
+   </div>
+</div>
+<div class='row'>
    <div class="box box-warning">
       <div class="box-header with-border">
- 
- <div class='col-xs-12 col-sm-6 minha-classe'>
-        <canvas id="bar-chart-horizontal" max-width:  500px></canvas>
- </div>
+         <div class='col-xs-12 col-sm-6 minha-classe'>
+            <canvas id="line-chart" max-width:  500px></canvas>
+         </div>
+         <div class='col-xs-12 col-sm-6 minha-classe'>
+            <canvas id="pie2-chart" max-width:  500px></canvas>
+         </div>
+      </div>
+   </div>
+</div>
+<div class='row'>
+   <div class="box box-warning">
+      <div class="box-header with-border">
+         <div class='col-xs-12 col-sm-6 minha-classe'>
+            <canvas id="doughnut2-chart" max-width:  500px></canvas>
+         </div>
+         <div class='col-xs-12 col-sm-6 minha-classe'>
+            <canvas id="line2-chart" max-width:  500px></canvas>
+         </div>
+      </div>
+   </div>
+</div>
 
 </section>
 @stop
@@ -50,18 +65,19 @@
 
 
 @section('js')
+
 <script>
    
-   var items = {!! $pesquisa->toJson() !!};
+   var item01 = {!! $pesquisa01->toJson() !!};
    const resposta = [];
    const quantidade = [];
 
    var total = 0;
-   items.forEach(function(item){
+   item01.forEach(function(item){
       total = total + item.qtd;
    });
 
-   items.forEach(function(item){
+   item01.forEach(function(item){
       resposta.push(item.resposta);
       quantidade.push(((item.qtd * 100) / total).toFixed(2));
    });
@@ -82,27 +98,39 @@
       title: {
          legend: true,
         display: true,
-           text: 'Você gostou do conteúdo abordado?'
+           text: 'Você consegue ver conexão deste treinamento com a sua prática no trabalho e/ou no dia a dia?'
       }
     }
 });
 </script>
+
 <!--02-->
 
 <script>
    
-   var items = {!! $pesquisa02->toJson() !!};
-  
-  
-new Chart(document.getElementById("pie-chart"), {
+   var item02 = {!! $pesquisa02->toJson() !!};
+   const resposta02 = [];
+   const quantidade02 = [];
+
+   var total = 0;
+   item02.forEach(function(item){
+      total = total + item.qtd;
+   });
+
+   item02.forEach(function(item){
+      resposta02.push(item.resposta);
+      quantidade02.push(((item.qtd * 100) / total).toFixed(2));
+   });
+   
+    new Chart(document.getElementById("pie-chart"), {
     type: 'pie',
     data: {
-      labels: resposta,
+      labels: resposta02,
       datasets: [
         {
           label: "Population (millions)",
           backgroundColor: ["#0073b7", "#00A65A","#F39C12","#DD4B39","#3C8DBC"],
-          data: quantidade,
+          data: quantidade02,
         }
       ]
     },
@@ -110,27 +138,40 @@ new Chart(document.getElementById("pie-chart"), {
       title: {
          legend: true,
         display: true,
-        text:' Como você avalia a dinâmica do treinamento?'
+           text: 'Você gostou do conteúdo abordado?'
       }
     }
+    
 });
-</script>
-<!--03-->
 
+</script>
+
+<!--03-->
 <script>
    
-   var items = {!! $pesquisa03->toJson() !!};
+   var item03 = {!! $pesquisa03->toJson() !!};
+   const resposta03 = [];
+   const quantidade03 = [];
+
+   var total = 0;
+   item03.forEach(function(item){
+      total = total + item.qtd;
+   });
+
+   item03.forEach(function(item){
+      resposta03.push(item.resposta);
+      quantidade03.push(((item.qtd * 100) / total).toFixed(2));
+   });
    
-  
-new Chart(document.getElementById("bar-chart-horizontal"), {
-    type: 'horizontalBar',
+    new Chart(document.getElementById("line-chart"), {
+    type: 'line',
     data: {
-      labels: resposta,
+      labels: resposta03,
       datasets: [
         {
-          label: "Population (millions)",
-          backgroundColor: ["#0073b7", "#00A65A","#F39C12","#DD4B39","#3C8DBC"],
-          data: quantidade,
+          label: "",
+          backgroundColor: ["#F39C12"],
+          data: quantidade03,
         }
       ]
     },
@@ -138,9 +179,127 @@ new Chart(document.getElementById("bar-chart-horizontal"), {
       title: {
          legend: true,
         display: true,
-        text:'O instrutor abordou o tema com clareza? ',
+           text: 'Que nota você daria para o treinamento de hoje?'
       }
     }
 });
 </script>
+
+
+<!--04-->
+<script>
+   
+   var item04 = {!! $pesquisa04->toJson() !!};
+   const resposta04 = [];
+   const quantidade04 = [];
+
+   var total = 0;
+   item04.forEach(function(item){
+      total = total + item.qtd;
+   });
+
+   item04.forEach(function(item){
+      resposta04.push(item.resposta);
+      quantidade04.push(((item.qtd * 100) / total).toFixed(2));
+   });
+   
+    new Chart(document.getElementById("pie2-chart"), {
+    type: 'pie',
+    data: {
+      labels: resposta04,
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#F39C12","#DD4B39","#3C8DBC"],
+          data: quantidade04,
+        }
+      ]
+    },
+    options: {
+      title: {
+         legend: true,
+        display: true,
+           text: 'Você consegue ver conexão deste treinamento com a sua prática no trabalho e/ou no dia a dia?'
+      }
+    }
+});
+</script>
+
+<!--05-->
+<script>
+   
+   var item05 = {!! $pesquisa05->toJson() !!};
+   const resposta05 = [];
+   const quantidade05 = [];
+
+   var total = 0;
+   item05.forEach(function(item){
+      total = total + item.qtd;
+   });
+
+   item05.forEach(function(item){
+      resposta05.push(item.resposta);
+      quantidade05.push(((item.qtd * 100) / total).toFixed(2));
+   });
+   
+    new Chart(document.getElementById("doughnut2-chart"), {
+    type: 'doughnut',
+    data: {
+      labels: resposta05,
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#0073b7", "#00A65A","#F39C12","#DD4B39","#3C8DBC"],
+          data: quantidade05,
+        }
+      ]
+    },
+    options: {
+      title: {
+         legend: true,
+        display: true,
+           text: 'Como você avalia a dinâmica do treinamento?'
+      }
+    }
+});
+</script>
+<!--06-->
+<script>
+   
+   var item06 = {!! $pesquisa06->toJson() !!};
+   const resposta06 = [];
+   const quantidade06 = [];
+
+   var total = 0;
+   item06.forEach(function(item){
+      total = total + item.qtd;
+   });
+
+   item06.forEach(function(item){
+      resposta06.push(item.resposta);
+      quantidade06.push(((item.qtd * 100) / total).toFixed(2));
+   });
+   
+    new Chart(document.getElementById("line2-chart"), {
+    type: 'line',
+    data: {
+      labels: resposta06,
+      datasets: [
+        {
+          label: "",
+          backgroundColor: ["#0073b7"],
+          data: quantidade06,
+        }
+      ]
+    },
+    options: {
+      title: {
+         legend: true,
+        display: true,
+           text: 'Defina em uma palavra o treinamento de hoje?'
+      }
+    }
+});
+</script>
+
 @stop
