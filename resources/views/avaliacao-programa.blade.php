@@ -35,7 +35,7 @@
    </div>
 </div>
 <div class='row'>
-   <div class="box box-warning">
+   <div class="box box-light">
       <div class="box-header with-border">
          <div class='col-xs-12 col-sm-6 minha-classe'>
             <canvas id="line-chart" max-width:  500px></canvas>
@@ -47,7 +47,7 @@
    </div>
 </div>
 <div class='row'>
-   <div class="box box-warning">
+   <div class="box box-light">
       <div class="box-header with-border">
          <div class='col-xs-12 col-sm-6 minha-classe'>
             <canvas id="doughnut2-chart" max-width:  500px></canvas>
@@ -210,7 +210,7 @@
       datasets: [
         {
           label: "Population (millions)",
-          backgroundColor: ["#F39C12","#DD4B39","#3C8DBC"],
+          backgroundColor: ["#F39C12","#00A65A","#DD4B39","#3C8DBC"],
           data: quantidade04,
         }
       ]

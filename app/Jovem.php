@@ -489,7 +489,7 @@ class Jovem extends Model
             )
             ->where('tb_matricula.data_desligamento', null)
             ->where('tb_jovem.id_jovem', $id)
-            // ->orderBy('tb_cronograma.data_disciplina')
+            ->orderBy('tb_cronograma.data_disciplina')
 
             ->Paginate(10);
         //dd($verJovens);
@@ -711,7 +711,7 @@ class Jovem extends Model
            c.data_disciplina < CURRENT_DATE()
             AND co.id_usuario = ?', [Auth::id()]);
 
-        //dd($jovemParticipante);
+       // dd($jovemParticipante);
         return $jovemParticipante;
     }
 

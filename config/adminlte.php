@@ -134,38 +134,33 @@ return [
     
         ['header' => ''],
         [
-            'text'    => 'Administrador ',
-            'icon'    => 'fas fa-fw fa-cogs',
-             'can'     => 'adm',
-
-                  'submenu' => [
-
-                [
-                    'text'        => 'Painel',
-                    'icon'    => 'fa fa-info-circle',
-                    'url'         => 'inicial',
-                
-                    ], 
-                [
-                    'text' => 'Relação Jovens',
-                    'icon'    => 'fa fa-id-badge',
-                    'url'  => 'home',
-                   
-                   
-                ],  
-                [
-                   
-                    'text' => 'Relação Gestores',
-                    'icon'    => 'fas fa-user-tie',
-                    'url'  => 'gestores',
-                   
-                ],  
+            'text'    => 'ADMINISTRADOR ',
+            'icon'    => '',
+            'url'  => 'home',
+             'can'     => 'adm', 
+            ], 
+            
+            [
+                'text' => 'Relação Jovens',
+                'icon'    => 'fa fa-id-badge',
+                'url'  => 'home',
+                'can'     => 'adm', 
                
-            ], ],
+               
+            ],  
+            [
+               
+                'text' => 'Relação Gestores',
+                'icon'    => 'fas fa-user-tie',
+                'url'  => 'gestores',
+                'can'     => 'adm', 
+               
+            ],  
 
             
         [
             'text'    => 'GESTOR',
+            'url'  => 'perfil-gestor',
             'icon'    => '',
              'can'     => 'gestor',
             ],
@@ -178,7 +173,7 @@ return [
                    
                 ],  
                 [
-                    'text' => 'Perfil', 
+                    'text' => 'Jovens', 
                     'icon'    => "fas fa-fw fa-user",
                     'url'  => 'face',
                     'can'     => 'gestor',
@@ -202,24 +197,26 @@ return [
                 
         
         [
-            'text'    => 'Perfil',
-            'icon'    => 'fa fa-id-badge',
+            'text'    => 'JOVEM',
+            'icon'    => '',
+            'url'  => 'perfil-jovem',
             'can'     => 'jovem',
-                     'submenu' => [
-                        [
-                            'text'        => 'Painel',
-                            'icon'    => 'fa fa-info-circle',
-                            'url'         => 'inicial',
-                    
-                        ], 
-                        [
-                            'text' => 'Evolução',
-                            'icon'    => "fa fa-signal",
-                            'url'  => 'perfil-jovem',
-                            
-                        ],
+                      ],
+                    [
+                        'text'        => 'Painel',
+                        'icon'    => 'fa fa-info-circle',
+                        'url'         => 'inicial',
+                        'can'     => 'jovem',
+                
+                    ], 
+                    [
+                        'text' => 'Evolução',
+                        'icon'    => "fa fa-signal",
+                        'url'  => 'perfil-jovem',
+                        'can'     => 'jovem',
                         
-                         ], ],
+                    ],
+                    
                                 
         
         

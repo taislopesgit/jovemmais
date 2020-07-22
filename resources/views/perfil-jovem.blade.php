@@ -184,7 +184,7 @@
             <div class="tab-content">
             <div id='calendar'></div>
                  <div id='external-events-list'></div>
-                 
+                
               <div class="tab-pane" id="treinamento">
               <table class="table table-striped">
                     <br>
