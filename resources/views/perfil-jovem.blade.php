@@ -174,7 +174,7 @@
     <div class="col-md-">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#calendario" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-check bg-dark"></i>&nbsp;&nbsp;Calendário</a> </li>
+             <li class="active"><a href="#calendario" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar-check bg-dark"></i>&nbsp;&nbsp;Calendário</a> </li> 
               <li class=""><a href="#treinamento" data-toggle="tab" aria-expanded="false"><i class="fas fa-book"></i></i>&nbsp;&nbsp;Treinamento</a></li>
               <li class=""><a href="#marcacao" data-toggle="tab" aria-expanded="false"><i class="fa fa-history bg-dark"></i>&nbsp;&nbsp;Marcação</a></li>
               <li class=""><a href="#ocorrencia" data-toggle="tab" aria-expanded="false"><i class="fas fa-exclamation-circle"></i></i>&nbsp;&nbsp;Ocorrência</a></li>
@@ -182,11 +182,9 @@
               <!--<li class=""><a href="#dados" data-toggle="tab" aria-expanded="false"><i class="fa fa-id-card bg-dark"></i>&nbsp;&nbsp;Editar Dados</a></li>-->
             </ul>
             <div class="tab-content">
-            <!--inicioCalendario-->
-   
-
-              <!--fimCalendario-->
-              <!-- /.tab-pane -->
+            <div id='calendar'></div>
+                 <div id='external-events-list'></div>
+                 
               <div class="tab-pane" id="treinamento">
               <table class="table table-striped">
                     <br>
@@ -348,5 +346,72 @@
 }
 </style>
 
+<link href='{{asset('assets/fullcalendar/packages/core/main.css')}}' rel='stylesheet' />
+<link href='{{asset('assets/fullcalendar/packages/daygrid/main.css')}}' rel='stylesheet' />
+<link href='{{asset('assets/fullcalendar/packages/timegrid/main.css')}}' rel='stylesheet' />
+<link href='{{asset('assets/fullcalendar/packages/list/main.css')}}' rel='stylesheet' />
+<link href='{{asset('assets/fullcalendar/css/style.css')}}' rel='stylesheet' />
 
+<script src='{{asset('assets/fullcalendar/packages/core/main.js')}}'></script>
+<script src='{{asset('assets/fullcalendar/packages/interaction/main.js')}}'></script>
+<script src='{{asset('assets/fullcalendar/packages/daygrid/main.js')}}'></script>
+<script src='{{asset('assets/fullcalendar/packages/timegrid/main.js')}}'></script>
+<script src='{{asset('assets/fullcalendar/packages/list/main.js')}}'></script>
+
+<script src='{{asset('assets/fullcalendar/packages/core/locales/pt-br.js')}}'></script>
+
+
+</script>
+
+ <script> 
+   
+  
+  document.addEventListener('DOMContentLoaded', function() {
+      var Calendar = FullCalendar.Calendar;
+  
+     /* iniciar calendario
+     -----------------------------------------------------------------*/
+     var calendarEl = document.getElementById('calendar');
+     var calendar = new Calendar(calendarEl, {
+        locale:'pt-br',
+        plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+      
+        navLinks: true,
+        eventLimit: true,
+        selectable: true,
+        editable: false,
+      
+    
+        eventDrop: function(event) {
+             alert('Você não pode alterar esse evento');
+        },
+    
+        events: [  @foreach ( $verJovens as $events )
+                   { 
+                       
+                      title: '{{$events-> descricao}}' ,
+                      description: '{{$events-> nome}}' ,
+                      start : '{{$events-> data_disciplina}}',
+                     
+                     
+                  },
+                      @endforeach
+                ],
+                eventColor: '#378006'
+
+        });
+            
+        calendar.render( );
+
+  });
+   
+
+      </script>
+
+  
 @stop

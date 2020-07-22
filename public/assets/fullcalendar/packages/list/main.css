@@ -44,11 +44,11 @@
 }
 
 .fc-ltr .fc-list-heading-main {
-  float: left;
+  text-align: center;
 }
 
 .fc-ltr .fc-list-heading-alt {
-  float: right;
+  text-align: center;
 }
 
 .fc-rtl .fc-list-heading-main {

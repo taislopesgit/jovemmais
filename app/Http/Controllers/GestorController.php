@@ -59,6 +59,14 @@ class GestorController extends Controller
     }
 
   
+    public function avaliacaoPrograma(Jovem $jovem)
+    {
+       
+        
+       
+        return view('avaliacao-programa');
+
+    }
 
 }
     

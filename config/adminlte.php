@@ -182,6 +182,12 @@ return [
                     
                 ],
                 [
+                    'text' => 'Avaliação do Programa',
+                    'icon'    => "fa fa-check",
+                    'url'  => 'avaliacao-programa',
+                    
+                ],
+                [
                     'text' => 'Ocorrência',
                     'icon'    => "fa fa-sticky-note",
                     'url'  => 'ocorrencia-jovem',

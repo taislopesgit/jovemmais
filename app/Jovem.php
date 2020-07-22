@@ -122,8 +122,11 @@ class Jovem extends Model
                 'tb_cronograma.hora_quarta_marcacao'
 
             )
-
+            ->orderBy('tb_cronograma.data_disciplina', 'desc')
             ->where('tb_jovem.id_usuario', Auth::id())->Paginate(10);
+           
+
+        //dd($verJovens);
         return $verJovens;
     }
 
@@ -253,10 +256,11 @@ class Jovem extends Model
                         INNER JOIN tb_pergunta AS p ON p.id_pergunta = r.id_pergunta
                         WHERE m.data_desligamento IS NULL
                          AND c.data_disciplina < CURRENT_DATE()
-                         AND p.id_pergunta = 6 
+                         AND p.id_pergunta = 6
                          AND co.id_usuario = ?', [Auth::id()]);
 
-        //dd($dashSatisfacao);
+       
+       // dd($dashSatisfacao);
         return $dashSatisfacao;
     }
 
@@ -600,7 +604,7 @@ class Jovem extends Model
                 )
 
                 ->where('tb_matricula.data_desligamento', null)
-                ->where('tb_pergunta.id_pergunta', 3)
+                ->where('tb_pergunta.id_pergunta', 1)
                 ->whereBetween('tb_resposta.data_referencia', [$dataIni, $dataFim])
                 ->where('tb_contato.id_usuario', Auth::id())
                 ->groupBy('resposta')
@@ -610,6 +614,67 @@ class Jovem extends Model
             return $pesquisa;
         }
     }
+
+    public function pesquisa02()
+    { {
+
+            $dataIni = date('Y-m-d', strtotime('-180 days', strtotime('now')));
+            $dataFim = date('Y-m-d');
+            $pesquisa02 = DB::table('tb_matricula')
+                ->join('tb_cronograma', 'tb_matricula.id_matricula', '=', 'tb_cronograma.id_matricula')
+                ->join('tb_sala_alocacao', 'tb_cronograma.id_sala_alocacao', '=', 'tb_sala_alocacao.id_sala_alocacao')
+                ->join('tb_resposta', 'tb_sala_alocacao.id_sala_alocacao', '=', 'tb_resposta.id_sala_alocacao')
+                ->join('tb_pergunta', 'tb_resposta.id_pergunta', '=', 'tb_pergunta.id_pergunta')
+                ->join('tb_contato_matricula', 'tb_matricula.id_matricula', '=', 'tb_contato_matricula.id_matricula')
+                ->join('tb_contato_cliente', 'tb_contato_matricula.id_contato_cliente', '=', 'tb_contato_cliente.id_contato_cliente')
+                ->join('tb_contato', 'tb_contato_cliente.id_contato', '=', 'tb_contato.id_contato')
+                ->select(
+
+                    DB::raw('count(tb_resposta.id_resposta) as qtd, tb_resposta.resposta')
+                )
+
+                ->where('tb_matricula.data_desligamento', null)
+                ->where('tb_pergunta.id_pergunta', 4)
+                ->whereBetween('tb_resposta.data_referencia', [$dataIni, $dataFim])
+                ->where('tb_contato.id_usuario', Auth::id())
+                ->groupBy('resposta')
+                ->get();
+            //->toSql();
+            //dd($pesquisa02);
+            return $pesquisa02;
+        }
+    }
+
+    public function pesquisa03()
+    { {
+
+            $dataIni = date('Y-m-d', strtotime('-180 days', strtotime('now')));
+            $dataFim = date('Y-m-d');
+            $pesquisa03 = DB::table('tb_matricula')
+                ->join('tb_cronograma', 'tb_matricula.id_matricula', '=', 'tb_cronograma.id_matricula')
+                ->join('tb_sala_alocacao', 'tb_cronograma.id_sala_alocacao', '=', 'tb_sala_alocacao.id_sala_alocacao')
+                ->join('tb_resposta', 'tb_sala_alocacao.id_sala_alocacao', '=', 'tb_resposta.id_sala_alocacao')
+                ->join('tb_pergunta', 'tb_resposta.id_pergunta', '=', 'tb_pergunta.id_pergunta')
+                ->join('tb_contato_matricula', 'tb_matricula.id_matricula', '=', 'tb_contato_matricula.id_matricula')
+                ->join('tb_contato_cliente', 'tb_contato_matricula.id_contato_cliente', '=', 'tb_contato_cliente.id_contato_cliente')
+                ->join('tb_contato', 'tb_contato_cliente.id_contato', '=', 'tb_contato.id_contato')
+                ->select(
+
+                    DB::raw('count(tb_resposta.id_resposta) as qtd, tb_resposta.resposta')
+                )
+
+                ->where('tb_matricula.data_desligamento', null)
+                ->where('tb_pergunta.id_pergunta', 2)
+                ->whereBetween('tb_resposta.data_referencia', [$dataIni, $dataFim])
+                ->where('tb_contato.id_usuario', Auth::id())
+                ->groupBy('resposta')
+                ->get();
+            //->toSql();
+                //dd($pesquisa03);
+            return $pesquisa03;
+        }
+    }
+
 
     public function faceToface()
     {
@@ -811,4 +876,11 @@ class Jovem extends Model
         //dd($evolucoes);
         return  $evolucoes;
     }
+
+   
+
+
+
+
+
 }

@@ -38,13 +38,7 @@ class JovemController extends Controller
         return view('inicial', compact('sobre','programaSobre'));
 
     }
-    public function calendario()
-    {
-        
-       
-        return view('calendar');
-
-    }
+ 
 
   
     public function jovemEdit($id)
@@ -127,11 +121,22 @@ class JovemController extends Controller
         $evolucoes = $jovem->jovemEvolucaoUser();
         $frequencias = $jovem->frequenciaUser();
         
+
+        //$calendar=array();
         
+       foreach ($verJovens as $events) {
+           $data [] = array (
+            'id'   => $events->id_jovem,
+            'Titulo'   => $events->descricao,
+            'Data'   => $events->data_disciplina
+           );
+          }
+          //echo json_encode($data);
    
-    return view('perfil-jovem', compact('verJovens','jovemDadosUser','sobreJovem','jovemSobreUser',
+    return view('perfil-jovem', compact('data','verJovens','jovemDadosUser','sobreJovem','jovemSobreUser',
     'evolucoes', 'jovemEvolucaoUser','usuarios','frequencias','frequenciaUser'));
     }
+
 
 
     public function JovemGestor(Request $request, Jovem $jovem)
@@ -195,6 +200,33 @@ class JovemController extends Controller
            'satisfacao','frequencia','dashFrequencia','ativos','dashOcorrencias','ocorrencia','pesquisa','testePesquisa','competencias'));
         }
    
+        public function jovemCalendario (Request $request, Jovem $jovem)
+        {  
+        
+        
+            return view('calendario-jovem');
+    
+        }
+        
+        
+        public function avaliacaoPrograma(Request $request, Jovem $jovem)
+        {
+           
+            $gestores = Jovem::where('id_usuario', Auth::id())->get();
+            $relatorioJovem = $jovem->RelacaoJovemGestor();
+            $nome = $jovem->nomeGestor();
+            
+            $dashSatisfacao = $jovem->satisfacao();
+            $dashFrequencia = $jovem->frequencia();
+            $dashOcorrencias = $jovem->ocorrencia();
 
-      
+
+            $pesquisa = $jovem->testePesquisa();
+            $pesquisa02 = $jovem->pesquisa02();
+            $pesquisa03 = $jovem->pesquisa03();
+
+            return view('avaliacao-programa', compact('pesquisa03', 'pesquisa03','pesquisa02', 'pesquisa02','gestores','relatorioJovem','RelacaoJovemGestor', 'nome', 'nomeGestor','dashSatisfacao',
+            'satisfacao','frequencia','dashFrequencia','ativos','dashOcorrencias','ocorrencia','pesquisa','testePesquisa','competencias'));
+         }
+    
     }

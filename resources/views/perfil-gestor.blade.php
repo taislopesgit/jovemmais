@@ -62,7 +62,11 @@
             @endif
             @endif  
             <h3>{{$satisfacao->satisfacao}}<sup style="font-size: 20px">/10</sup></h3>
-            <p>Nível de satisfação</p>
+            <div class="a:link ">
+            <a href="{{route('avaliacao-programa')}}">
+                        <p> Nivel de satisfação</p>
+                        </a>
+         </div>
          </div>
          @endforeach
       </div>
@@ -147,16 +151,16 @@
                         @foreach($array as $present)
                         @switch($present)
                         @case(1)
-                        <i class="fa fa-circle text-green"></i> 
+                        <i class="fa fa-circle text-green" title="Presença"></i> 
                         @break
                         @case(2)
-                        <i class="fa fa-circle text-red"></i>
+                        <i class="fa fa-circle  text-red" title="Falta"></i>
                         @break
                         @case(3)
-                        <i class="fa fa-circle text-red"></i>
+                        <i class="fa fa-circle  text-red" title="Falta"></i>
                         @break
                         @default
-                        <i class="fa fa-circle text-blue"></i>
+                        <i class="fa fa-circle  text-blue" title="Atraso"></i>
                         @endswitch
                         @endforeach
                         @endif  
@@ -166,9 +170,9 @@
                         <i class="fa fa-eye">&nbsp;</i>
                         </a>
                         &nbsp;
-                        <a href="{{route('ocorrencia', $perfil->id_jovem)}}" class="text-red" title="ocorrencia" data-toggle="tooltip" data-placement="top">
+                        <!--<a href="{{route('ocorrencia', $perfil->id_jovem)}}" class="text-red" title="ocorrencia" data-toggle="tooltip" data-placement="top">
                         <i class="fa fa-edit">&nbsp;</i>
-                        </a>
+                        </a>-->
                      </td>
                 
       
@@ -188,12 +192,13 @@
          </div>
       </div>
    </div>
-   <!--fim-->
+   
+   <!--
    <div class="row">
       <div class="col-md-12">
          <div class="box box-warning">
           <div class="box-header with-border">
-            <h3 class="box-title">Avaliação</h3>
+            <h3 class="box-title">Avaliação dos jovens aos treinamentos</h3>
 
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -201,121 +206,23 @@
               <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
             </div>
           </div>
-          <!-- /.box-header -->
+      
           <div class="box-body">
             <div class="row">
-              <div class="col-md-8">
-         <br>
-         <p class="text-center">
-            <strong></strong>
-         </p>
+            //pergunta01
+             <div>
                 <div class="chart">
-                  <!-- Sales Chart Canvas -->
-                  <canvas id="salesChart" style="height: 280px;"></canvas>
-                </div>
-                <!-- /.chart-responsive -->
-              </div>
-              <!-- /.col -->
-              <div class="col-md-4">
-                <p class="text-center">
-                  <strong>Avaliação dos jovens em relação aos treinamentos</strong>
-                </p>
-               <br>
-                <div class="progress-group">
-                  <span class="progress-text">Criatividade, Trabalho em equipe e Pensamento crítico</span>
-                <span class="progress-number"><b>{{$competencias['combo1']}}</b>/{{$competencias['total']}}</span>
-  
-                  <div class="progress sm">
-                    <div class="progress-bar progress-bar-blue" style="width: {{$competencias['combo1']}}%"></div>
-                  </div>
-                </div>
-                <!-- /.progress-group -->
-                <div class="progress-group">
-                  <span class="progress-text">Orientação para o trabalho, Falar em público e Aprender a aprender</span>
-                  <span class="progress-number"><b>{{$competencias['combo2']}}</b>/{{$competencias['total']}}</span>
-  
-                  <div class="progress sm">
-                    <div class="progress-bar progress-bar-green" style="width: {{$competencias['combo2']}}%"></div>
-                  </div>
-                </div>
-                <!-- /.progress-group -->
-                <div class="progress-group">
-                  <span class="progress-text">Negociação, Comunicação oral e escrita e Conduta ética</span>
-                  <span class="progress-number"><b>{{$competencias['combo3']}}</b>/{{$competencias['total']}}</span>
-  
-                  <div class="progress sm">
-                    <div class="progress-bar progress-bar-yellow" style="width: {{$competencias['combo3']}}%"></div>
-                  </div>
-                </div>
-                <!-- /.progress-group -->
-                <div class="progress-group">
-                  <span class="progress-text">Resolução de problemas, Inteligência emocional e Assiduidade e Pontualidade</span>
-                  <span class="progress-number"><b>{{$competencias['combo4']}}</b>/{{$competencias['total']}}</span>
-  
-                  <div class="progress sm">
-                    <div class="progress-bar progress-bar-red" style="width: {{$competencias['combo4']}}%"></div>
-                  </div>
-                </div>
-               </div>
-            </div>
-         </div>
-      </div>
+                  <canvas id="doughnut-chart" max-width:  500px></canvas>
+                  <div>
+          
+                  fim-->
+              
       
    
 </section>
 @stop
 
-<!--feedback-->
 
-@section('js')
-<script>
-   
-   var items = {!! $pesquisa->toJson() !!};
-   const resposta = [];
-   const quantidade = [];
 
-   var total = 0;
-   items.forEach(function(item){
-      total = total + item.qtd;
-   });
 
-   items.forEach(function(item){
-      resposta.push(item.resposta);
-      quantidade.push(((item.qtd * 100) / total).toFixed(2));
-   });
-   
-    var ctx = document.getElementById('salesChart').getContext('2d');
-    var chart = new Chart(ctx, {
-        // tipo de chart
-        type: 'radar',
 
-        // Estrutura de dadis
-
-        data: {
-            labels:  resposta,
-            datasets: [
-                {    
-                    label: '%',
-                    fill: true,
-                    backgroundColor: 'rgb(255, 128, 0, 0.3)',
-                    borderColor: 'rgb(204, 102, 0)',
-                    pointBackgroundColor: 'rgb(204, 102, 0)',
-                    pointBorderColor: 'rgb(255, 99, 132)',
-                    borderWidth: 2,
-                    data: quantidade,
-                   
-                }
-            ],
-        },
-
-       
-        options: {
-        legend: {
-            display: false
-        },
-    }
-    });
-</script>
-<!--fimFeedBack-->
-
-@stop
