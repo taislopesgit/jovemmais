@@ -124,7 +124,7 @@ class Jovem extends Model
             )
             ->orderBy('tb_cronograma.data_disciplina', 'desc')
             ->where('tb_jovem.id_usuario', Auth::id())->Paginate(10);
-           
+
 
         //dd($verJovens);
         return $verJovens;
@@ -184,7 +184,7 @@ class Jovem extends Model
                   / 100 )  as aulapresenca'),
 
 
-                DB::raw('CEIL((SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_matricula.id_matricula AND c.data_disciplina AND c.hora_primeira_marcacao AND c.hora_segunda_marcacao)* 
+                DB::raw('CEIL((SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_matricula.id_matricula AND c.data_disciplina AND c.hora_primeira_marcacao AND c.hora_segunda_marcacao)*
                 (SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_matricula.id_matricula AND c.atraso_entrada AND c.atraso_almoco <= CURRENT_DATE()) / 100)  as atraso')
             )
             ->where('tb_matricula.data_desligamento', null)
@@ -223,7 +223,7 @@ class Jovem extends Model
               / 100)  as aulaconcluida'),
 
 
-                DB::raw('(SELECT REVERSE(SUBSTRING(GROUP_CONCAT(c.id_justificativa ORDER BY c.data_disciplina DESC) FROM 1 FOR 9)) 
+                DB::raw('(SELECT REVERSE(SUBSTRING(GROUP_CONCAT(c.id_justificativa ORDER BY c.data_disciplina DESC) FROM 1 FOR 9))
               FROM
               tb_cronograma AS c
               INNER JOIN tb_matricula AS m ON m.id_matricula = c.id_matricula
@@ -259,7 +259,7 @@ class Jovem extends Model
                          AND p.id_pergunta = 6
                          AND co.id_usuario = ?', [Auth::id()]);
 
-       
+
        // dd($dashSatisfacao);
         return $dashSatisfacao;
     }
@@ -333,33 +333,50 @@ class Jovem extends Model
         return $nome;
     }
 
-    public function ocorrencia()
+    public function qtdOcorrencia()
     {
-        $dashOcorrencias = DB::table('tb_cronograma')
-            ->join('tb_matricula', 'tb_cronograma.id_matricula', '=', 'tb_matricula.id_matricula')
+        $dashOcorrencias = DB::table('tb_ocorrencia')
+
+            ->join('tb_matricula', 'tb_matricula.id_matricula', '=', 'tb_ocorrencia.id_matricula')
             ->join('tb_contato_matricula', 'tb_matricula.id_matricula', '=', 'tb_contato_matricula.id_matricula')
             ->join('tb_contato_cliente', 'tb_contato_matricula.id_contato_cliente', '=', 'tb_contato_cliente.id_contato_cliente')
             ->join('tb_contato', 'tb_contato_cliente.id_contato', '=', 'tb_contato.id_contato')
-            ->join('tb_ocorrencia', 'tb_cronograma.id_cronograma', '=', 'tb_ocorrencia.id_cronograma')
-            ->join('tb_tipo_ocorrencia', 'tb_ocorrencia.id_tipo_ocorrencia', '=', 'tb_tipo_ocorrencia.id_tipo_ocorrencia')
-            ->join('tb_natureza_ocorrencia', 'tb_tipo_ocorrencia.id_natureza_ocorrencia', '=', 'tb_natureza_ocorrencia.id_natureza_ocorrencia')
 
 
-            ->select(
-                'tb_ocorrencia.id_jovem',
-                'tb_ocorrencia.descricao',
-                'tb_natureza_ocorrencia.descricao as natureza',
-                'tb_tipo_ocorrencia.nome',
-
-                DB::raw('(SELECT COUNT(*) FROM tb_ocorrencia as o WHERE o.id_ocorrencia ) as ocorrencia ')
-
-            )
+            ->select('*')
 
             ->where('tb_contato.id_usuario', Auth::id())
             ->where('tb_matricula.data_desligamento', null)
-            ->get();
-          //dd($dashOcorrencias);
+            ->count();
+            //->toSql();
+             //dd($dashOcorrencias);
         return $dashOcorrencias;
+    }
+
+
+
+    public function qtdFerias()
+    {
+        $dataDeHoje = date( 'Y-m-d');
+        $ferias = DB::table('tb_interrupcao')
+
+            ->join('tb_matricula', 'tb_matricula.id_matricula', '=', 'tb_interrupcao.id_matricula')
+            ->join('tb_contato_matricula', 'tb_matricula.id_matricula', '=', 'tb_contato_matricula.id_matricula')
+            ->join('tb_contato_cliente', 'tb_contato_matricula.id_contato_cliente', '=', 'tb_contato_cliente.id_contato_cliente')
+            ->join('tb_contato', 'tb_contato_cliente.id_contato', '=', 'tb_contato.id_contato')
+
+
+            ->select('*')
+
+            ->where('tb_contato.id_usuario', Auth::id())
+            ->where('tb_interrupcao.id_tipo_interrupcao', 1)
+            ->where('tb_interrupcao.data_inicio', '<=', $dataDeHoje)
+            ->where('tb_interrupcao.data_fim', '>=',  $dataDeHoje)
+            ->where('tb_matricula.data_desligamento', null)
+            ->count();
+            //->toSql();
+            //dd($ferias);
+        return $ferias;
     }
 
 
@@ -386,7 +403,7 @@ class Jovem extends Model
                   )as aulafim'),
 
 
-                DB::raw('CEIL((SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_matricula.id_matricula AND c.data_disciplina AND c.hora_primeira_marcacao AND c.hora_segunda_marcacao)* 
+                DB::raw('CEIL((SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_matricula.id_matricula AND c.data_disciplina AND c.hora_primeira_marcacao AND c.hora_segunda_marcacao)*
                 (SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_matricula.id_matricula AND c.atraso_entrada AND c.atraso_almoco <= CURRENT_DATE()) / 100)  as atraso')
             )
 
@@ -580,11 +597,11 @@ class Jovem extends Model
             )
             ->orderBy('tb_contato.nome', 'ASC')
             ->paginate(10);
-        // dd($dominio);   
+        // dd($dominio);
         return $dominio;
     }
 
- 
+
     public function testePesquisa()
     { {
 
@@ -615,7 +632,7 @@ class Jovem extends Model
         }
     }
     public static function getResultadoAvaliacao($idPergunta, $dataInicio, $dataFim ) {
-        
+
         $pesquisa = DB::table('tb_matricula')
             ->join('tb_cronograma', 'tb_matricula.id_matricula', '=', 'tb_cronograma.id_matricula')
             ->join('tb_sala_alocacao', 'tb_cronograma.id_sala_alocacao', '=', 'tb_sala_alocacao.id_sala_alocacao')
@@ -638,7 +655,7 @@ class Jovem extends Model
             //->toSql();
              //dd($pesquisa);
         return $pesquisa;
-        
+
     }
     public function faceToface()
     {
@@ -685,34 +702,20 @@ class Jovem extends Model
 
     public function participante()
     {
-        $jovemParticipante = DB::select('SELECT
-            COUNT(DISTINCT j.id_jovem) AS jovens,
-            CEIL (
-            100 -
-            (
-            (
-            SUM(
-            CASE
-            WHEN c.id_justificativa = 2 THEN 1
-            ELSE 0
-            END
-            ) * 100
-            ) / COUNT(c.id_cronograma)
-            )
-            ) AS frequencia
-            FROM
-            tb_matricula AS m
-            INNER JOIN tb_jovem AS j ON j.id_jovem = m.id_jovem
-            INNER JOIN tb_cronograma AS c ON c.id_matricula = m.id_matricula
-            INNER JOIN tb_contato_matricula AS cm ON cm.id_matricula = m.id_matricula
-            INNER JOIN tb_contato_cliente AS cc ON cc.id_contato_cliente = cm.id_contato_cliente AND cc.id_tipo_cargo = 5
-            INNER JOIN tb_contato AS co ON co.id_contato = cc.id_contato
-            WHERE
-           c.data_disciplina < CURRENT_DATE()
-            AND co.id_usuario = ?', [Auth::id()]);
+        $jovemParticipante = DB::table('tb_matricula')
+        ->join('tb_contato_matricula', 'tb_matricula.id_matricula', '=', 'tb_contato_matricula.id_matricula')
+        ->join('tb_contato_cliente', 'tb_contato_matricula.id_contato_cliente', '=', 'tb_contato_cliente.id_contato_cliente')
+        ->join('tb_contato', 'tb_contato_cliente.id_contato', '=', 'tb_contato.id_contato')
 
-       // dd($jovemParticipante);
-        return $jovemParticipante;
+
+        ->select('*')
+
+        ->where('tb_contato.id_usuario', Auth::id())
+
+        ->count();
+        //->toSql();
+         //dd($jovemParticipante);
+    return $jovemParticipante;
     }
 
 
@@ -748,7 +751,7 @@ class Jovem extends Model
 
 
 
-                DB::raw('(SELECT REVERSE(SUBSTRING(GROUP_CONCAT(c.id_justificativa ORDER BY c.data_disciplina DESC) FROM 1 FOR 9)) 
+                DB::raw('(SELECT REVERSE(SUBSTRING(GROUP_CONCAT(c.id_justificativa ORDER BY c.data_disciplina DESC) FROM 1 FOR 9))
                      FROM
                      tb_cronograma AS c
                      INNER JOIN tb_matricula AS m ON m.id_matricula = c.id_matricula
@@ -831,7 +834,7 @@ class Jovem extends Model
                               )as aulafim'),
 
 
-                DB::raw('CEIL((SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_matricula.id_matricula AND c.data_disciplina AND c.hora_primeira_marcacao AND c.hora_segunda_marcacao)* 
+                DB::raw('CEIL((SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_matricula.id_matricula AND c.data_disciplina AND c.hora_primeira_marcacao AND c.hora_segunda_marcacao)*
                             (SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_matricula.id_matricula AND c.atraso_entrada AND c.atraso_almoco <= CURRENT_DATE()) / 100)  as atraso')
             )
 
@@ -841,7 +844,7 @@ class Jovem extends Model
         return  $evolucoes;
     }
 
-   
+
 
 
 

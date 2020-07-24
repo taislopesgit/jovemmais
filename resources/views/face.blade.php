@@ -27,10 +27,10 @@
             <div class="icon">
                <i class="fa fa-user"></i>
             </div>
-            <h3>{{$jovens->jovens}}  @endforeach 
-            @foreach ($jovemParticipante  as $participante)
-            <sup style="font-size: 20px">/{{$participante->jovens}} </sup></h3>
-            @endforeach 
+            <h3>{{$jovens->jovens}}  @endforeach
+
+            <sup style="font-size: 20px">/{{$jovemParticipante}} </sup></h3>
+
             <p>Jovens ativos</p>
          </div>
          </div>
@@ -39,14 +39,11 @@
    <div class="col-md-3">
       <div class="small-box bg-green">
       <div class="inner">
-         
             <div class="icon">
                <i class="fa fa-plane"></i>
             </div>
-            <h3>0
-            @foreach ($jovemParticipante  as $participante)
-            <sup style="font-size: 20px">/{{$participante->jovens}} </sup></h3>
-            @endforeach 
+            <h3>{{$ferias}}
+            <sup style="font-size: 20px">/{{$jovemParticipante}} </sup></h3>
             <p>Jovens em férias</p>
          </div>
          </div>
@@ -56,15 +53,15 @@
       <div class="col-md-3">
       <div class="small-box bg-orange">
       <div class="inner">
-        
+
             <div class="icon">
                <i class="fa fa-book"></i>
             </div>
-            @foreach($progressoJovem as $progresso) 
+            @foreach($progressoJovem as $progresso)
             <h3>{{$progresso->aulaconcluida}}%
-            @endforeach 
+            @endforeach
             <sup style="font-size: 20px"> </sup></h3>
-           
+
             <p>Andamento aprendizado</p>
          </div>
          </div>
@@ -74,28 +71,28 @@
       <div class="col-md-3">
       <div class="small-box bg-red">
       <div class="inner">
-         
+
             <div class="icon">
                <i class="fa fa-graduation-cap"></i>
             </div>
             <h3>4
-            @foreach ($jovemParticipante  as $participante)
-            <sup style="font-size: 20px">/{{$participante->jovens}} </sup></h3>
-            @endforeach 
+
+            <sup style="font-size: 20px">/{{$jovemParticipante}} </sup></h3>
+
             <p>Desligamento</p>
          </div>
          </div>
          </div>
    <!-- ./fim -->
-   
-      
-   
+
+
+
    <div class="col-md-12">
    <div class="box box-warning">
       <div class="box-header with-border">
          <br>
-      @foreach($relatorioJovem as $face)        
-     
+      @foreach($relatorioJovem as $face)
+
       <div class="col-md-3">
     <div class="callout callout-primary">
     <table class="table">
@@ -109,11 +106,11 @@
   </thead>
   <tbody>
     <tr>
-    <td class="align-middle text-center">  
+    <td class="align-middle text-center">
                         <div class="progress progress-xs">
                            @if ($face->aulaconcluida <= 25)
                            <div class="progress-bar progress-bar-success" style="width: {{$face->aulaconcluida}}%"></div>
-                           @else 
+                           @else
                            @if ($face->aulaconcluida <= 50)
                            <div class="progress-bar progress-bar-primary" style="width: {{$face->aulaconcluida}}%"></div>
                            @else
@@ -123,12 +120,12 @@
                            <div class="progress-bar progress-bar-danger" style="width: {{$face->aulaconcluida}}%"></div>
                            @endif
                            @endif
-                           @endif  
+                           @endif
                         </div>
     <td class="align-middle text-center">
                         @if ($face->aulaconcluida <= 25)
                         <span class="badge bg-green">{{$face->aulaconcluida}}%</span>
-                        @else 
+                        @else
                         @if ($face->aulaconcluida <= 50)
                         <span class="badge bg-blue">{{$face->aulaconcluida}}%</span>
                         @else
@@ -138,7 +135,7 @@
                         <span class="badge bg-red">{{$face->aulaconcluida}}%</span>
                         @endif
                         @endif
-                        @endif    
+                        @endif
                      </td>
                      <td class="align-middle text-center">
                         <a href="{{route('show', $face->id_jovem)}}" class="text-blue" title="Visualizar" data-toggle="tooltip" data-placement="top">
@@ -150,7 +147,7 @@
 </table>
 </div>
   </div>
-    @endforeach    
+    @endforeach
    </div>
    </div>
    <div class="box-tools">
@@ -162,7 +159,7 @@
                 </div>
 
 
-   
+
 </section>
 
 
