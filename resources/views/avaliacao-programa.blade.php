@@ -17,7 +17,7 @@
 <section class="content">
    @foreach ($nome as $gestor)
    <h4> Bem vindo(a), {{$gestor->nome}}</h4>
-   @endforeach 
+   @endforeach
    </br>
 
    <div class='row'>
@@ -67,7 +67,7 @@
 @section('js')
 
 <script>
-   
+
    var item01 = {!! $pesquisa01->toJson() !!};
    const resposta = [];
    const quantidade = [];
@@ -81,7 +81,7 @@
       resposta.push(item.resposta);
       quantidade.push(((item.qtd * 100) / total).toFixed(2));
    });
-   
+
    new Chart(document.getElementById("doughnut-chart"), {
     type: 'doughnut',
     data: {
@@ -107,7 +107,7 @@
 <!--02-->
 
 <script>
-   
+
    var item02 = {!! $pesquisa02->toJson() !!};
    const resposta02 = [];
    const quantidade02 = [];
@@ -121,7 +121,7 @@
       resposta02.push(item.resposta);
       quantidade02.push(((item.qtd * 100) / total).toFixed(2));
    });
-   
+
     new Chart(document.getElementById("pie-chart"), {
     type: 'pie',
     data: {
@@ -141,14 +141,14 @@
            text: 'Você gostou do conteúdo abordado?'
       }
     }
-    
+
 });
 
 </script>
 
 <!--03-->
 <script>
-   
+
    var item03 = {!! $pesquisa03->toJson() !!};
    const resposta03 = [];
    const quantidade03 = [];
@@ -162,7 +162,7 @@
       resposta03.push(item.resposta);
       quantidade03.push(((item.qtd * 100) / total).toFixed(2));
    });
-   
+
     new Chart(document.getElementById("line-chart"), {
     type: 'line',
     data: {
@@ -188,7 +188,7 @@
 
 <!--04-->
 <script>
-   
+
    var item04 = {!! $pesquisa04->toJson() !!};
    const resposta04 = [];
    const quantidade04 = [];
@@ -202,7 +202,7 @@
       resposta04.push(item.resposta);
       quantidade04.push(((item.qtd * 100) / total).toFixed(2));
    });
-   
+
     new Chart(document.getElementById("pie2-chart"), {
     type: 'pie',
     data: {
@@ -227,7 +227,7 @@
 
 <!--05-->
 <script>
-   
+
    var item05 = {!! $pesquisa05->toJson() !!};
    const resposta05 = [];
    const quantidade05 = [];
@@ -241,7 +241,7 @@
       resposta05.push(item.resposta);
       quantidade05.push(((item.qtd * 100) / total).toFixed(2));
    });
-   
+
     new Chart(document.getElementById("doughnut2-chart"), {
     type: 'doughnut',
     data: {
@@ -265,7 +265,7 @@
 </script>
 <!--06-->
 <script>
-   
+
    var item06 = {!! $pesquisa06->toJson() !!};
    const resposta06 = [];
    const quantidade06 = [];
@@ -279,7 +279,7 @@
       resposta06.push(item.resposta);
       quantidade06.push(((item.qtd * 100) / total).toFixed(2));
    });
-   
+
     new Chart(document.getElementById("line2-chart"), {
     type: 'line',
     data: {

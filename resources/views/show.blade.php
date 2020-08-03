@@ -4,7 +4,7 @@
         Jovem+
     </h2>
     <ol class="breadcrumb">
-        <li><a href="/inicial"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li class="active">Perfil</li>
     </ol>
 </section>
@@ -67,7 +67,7 @@
                 </ul>
             </div>
         </div>
-        <!--Fimboxprimary-->         
+        <!--Fimboxprimary-->
         <div class="box box-warning">
             <div class="box-body">
                 <div>
@@ -171,7 +171,7 @@
                     <th>Data</th>
                     <th>Status</th>
                     <!--<th>Status</th>-->
-                    </tr>   
+                    </tr>
                     @foreach ($verJovens as $verJovem)
                     <tr>
                     <td class="align-middle">{{$verJovem->nome}}</td>
@@ -180,8 +180,8 @@
                     <td class="align-center">{{$verJovem->justificativa}}</td>
                     <!--<td class="align-middle">{{$verJovem->justificativa}}</td>-->
                     @endforeach
-                    </tr>  
-                    </tbody>   
+                    </tr>
+                    </tbody>
                 </table>
                 <div class="box-tools">
                     @if (isset($jovemDados))

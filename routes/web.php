@@ -13,10 +13,11 @@ Auth::routes();
 
 Route::group(['prefix' => 'home'], function () {
     Route::match(['get', 'post'], '/', 'homeController@index')->name('home');
-    Route::match(['get', 'post'], '/{home}', 'homeController@show')->name('show');	
+    Route::match(['get', 'post'], '/{home}', 'homeController@show')->name('show');
     Route::get('/edita-jovem/{id}', 'homeController@edit')->name('edit');
-    Route::get('/gestores', 'homeController@gestores')->name('gestores');	
-    
+    Route::get('/gestores', 'homeController@gestores')->name('gestores');
+
+
 });
 
 
@@ -29,8 +30,11 @@ Route::get( '/perfil-edit/{id}/edit' , 'jovemController@jovemEdit')->name('edita
 Route::post( '/perfil-edit/{id}' , 'jovemController@jovemUpdate')->name('atualizar');
 Route::get('/perfil-gestor', 'jovemController@jovemGestor')->name('gestor');
 Route::get( '/avaliacao-programa', 'jovemController@avaliacaoPrograma')->name('avaliacao-programa');
+Route::get('/desempenho-jovem', 'jovemController@jovemDesempenho')->name('desempenho');
+Route::get('/cadastra-ocorrencia', 'jovemController@cadastraOcorrencia')->name('cadastrar');
+Route::match(['get', 'post'], '/salva-ocorrencia', 'jovemController@salvaOcorrencia')->name('salvar-ocorrencia');
 
-Route::get('/calendario-jovem', 'jovemController@jovemCalendario')->name('calendario');
+
 
 Route::get('/gestores', 'gestorController@gestores')->name('gestores');
 Route::match(['get', 'post'], '/{gestor}', 'gestorController@show')->name('gestorId');

@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'blue-light',
+    'skin' => 'blue',
 
     /*
     |--------------------------------------------------------------------------
@@ -128,74 +128,94 @@ return [
     */
 
     'menu' => [
-        
+
         ['header' => ''],
-       
-    
+
+
         ['header' => ''],
         [
             'text'    => 'ADMINISTRADOR ',
             'icon'    => '',
             'url'  => 'home',
-             'can'     => 'adm', 
-            ], 
-            
+             'can'     => 'adm',
+            ],
+
             [
                 'text' => 'Relação Jovens',
                 'icon'    => 'fa fa-id-badge',
                 'url'  => 'home',
-                'can'     => 'adm', 
-               
-               
-            ],  
-            [
-               
-                'text' => 'Relação Gestores',
-                'icon'    => 'fas fa-user-tie',
-                'url'  => 'gestores',
-                'can'     => 'adm', 
-               
-            ],  
+                'can'     => 'adm',
 
-            
+
+            ],
+            [
+
+                'text' => 'Relação Gestores',
+                'icon'    => 'fa fa-user-tie',
+                'url'  => 'gestores',
+                'can'     => 'adm',
+
+            ],
+            [
+
+                'text' => 'Cadastrar Ocorrência',
+                'icon'    => 'fa fa-plus',
+                'url'  => 'cadastra-ocorrencia',
+                'can'     => 'adm',
+
+            ],
+
+
+
         [
             'text'    => 'GESTOR',
             'url'  => 'perfil-gestor',
             'icon'    => '',
              'can'     => 'gestor',
             ],
-            
+
                 [
                     'text' => 'Painel',
                     'icon'    => "fa fa-desktop",
                     'url'  => 'perfil-gestor',
                     'can'     => 'gestor',
-                   
-                ],  
+
+                ],
                 [
-                    'text' => 'Jovens', 
+                    'text' => 'Jovens',
                     'icon'    => "fas fa-fw fa-user",
                     'url'  => 'face',
                     'can'     => 'gestor',
-                    
+
+                ],
+
+                [
+                    'text' => 'Ocorrências ',
+                    'icon'    => "fa fa-sticky-note",
+                    'url'  => 'ocorrencia-jovem',
+                    'can'     => 'gestor',
+
                 ],
                 [
                     'text' => 'Avaliação do Programa',
                     'icon'    => "fa fa-check",
                     'url'  => 'avaliacao-programa',
                     'can'     => 'gestor',
-                    
+
                 ],
+                /*
                 [
-                    'text' => 'Ocorrência',
-                    'icon'    => "fa fa-sticky-note",
-                    'url'  => 'ocorrencia-jovem',
+                    'text' => 'Desempenho Jovens ',
+                    'icon'    => "fa fa-signal" ,
+                    'url'  => 'desempenho-jovem',
                     'can'     => 'gestor',
-                    
-                ],
-                
-                
-        
+
+                ],*/
+
+
+
+
+
         [
             'text'    => 'JOVEM',
             'icon'    => '',
@@ -207,22 +227,22 @@ return [
                         'icon'    => 'fa fa-info-circle',
                         'url'         => 'inicial',
                         'can'     => 'jovem',
-                
-                    ], 
+
+                    ],
                     [
                         'text' => 'Evolução',
                         'icon'    => "fa fa-signal",
                         'url'  => 'perfil-jovem',
                         'can'     => 'jovem',
-                        
+
                     ],
-                    
-                                
-        
-        
+
+
+
+
     ],
 
- 
+
     'filters' => [
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,

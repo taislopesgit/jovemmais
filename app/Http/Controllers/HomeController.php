@@ -34,19 +34,19 @@ class HomeController extends Controller
      */
     public function index(Request $request, Jovem $jovem)
     {
-       
-     
+
+
         $dadosFiltro = $request->except('_token');
         $jovens = $jovem->filtroDados($dadosFiltro);
         $clientes = Cliente::orderBy('razao_social','asc')->orderBy('nome_fantasia','asc')->get();
         $cursos = Curso::orderBy('nome')->get();
         $sobre = $jovem->programaSobre();
         $evolucoes = $jovem->admEvolucao();
-        
+
         return view('home', compact('evolucoes', 'admEvolucao','jovens','dadosFiltro','clientes','cursos','sobre', 'ususarios'));
 
     }
-  
+
     public function show($id)
     {
 
@@ -65,7 +65,7 @@ class HomeController extends Controller
     public function edit($id)
     {
         $jovem = Jovem::findOrFail($id);
-         
+
         return view('edita-jovem',compact('jovem'));
     }
     public function perfilGestor($id)
@@ -73,8 +73,11 @@ class HomeController extends Controller
 
         $jovem = Jovem::findOrFail($id);
         $verJovens = $jovem->jovemDados($id);
-       
+
         return view('gestor', compact('jovem','verJovens'));
 
     }
+
+
+
 }

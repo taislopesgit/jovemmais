@@ -28,9 +28,7 @@
                <i class="fa fa-user"></i>
             </div>
             <h3>{{$jovens->jovens}}  @endforeach
-
             <sup style="font-size: 20px">/{{$jovemParticipante}} </sup></h3>
-
             <p>Jovens ativos</p>
          </div>
          </div>
@@ -53,7 +51,6 @@
       <div class="col-md-3">
       <div class="small-box bg-orange">
       <div class="inner">
-
             <div class="icon">
                <i class="fa fa-book"></i>
             </div>
@@ -75,18 +72,13 @@
             <div class="icon">
                <i class="fa fa-graduation-cap"></i>
             </div>
-            <h3>4
-
+            <h3>{{$jovemDesligado}}
             <sup style="font-size: 20px">/{{$jovemParticipante}} </sup></h3>
-
             <p>Desligamento</p>
          </div>
          </div>
          </div>
    <!-- ./fim -->
-
-
-
    <div class="col-md-12">
    <div class="box box-warning">
       <div class="box-header with-border">
@@ -100,6 +92,9 @@
     <tr>
       <th scope="col"> <img src="https://www.vocacao.org.br/jovemaprendiz/feedback-gestor/images/{{$face->id_jovem}}.jpg" alt="Avatar" class="avatar"> </th>
       <th scope="col">{{$face->jovem}}
+      <br>
+      </th>
+      <th scope="col">#{{$face->id_jovem}}
       <br>
       </th>
     </tr>

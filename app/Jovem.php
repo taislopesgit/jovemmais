@@ -260,7 +260,7 @@ class Jovem extends Model
                          AND co.id_usuario = ?', [Auth::id()]);
 
 
-       // dd($dashSatisfacao);
+       //dd($dashSatisfacao);
         return $dashSatisfacao;
     }
 
@@ -673,32 +673,60 @@ class Jovem extends Model
 
     public function ocorrenciaJovem()
     {
-        $ocorrencias = DB::table('tb_cronograma')
-            ->join('tb_matricula', 'tb_cronograma.id_matricula', '=', 'tb_matricula.id_matricula')
-            ->join('tb_contato_matricula', 'tb_matricula.id_matricula', '=', 'tb_contato_matricula.id_matricula')
-            ->join('tb_contato_cliente', 'tb_contato_matricula.id_contato_cliente', '=', 'tb_contato_cliente.id_contato_cliente')
-            ->join('tb_contato', 'tb_contato_cliente.id_contato', '=', 'tb_contato.id_contato')
-            ->join('tb_ocorrencia', 'tb_cronograma.id_cronograma', '=', 'tb_ocorrencia.id_cronograma')
-            ->join('tb_tipo_ocorrencia', 'tb_ocorrencia.id_tipo_ocorrencia', '=', 'tb_tipo_ocorrencia.id_tipo_ocorrencia')
-            ->join('tb_natureza_ocorrencia', 'tb_tipo_ocorrencia.id_natureza_ocorrencia', '=', 'tb_natureza_ocorrencia.id_natureza_ocorrencia')
+        $verOcorrencia = DB::table('tb_ocorrencia')
+
+        ->join('tb_matricula', 'tb_matricula.id_matricula', '=', 'tb_ocorrencia.id_matricula')
+        ->join('tb_tipo_ocorrencia','tb_ocorrencia.id_tipo_ocorrencia', '=', 'tb_tipo_ocorrencia.id_tipo_ocorrencia')
+        ->join('tb_contato_matricula', 'tb_matricula.id_matricula', '=', 'tb_contato_matricula.id_matricula')
+        ->join('tb_contato_cliente', 'tb_contato_matricula.id_contato_cliente', '=', 'tb_contato_cliente.id_contato_cliente')
+        ->join('tb_contato', 'tb_contato_cliente.id_contato', '=', 'tb_contato.id_contato')
 
 
-            ->select(
-                'tb_ocorrencia.id_jovem',
-                'tb_ocorrencia.descricao',
-                'tb_natureza_ocorrencia.descricao as natureza',
+        ->select('tb_ocorrencia.id_ocorrencia',
+                 'tb_ocorrencia.id_tipo_ocorrencia',
+                'tb_ocorrencia.responsavel',
                 'tb_tipo_ocorrencia.nome',
+                 'tb_tipo_ocorrencia.descricao',
+                 'tb_ocorrencia.id_jovem'
 
-                DB::raw('(SELECT COUNT(*) FROM tb_ocorrencia as o WHERE o.id_ocorrencia = 4) as ocorrencia ')
 
-            )
+                )
 
-            ->where('tb_contato.id_usuario', Auth::id())
-            ->where('tb_matricula.data_desligamento', null)
-            ->get();
-        //dd($ocorrencias);
-        return $ocorrencias;
+        ->where('tb_contato.id_usuario', Auth::id())
+        ->where('tb_matricula.data_desligamento', null)
+        ->OrderBy('tb_matricula.id_jovem')
+        ->OrderBy('tb_tipo_ocorrencia.nome')
+        ->paginate(10);
+       //->toSql();
+       //dd($verOcorrencia);
+      return $verOcorrencia ;
     }
+
+    public function ocorrenciaJovemId()
+    {
+        $verOcorrenciaId = DB::table('tb_ocorrencia')
+
+        ->join('tb_matricula', 'tb_matricula.id_matricula', '=', 'tb_ocorrencia.id_matricula')
+        ->join('tb_jovem', 'tb_matricula.id_jovem', '=', 'tb_jovem.id_jovem')
+
+
+        ->select('tb_ocorrencia.id_ocorrencia',
+                'tb_ocorrencia.id_tipo_ocorrencia',
+                'tb_ocorrencia.responsavel',
+                 'tb_ocorrencia.descricao',
+                 'tb_ocorrencia.id_jovem'
+
+
+                )
+        ->where('tb_jovem.id_usuario', Auth::id())
+        ->where('tb_matricula.data_desligamento', null)
+        ->paginate(10);
+       //->toSql();
+       //dd($verOcorrenciaId);
+      return $verOcorrenciaId;
+    }
+
+
 
     public function participante()
     {
@@ -716,6 +744,24 @@ class Jovem extends Model
         //->toSql();
          //dd($jovemParticipante);
     return $jovemParticipante;
+    }
+
+    public function desligamento()
+    {
+        $jovemDesligado = DB::table('tb_matricula')
+        ->join('tb_contato_matricula', 'tb_matricula.id_matricula', '=', 'tb_contato_matricula.id_matricula')
+        ->join('tb_contato_cliente', 'tb_contato_matricula.id_contato_cliente', '=', 'tb_contato_cliente.id_contato_cliente')
+        ->join('tb_contato', 'tb_contato_cliente.id_contato', '=', 'tb_contato.id_contato')
+
+
+        ->select('*')
+
+        ->where('tb_contato.id_usuario', Auth::id())
+        ->whereNotNull('tb_matricula.data_desligamento')
+        ->count();
+        //->toSql();
+        //dd($jovemDesligado);
+         return $jovemDesligado;
     }
 
 
@@ -812,6 +858,33 @@ class Jovem extends Model
         return $concluidoJovem;
     }
 
+    public function chartEvolucao()
+    {
+        $evolucoesJovem = DB::table('tb_jovem')
+            ->join('tb_matricula', 'tb_jovem.id_jovem', '=', 'tb_matricula.id_jovem')
+            ->join('tb_cliente', 'tb_matricula.id_cliente', '=', 'tb_cliente.id_cliente')
+            ->join('tb_contato_matricula', 'tb_matricula.id_matricula', '=', 'tb_contato_matricula.id_matricula')
+            ->join('tb_contato_cliente', 'tb_contato_matricula.id_contato_cliente', '=', 'tb_contato_cliente.id_contato_cliente')
+            ->join('tb_contato', 'tb_contato_cliente.id_contato', '=', 'tb_contato.id_contato')
+
+            ->select(
+
+
+
+                DB::raw('CEIL((SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_matricula.id_matricula AND c.data_disciplina) *
+                (SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_matricula.id_matricula	AND c.data_disciplina <= CURRENT_DATE())
+                  / 100)  as aulaconcluida')
+
+            )
+            ->where('tb_matricula.data_desligamento')
+            ->where('tb_contato.id_usuario', Auth::id())
+            ->get();
+        //dd($evolucoesJovem);
+
+
+        return $evolucoesJovem;
+    }
+
 
     public function admEvolucao()
     {
@@ -844,7 +917,35 @@ class Jovem extends Model
         return  $evolucoes;
     }
 
+    public function dadosOcorrencia()
+    {
+        $dadoOcorrencia = DB::table('tb_ocorrencia')
 
+        ->join('tb_matricula', 'tb_matricula.id_matricula', '=', 'tb_ocorrencia.id_matricula')
+        ->join('tb_tipo_ocorrencia','tb_ocorrencia.id_tipo_ocorrencia', '=', 'tb_tipo_ocorrencia.id_tipo_ocorrencia')
+        ->join('tb_contato_matricula', 'tb_matricula.id_matricula', '=', 'tb_contato_matricula.id_matricula')
+        ->join('tb_contato_cliente', 'tb_contato_matricula.id_contato_cliente', '=', 'tb_contato_cliente.id_contato_cliente')
+        ->join('tb_contato', 'tb_contato_cliente.id_contato', '=', 'tb_contato.id_contato')
+
+
+        ->select('tb_ocorrencia.id_ocorrencia',
+                 'tb_ocorrencia.id_tipo_ocorrencia',
+                'tb_ocorrencia.responsavel',
+                'tb_tipo_ocorrencia.nome',
+                 'tb_tipo_ocorrencia.descricao',
+                 'tb_ocorrencia.id_jovem'
+
+
+                )
+
+        ->where('tb_matricula.data_desligamento', null)
+        ->OrderBy('tb_matricula.id_jovem')
+        ->OrderBy('tb_tipo_ocorrencia.nome')
+        ->paginate(10);
+       //->toSql();
+       //dd($dadoOcorrencia);
+      return $dadoOcorrencia ;
+    }
 
 
 

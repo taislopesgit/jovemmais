@@ -12,6 +12,7 @@ use App\Cliente;
 use App\Usuario;
 use App\Papel;
 use App\Permissao;
+use App\Ocorrencia;
 
 
 class JovemController extends Controller
@@ -31,6 +32,7 @@ class JovemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
 
     public function home(Jovem $jovem)
     {
@@ -81,9 +83,10 @@ class JovemController extends Controller
         $progressoJovem = $jovem->RelacaoProgresso();
         $concluidoJovem = $jovem->RelacaoConcluido();
         $ferias = $jovem->qtdFerias();
+        $jovemDesligado = $jovem->desligamento();
 
 
-        return view('face', compact('ferias','qtdFerias','face','faceToface','relatorioJovem','RelacaoJovemGestor',
+        return view('face', compact('jovemDesligado','desligamento','ferias','qtdFerias','face','faceToface','relatorioJovem','RelacaoJovemGestor',
         'dashFrequencia', 'frequencia', 'dashSatisfacao', 'satisfacao','jovemParticipante','participante',
     'nome','nomeGestor','RelacaoProgresso','progressoJovem','concluidoJovem', 'RelacaoConcluido'));
 
@@ -96,20 +99,35 @@ class JovemController extends Controller
 
         $face = $jovem->faceToface();
         $relatorioJovem = $jovem->RelacaoJovemGestor();
-        $ocorrencias = $jovem ->ocorrenciaJovem();
+        $verOcorrencia = $jovem ->ocorrenciaJovem();
 
-        return view('ocorrencia-jovem', compact('ocorrencias','ocorrenciaJovem','face','faceToface','relatorioJovem','RelacaoJovemGestor'));
-
-    }
-
-
-    public function avaliacaoJovem(Request $request, Jovem $jovem)
-    {
-
-
-        return view('avaliacao-jovem');
+        return view('ocorrencia-jovem', compact('verOcorrencia','ocorrenciaJovem','face','faceToface','relatorioJovem','RelacaoJovemGestor'));
 
     }
+
+
+    public function jovemDesempenho(Request $request, Jovem $jovem)
+
+{
+
+    $face = $jovem->faceToface();
+    $relatorioJovem = $jovem->RelacaoJovemGestor();
+    $dashFrequencia = $jovem->frequencia();
+    $dashSatisfacao = $jovem->satisfacao();
+    $jovemParticipante = $jovem->participante();
+    $nome = $jovem->nomeGestor();
+    $progressoJovem = $jovem->RelacaoProgresso();
+    $concluidoJovem = $jovem->RelacaoConcluido();
+    $ferias = $jovem->qtdFerias();
+    $jovemDesligado = $jovem->desligamento();
+    $evolucoesJovem = $jovem->chartEvolucao();
+
+
+    return view('desempenho-jovem', compact('evolucoesJovem','chartEvolucao','jovemDesligado','desligamento','ferias','qtdFerias','face','faceToface','relatorioJovem','RelacaoJovemGestor',
+    'dashFrequencia', 'frequencia', 'dashSatisfacao', 'satisfacao','jovemParticipante','participante',
+'nome','nomeGestor','RelacaoProgresso','progressoJovem','concluidoJovem', 'RelacaoConcluido'));
+
+}
 
 
 
@@ -123,19 +141,10 @@ class JovemController extends Controller
         $evolucoes = $jovem->jovemEvolucaoUser();
         $frequencias = $jovem->frequenciaUser();
 
+        $verOcorrenciaId = $jovem->ocorrenciaJovemId();
 
-        /**$calendar=array();
 
-       foreach ($verJovens as $events) {
-           $data [] = array (
-            'id'   => $events->id_jovem,
-            'Titulo'   => $events->descricao,
-            'Data'   => $events->data_disciplina
-           );
-          }
-          //echo json_encode($data);*/
-
-    return view('perfil-jovem', compact('data','verJovens','jovemDadosUser','sobreJovem','jovemSobreUser',
+    return view('perfil-jovem', compact('ocorrenciaJovemId','verOcorrenciaId','data','verJovens','jovemDadosUser','sobreJovem','jovemSobreUser',
     'evolucoes', 'jovemEvolucaoUser','usuarios','frequencias','frequenciaUser'));
     }
 
@@ -202,14 +211,6 @@ class JovemController extends Controller
            'satisfacao','frequencia','dashFrequencia','ativos','dashOcorrencias','qtdOcorrencia','pesquisa','testePesquisa','competencias'));
         }
 
-        public function jovemCalendario (Request $request, Jovem $jovem)
-        {
-
-
-            return view('calendario-jovem');
-
-        }
-
 
         public function avaliacaoPrograma(Request $request, Jovem $jovem)
         {
@@ -220,7 +221,7 @@ class JovemController extends Controller
 
             $dashSatisfacao = $jovem->satisfacao();
             $dashFrequencia = $jovem->frequencia();
-            $dashOcorrencias = $jovem->ocorrencia();
+            $dashOcorrencias = $jovem->qtdOcorrencia();
 
 
             $dataIni = date('Y-m-d', strtotime('-180 days', strtotime('now')));
@@ -234,7 +235,37 @@ class JovemController extends Controller
             $pesquisa06 =$jovem->getResultadoAvaliacao(3,$dataIni, $dataFim);
 
             return view('avaliacao-programa', compact('pesquisa06','pesquisa05','pesquisa04','pesquisa03','pesquisa01','pesquisa02','gestores','relatorioJovem','RelacaoJovemGestor', 'nome', 'nomeGestor','dashSatisfacao',
-            'satisfacao','frequencia','dashFrequencia','ativos','dashOcorrencias','ocorrencia','pesquisa','competencias'));
+            'satisfacao','frequencia','dashFrequencia','ativos','dashOcorrencias','qtdOcorrencia','pesquisa','competencias'));
          }
+
+         public function cadastraOcorrencia (Request $request, Jovem $jovem)
+    {
+      $dadoOcorrencia=$jovem->dadosOcorrencia();
+      $idOcorrencia = Ocorrencia::groupby('id_ocorrencia')->get();
+
+      $idTipoOcorrencia =[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
+      $verOcorrencia = $jovem ->ocorrenciaJovem();
+
+
+      return view('cadastra-ocorrencia',compact('verOcorrencia','ocorrenciaJovem','idOcorrencia','dadoOcorrencia','dadosOcorrencia','idTipoOcorrencia'));
+
+    }
+
+    public function salvaOcorrencia (Request $request)
+    {
+
+     /* $dataForm = $request->all()->expect('token');
+        $insert = Ocorrencia::create($dataForm);*/
+
+        $dataForm = $request->except(['token']);
+        Ocorrencia::create($dataForm);
+        dd($dataForm);
+
+        if($insert)
+          return redirect()->route('cadastra-ocorrencia');
+        else
+          return redirect()->back();
+
+    }
 
     }

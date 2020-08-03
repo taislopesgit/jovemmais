@@ -6,7 +6,7 @@
         Jovem+
     </h2>
     <ol class="breadcrumb">
-        <li><a href="/inicial"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li class="active">Perfil</li>
     </ol>
 </section>
@@ -17,12 +17,12 @@
         <div class="small-box bg-blue">
             <div class="inner">
             @foreach ($evolucoes as $programa)
-            
+
             <h3>{{$programa->aulaconcluida}}<sup style="font-size: 20px">%</sup></h3>
-                
+
             <p>Índice de conclusão</p>
             </div>@endforeach
-           
+
             <div class="icon">
                 <i class="fas fa-wallet" style="font-size:38px"></i>
             </div>
@@ -34,9 +34,9 @@
         <div class="small-box bg-green">
             <div class="inner">
             @foreach ($sobre as $programa)
-            
+
                 <h3>+{{$programa->aulas}}<sup style="font-size: 20px"></sup></h3>
-               
+
                 <p>Aulas ministradas</p>
             </div>@endforeach
             <div class="icon">
@@ -133,7 +133,7 @@
                     <div class="form-group col-md-2">
                         <input type="submit"  class="btn btn-primary" value="Filtrar">
                     </div>
-                    <div>  
+                    <div>
                     </div>
             </div>
         </div>
@@ -188,7 +188,7 @@
                                 <small class="label bg-olive">Ativo</small>
                                 @endif
                             </td>
-                            
+
                             <td class="align-middle text-center"> </td>
                             <td class="align-middle text-center">
                                 <a href="{{route('show', $jovem->id_jovem)}}" class="text-blue" title="Visualizar" data-toggle="tooltip" data-placement="top">
@@ -205,7 +205,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                
+
                 <div class="box-tools">
                     @if (isset($dadosFiltro))
                     {{ $jovens->appends($dadosFiltro)->links() }}

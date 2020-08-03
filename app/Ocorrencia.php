@@ -16,11 +16,11 @@ class Ocorrencia extends Authenticatable
     protected $table = 'tb_ocorrencia';
     protected $primaryKey = 'id_ocorrencia';
 
-   
 
 
-    
 
-   
+
+
+
 
 }

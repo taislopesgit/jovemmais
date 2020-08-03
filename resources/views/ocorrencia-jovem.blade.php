@@ -17,88 +17,41 @@
 <div class="col-md-12">
 <div class="row">
     <div class="box-header with-border">
-            <!-- inserirOcorrencia
-        <a class="accordion-toggle pull-right collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false">
-        <i class="fa fa-arrow-alt-circle-up"></i>
-        </a>
-        <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-            <h4 class="box-title">Nova ocorrência</h4>
-            <div class="panel-body">
-            <form action=""  method="post">
-                    {{ csrf_field() }}
-                    <div class="form-row">
-                        <div class="form-group col-md-2">
-                            <label>ID Jovem</label>
-                            <input type="search"  name="id" class="form-control">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label>ID Ocorrência</label><select class="form-control" name="id_ocorrencia">
-                            <option selected></option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                        </select>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label>Tipo</label>
-                        <select class="form-control" name="tipo_ocorrencia">
-                            <option selected></option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label>Descrição</label>
-                        <input name="descricao" type="textsubmit" class="form-control">
-                    </div>
-
-                    <div class="form-group col-md-3">
-                        <input type="submit"  class="btn btn-primary" value="Registrar">
-                    </div>  
-                    </form>
-                    </div>
-            </div>
-        </div>-->
         </div>
         </div>
-
-        
    <div class="box box-warning">
       <div class="box-header with-border">
-              <h3 class="box-title">Relação Ocorrências</h3>
-              <br> <br>
-              
               <div class="table-responsive">
               <table class="table table-striped">
                   <thead>
-                  <tr>
+                  <tr class="color">
                     <th class="align-middle text-center">Perfil</th>
                     <th class="align-middle text-center">ID Jovem</th>
-                    <th class="align-middle text-center">ID Ocorrência</th>
                     <th class="align-middle text-center">Tipo</th>
                     <th class="align-middle text-center">Descrição</th>
-                   
+                    <th class="align-middle text-center">Responsável</th>
                   </tr>
                   </thead>
-                  <tbody>
                   <tr>
-   
-                  <td class="align-middle text-center"></td>
-                  <td class="align-middle text-center"></td>
-                  
-                  <td class="align-middle text-center"></td>
-                  <td class="align-middle text-center"></td>
-                  <td class="align-middle text-center"></td>
-                    
-                    <td class="align-middle text-center">
-                      <div class="sparkbar" data-color="#00a65a" data-height="20"><canvas width="34" height="20" style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas></div>
-                   </td>                    
-                  </tr>
+                  <tbody>
+                  @foreach ($verOcorrencia as $ocorrencia)
+                  <td class="align-middle text-center"> <img src="https://www.vocacao.org.br/jovemaprendiz/feedback-gestor/images/{{$ocorrencia->id_jovem}}.jpg" alt="Avatar" class="avatar"> </t>
+                  <td class="align-middle text-center">{{$ocorrencia->id_jovem}}</td>
+                  <td class="align-middle text-center">{{$ocorrencia->nome}}</td>
+                  <td class="align-middle text-center">{{$ocorrencia->descricao}}</td>
+                  <td class="align-middle text-center">{{$ocorrencia->responsavel}}</td>
+                  </tr> @endforeach
                   </tbody>
                 </table>
               </div>
-        
-   
+              <div class="box-tools">
+                    @if (isset($ocorrenciaJovem))
+                    {{ $verOcorrencia->appends($ocorrenciaJovem)->links() }}
+                    @else
+                    {{ $verOcorrencia->links() }}
+                    @endif
+            </div>
+
 </section>
 
 <style>
@@ -109,7 +62,9 @@
     border-radius: 50%;
 }
 
-
+.color{
+  background-color: #E4E3E3;
+}
 </style>
 
 
