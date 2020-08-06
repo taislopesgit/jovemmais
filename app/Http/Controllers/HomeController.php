@@ -38,6 +38,7 @@ class HomeController extends Controller
 
         $dadosFiltro = $request->except('_token');
         $jovens = $jovem->filtroDados($dadosFiltro);
+
         $clientes = Cliente::orderBy('razao_social','asc')->orderBy('nome_fantasia','asc')->get();
         $cursos = Curso::orderBy('nome')->get();
         $sobre = $jovem->programaSobre();
@@ -67,7 +68,9 @@ class HomeController extends Controller
         $jovem = Jovem::findOrFail($id);
 
         return view('edita-jovem',compact('jovem'));
+
     }
+
     public function perfilGestor($id)
     {
 
@@ -78,6 +81,34 @@ class HomeController extends Controller
 
     }
 
+    public function cadastraJovem( Request $request, Cronograma $cronograma, Jovem $jovem, Matricula $matricula)
+    {
 
 
-}
+
+        return view('cadastra-jovem');
+
+    }
+
+    public function salvaJovem( Request $request, Jovem $jovem)
+    {
+
+      $insert = $jovem->create($request->all());
+      //dd($insert);
+
+      if ($insert)
+          return redirect()
+                      ->route('cadastrar')
+                      ->with('success', 'Jovem inserido com sucesso!');
+
+
+      return redirect()
+                  ->back()
+                  ->with('error', 'Falha ao inserir');
+    }
+
+    }
+
+
+
+

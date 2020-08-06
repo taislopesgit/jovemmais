@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Usuario;
+use App\Ocorrencia;
 use App\Cliente;
 use App\Gestor;
 
@@ -48,6 +49,7 @@ class Jovem extends Model
             )
         );
     }
+
 
 
     public function filtroDados(array $dados)
@@ -430,7 +432,39 @@ class Jovem extends Model
         return $frequencia;
     }
 
-
+    public function filtroGestor(array $dados)
+    {
+        $contato = DB::table('tb_contato')
+            ->join('tb_contato_cliente', 'tb_contato.id_contato', '=', 'tb_contato_cliente.id_contato')
+            ->join('tb_cliente', 'tb_contato_cliente.id_cliente', '=', 'tb_cliente.id_cliente')
+            ->join('tb_holding', 'tb_cliente.id_holding', '=', 'tb_holding.id_holding')
+            ->select(
+                'tb_contato.id_contato',
+                'tb_contato.email',
+                'tb_contato.celular',
+                'tb_contato.nome',
+                'tb_holding.nome_fantasia'
+            );
+        $contato = $contato->where(function ($query) use ($dados) {
+            if (isset($dados['id_contato']))
+                $query->where('tb_contato.id_contato', $dados['id_contato']);
+            if (isset($dados['nome']))
+                $query->where('tb_contato.nome', 'LIKE', '%' . $dados['nome'] . '%');
+            if (isset($dados['nome_fantasia']))
+            $query->where('tb_cliente.nome_fantasia', 'LIKE', '%' . $dados['nome_fantasia'] . '%');
+        })
+            ->groupBy(
+                'tb_contato.id_contato',
+                'tb_contato.email',
+                'tb_contato.celular',
+                'tb_contato.nome',
+                'tb_holding.nome_fantasia'
+            )
+            ->orderBy('tb_contato.nome', 'ASC')
+            ->paginate(10);
+        //dd($contato);
+        return $contato;
+    }
 
 
     public function Gestor(int $id)
@@ -563,43 +597,6 @@ class Jovem extends Model
         return $sobre;
     }
 
-
-
-    public function DadoGestores(array $dados)
-    {
-        $dominio = DB::table('tb_contato')
-            ->join('tb_contato_cliente', 'tb_contato.id_contato', '=', 'tb_contato_cliente.id_contato')
-            ->join('tb_cliente', 'tb_contato_cliente.id_cliente', '=', 'tb_cliente.id_cliente')
-            ->join('tb_holding', 'tb_cliente.id_holding', '=', 'tb_holding.id_holding')
-
-
-            ->select(
-                'tb_contato.id_contato',
-                'tb_contato.email',
-                'tb_contato.celular',
-                'tb_contato.nome',
-                'tb_holding.nome_fantasia'
-            );
-
-        $dominio = $dominio->where(function ($query) use ($dados) {
-            if (isset($dados['id']))
-                $query->where('tb_contato.id_contato', $dados['id']);
-            if (isset($dados['nome']))
-                $query->where('tb_contato.nome', 'LIKE', '%' . $dados['nome'] . '%');
-        })
-
-            ->groupBy(
-                'tb_contato.id_contato',
-                'tb_contato.email',
-                'tb_contato.celular',
-                'tb_contato.nome',
-                'tb_holding.nome_fantasia'
-            )
-            ->orderBy('tb_contato.nome', 'ASC')
-            ->paginate(10);
-        // dd($dominio);
-        return $dominio;
-    }
 
 
     public function testePesquisa()
@@ -933,7 +930,9 @@ class Jovem extends Model
                 'tb_ocorrencia.responsavel',
                 'tb_tipo_ocorrencia.nome',
                  'tb_tipo_ocorrencia.descricao',
-                 'tb_ocorrencia.id_jovem'
+                 'tb_ocorrencia.id_jovem',
+                 'tb_ocorrencia.criado_por',
+                 'tb_ocorrencia.criado_em'
 
 
                 )
@@ -946,8 +945,6 @@ class Jovem extends Model
        //dd($dadoOcorrencia);
       return $dadoOcorrencia ;
     }
-
-
 
 
 

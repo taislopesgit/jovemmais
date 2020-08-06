@@ -141,32 +141,61 @@ return [
             ],
 
             [
-                'text' => 'Relação Jovens',
+                'text' => 'Jovens',
                 'icon'    => 'fa fa-id-badge',
-                'url'  => 'home',
                 'can'     => 'adm',
+                'submenu' => [
+                  [
+                    'text' => 'Relação Jovens',
+                    'icon'  => "fa fa-list",
+                    'url'  => 'home',
+                    'can'     => 'adm',
+                ],
+                  [
+                      'text' => 'Cadastrar Jovem',
+                      'icon'  => "fa fa-plus",
+                      'url'  => 'cadastra-jovem',
+                      'can'     => 'adm',
+                  ],
+
+            ]],
 
 
-            ],
+
             [
 
-                'text' => 'Relação Gestores',
+                'text' => 'Gestores',
                 'icon'    => 'fa fa-user-tie',
                 'url'  => 'gestores',
                 'can'     => 'adm',
 
             ],
+
             [
 
-                'text' => 'Cadastrar Ocorrência',
-                'icon'    => 'fa fa-plus',
-                'url'  => 'cadastra-ocorrencia',
-                'can'     => 'adm',
-
-            ],
-
-
-
+              'text' => 'Ocorrências',
+              'icon'    => 'fa fa-edit',
+              'can'     => 'adm',
+              'submenu' => [
+                  [
+                    'text' => 'Relação Ocorrência',
+                    'icon'  => "fa fa-list",
+                    'url'  => 'relacao-ocorrencia',
+                    'can'     => 'adm',
+                ],
+                  [
+                      'text' => 'Cadastrar Ocorrência',
+                      'icon'  => "fa fa-plus",
+                      'url'  => 'cadastra-ocorrencia',
+                      'can'     => 'adm',
+                  ],
+                  [
+                    'text' => 'Buscar Ocorrência',
+                    'icon'  => "fa fa-search",
+                    'url'  => 'busca-ocorrencia',
+                    'can'     => 'adm',
+                ],
+            ]],
         [
             'text'    => 'GESTOR',
             'url'  => 'perfil-gestor',

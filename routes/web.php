@@ -16,6 +16,8 @@ Route::group(['prefix' => 'home'], function () {
     Route::match(['get', 'post'], '/{home}', 'homeController@show')->name('show');
     Route::get('/edita-jovem/{id}', 'homeController@edit')->name('edit');
     Route::get('/gestores', 'homeController@gestores')->name('gestores');
+    Route::get('/cadastra-jovem', 'homeController@cadastraJovem')->name('cadastra-jovem');
+    Route::match(['get', 'post'], '/salva-jovem', 'homeController@salvaJovem')->name('salva-jovem');
 
 
 });
@@ -31,12 +33,17 @@ Route::post( '/perfil-edit/{id}' , 'jovemController@jovemUpdate')->name('atualiz
 Route::get('/perfil-gestor', 'jovemController@jovemGestor')->name('gestor');
 Route::get( '/avaliacao-programa', 'jovemController@avaliacaoPrograma')->name('avaliacao-programa');
 Route::get('/desempenho-jovem', 'jovemController@jovemDesempenho')->name('desempenho');
-Route::get('/cadastra-ocorrencia', 'jovemController@cadastraOcorrencia')->name('cadastrar');
-Route::match(['get', 'post'], '/salva-ocorrencia', 'jovemController@salvaOcorrencia')->name('salvar-ocorrencia');
+
+Route::get('/cadastra-ocorrencia', 'ocorrenciaController@cadastraOcorrencia')->name('cadastrar');
+Route::match(['get', 'post'], '/salva-ocorrencia', 'ocorrenciaController@salvaOcorrencia')->name('salvar-ocorrencia');
+Route::match(['get', 'post'], '/busca-ocorrencia', 'ocorrenciaController@buscaOcorrencia')->name('busca-ocorrencia');
+Route::match(['get', 'post'], '/relacao-ocorrencia', 'ocorrenciaController@relacaoOcorrencia')->name('relacao-ocorrencia');
 
 
 
-Route::get('/gestores', 'gestorController@gestores')->name('gestores');
+Route::match(['get', 'post'], '/gestores', 'gestorController@gestores')->name('gestores');
+
+
 Route::match(['get', 'post'], '/{gestor}', 'gestorController@show')->name('gestorId');
 
 

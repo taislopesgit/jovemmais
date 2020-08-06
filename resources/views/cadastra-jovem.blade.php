@@ -17,16 +17,16 @@
       <div class="alert alert-success">
         {{ session('success') }}
       </div>
-      @endif
+      @endifs
       @if(session('error'))
       <div class="alert alert-danger">
         {{ session('error') }}
       </div>
       @endif
       <!--cadastrarOcorrencias-->
-      <h4 class="box-title">Cadastrar ocorrência</h4>
+      <h4 class="box-title">Cadastrar Jovem</h4>
       <br> <br>
-      <form method="post" action="{{ route('salvar-ocorrencia') }}">
+      <form method="post" action="{{ route('salva-jovem') }}">
         {{ csrf_field() }}
         <div class="form-group col-md-4" >
           <label>#Tipo</label>

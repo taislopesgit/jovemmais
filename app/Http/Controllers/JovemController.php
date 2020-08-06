@@ -238,34 +238,5 @@ class JovemController extends Controller
             'satisfacao','frequencia','dashFrequencia','ativos','dashOcorrencias','qtdOcorrencia','pesquisa','competencias'));
          }
 
-         public function cadastraOcorrencia (Request $request, Jovem $jovem)
-    {
-      $dadoOcorrencia=$jovem->dadosOcorrencia();
-      $idOcorrencia = Ocorrencia::groupby('id_ocorrencia')->get();
-
-      $idTipoOcorrencia =[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
-      $verOcorrencia = $jovem ->ocorrenciaJovem();
-
-
-      return view('cadastra-ocorrencia',compact('verOcorrencia','ocorrenciaJovem','idOcorrencia','dadoOcorrencia','dadosOcorrencia','idTipoOcorrencia'));
-
-    }
-
-    public function salvaOcorrencia (Request $request)
-    {
-
-     /* $dataForm = $request->all()->expect('token');
-        $insert = Ocorrencia::create($dataForm);*/
-
-        $dataForm = $request->except(['token']);
-        Ocorrencia::create($dataForm);
-        dd($dataForm);
-
-        if($insert)
-          return redirect()->route('cadastra-ocorrencia');
-        else
-          return redirect()->back();
-
-    }
 
     }

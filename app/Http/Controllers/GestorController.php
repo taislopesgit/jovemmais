@@ -34,8 +34,8 @@ class GestorController extends Controller
     public function home(Jovem $jovem)
     {
         $sobre = $jovem->programaSobre();
-        
-       
+
+
         return view('inicial', compact('sobre','programaSobre'));
 
     }
@@ -43,30 +43,33 @@ class GestorController extends Controller
 
     public function show(int $id, Jovem $jovem)
         {
-            
+
             $gestores = $jovem->gestor($id);
             $nome = $jovem->gestorNome($id);
             return view('gestorId', compact('gestores','gestor','nome','gestorNome'));
         }
 
+
     public function gestores(Request $request, Jovem $jovem) {
 
-        $dadosFiltros = $request->except('_token');
-        $dominio = $jovem->dadoGestores($dadosFiltros);
+      $dadosFiltros = $request->except('_token');
+      $contato = $jovem->filtroGestor($dadosFiltros);
+      //dd($contato);
 
-        return view('gestores', compact('dadosFiltros','dominio','dadoGestores','jovem'));
+      return view('gestores', compact('dadosFiltros','contato','filtroGestor'));
 
     }
 
-  
+
     public function avaliacaoPrograma(Jovem $jovem)
     {
-       
-        
-       
+
+
+
         return view('avaliacao-programa');
 
     }
 
+
+
 }
-    
