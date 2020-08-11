@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Jovem;
+use App\Familia;
+use App\Parentesco;
 use App\User;
 use App\Cliente;
 use App\Curso;
@@ -63,13 +65,30 @@ class HomeController extends Controller
 
     }
 
-    public function edit($id)
+    public function edit($id, Jovem $jovem, Familia $familia, Parentesco $parentesco)
     {
-        $jovem = Jovem::findOrFail($id);
 
-        return view('edita-jovem',compact('jovem'));
+
+      $jovem = Jovem::find($id);
+      $familia = Familia::find($id);
+      $parentesco = Parentesco::find($id);
+
+
+
+        return view('edita-jovem',compact('familia','jovem','jovemEdicao','editJovem',' parentesco'));
 
     }
+
+    /*public function update(Jovem $jovem, Request $request)
+      {
+      $product->product_line_id = $request->product_line_id;
+      $product->description = $request->description;
+      $product->expiration_time = $request->expiration_time;
+      $product->price = $request->price;
+      $product->save();
+      return redirect('product');
+      }*/
+
 
     public function perfilGestor($id)
     {
@@ -81,31 +100,7 @@ class HomeController extends Controller
 
     }
 
-    public function cadastraJovem( Request $request, Cronograma $cronograma, Jovem $jovem, Matricula $matricula)
-    {
 
-
-
-        return view('cadastra-jovem');
-
-    }
-
-    public function salvaJovem( Request $request, Jovem $jovem)
-    {
-
-      $insert = $jovem->create($request->all());
-      //dd($insert);
-
-      if ($insert)
-          return redirect()
-                      ->route('cadastrar')
-                      ->with('success', 'Jovem inserido com sucesso!');
-
-
-      return redirect()
-                  ->back()
-                  ->with('error', 'Falha ao inserir');
-    }
 
     }
 

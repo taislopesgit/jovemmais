@@ -7,15 +7,20 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Usuario;
 use App\Ocorrencia;
+use App\Matricula;
 use App\Cliente;
 use App\Gestor;
 
 class Jovem extends Model
 {
-    protected $fillable = ['nome', 'data_nascimento', 'sexo', 'email', 'raca', 'deficiente', 'cep'];
-    protected $guarded = ['id_jovem', 'criado_em', 'atualizado_em'];
+    protected $fillable = ['nome', 'criado_por','data_nascimento', 'sexo', 'email', 'raca', 'deficiente', 'cep','deficiencia_tipo',
+    'estado_civil','nacionalidade','naturalidade','uf_naturalidade','endereco','numero','complemento','bairro','cidade','uf','titulo_eleitoral_data_expedicao'];
+
+    protected $guarded = ['criado_em', 'atualizado_em','atualizado_por'];
     protected $table = 'tb_jovem';
     protected $primaryKey = 'id_jovem';
+
+
 
 
 
@@ -945,6 +950,8 @@ class Jovem extends Model
        //dd($dadoOcorrencia);
       return $dadoOcorrencia ;
     }
+
+
 
 
 

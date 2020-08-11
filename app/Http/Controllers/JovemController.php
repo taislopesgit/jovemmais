@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Jovem;
+use App\Matricula;
 use App\Perfil;
 use App\Cliente;
 use App\Usuario;
@@ -164,11 +165,11 @@ class JovemController extends Controller
             $pesquisa = $jovem->testePesquisa();
 
             $competencias=array();
-            $competencias['combo1'] = 0;
-            $competencias['combo2'] = 0;
-            $competencias['combo3'] = 0;
-            $competencias['combo4'] = 0;
-            $competencias['total'] = 0;
+            $competencias['combo1'] = 1;
+            $competencias['combo2'] = 1;
+            $competencias['combo3'] = 1;
+            $competencias['combo4'] = 1;
+            $competencias['total'] = 1;
 
 
             foreach($pesquisa as $p){
@@ -239,4 +240,40 @@ class JovemController extends Controller
          }
 
 
+
+    //cadastra novo jovem no banco de dados
+    public function cadastraJovem( Request $request, Jovem $jovem, Matricula $matricula)
+    {
+
+
+
+        return view('cadastra-jovem');
+
     }
+
+    //salva dados do novo jovem no banco de dados
+    public function salvaJovem( Request $request, Jovem $jovem, Matricula $matricula)
+    {
+
+      $novoJovem = $jovem ->insert($request->except('_token'));
+
+
+      if ($novoJovem)
+          return redirect()
+                      ->route('cadastra-jovem')
+                      ->with('success', 'Jovem inserido com sucesso!');
+
+
+      return redirect()
+                  ->back()
+                  ->with('error', 'Falha ao inserir');
+    }
+
+
+
+
+
+
+
+
+}
