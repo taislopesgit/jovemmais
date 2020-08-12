@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Jovem;
 use App\Matricula;
+use App\Familia;
 use App\Perfil;
 use App\Cliente;
 use App\Usuario;
@@ -269,6 +270,35 @@ class JovemController extends Controller
                   ->with('error', 'Falha ao inserir');
     }
 
+
+    //cadastra familiares jovem
+    public function cadastraFamilia( Request $request, Jovem $jovem, Familia $familia)
+    {
+
+
+
+        return view('cadastra-familia');
+
+    }
+
+    //salva dados familiares jovem
+    public function salvaFamilia( Request $request, Jovem $jovem, Familia $familia)
+    {
+
+
+      $novoFamilia = $familia ->insert($request->except('_token'));
+
+
+      if ($novoFamilia)
+          return redirect()
+                      ->route('cadastra-familia')
+                      ->with('success', 'Dados inseridos com sucesso!');
+
+
+      return redirect()
+                  ->back()
+                  ->with('error', 'Falha ao inserir');
+    }
 
 
 

@@ -3,6 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Usuario;
+use App\Ocorrencia;
+use App\Matricula;
+use App\Cliente;
+use App\Gestor;
 
 class Matricula extends Model
 {

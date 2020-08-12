@@ -157,6 +157,12 @@ return [
                       'url'  => 'cadastra-jovem',
                       'can'     => 'adm',
                   ],
+                  [
+                    'text' => 'Cadastrar Família',
+                    'icon'  => "fa fa-plus",
+                    'url'  => 'cadastra-familia',
+                    'can'     => 'adm',
+                ],
 
             ]],
 

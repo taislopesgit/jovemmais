@@ -37,6 +37,10 @@ Route::match(['get'], '/cadastra-jovem', 'jovemController@cadastraJovem')->name(
 Route::match(['get', 'post'], '/salva-jovem', 'jovemController@salvaJovem')->name('salva-jovem');
 
 
+Route::get('/cadastra-familia', 'jovemController@cadastraFamilia')->name('cadastra-familia');
+Route::match(['get', 'post'], '/salva-matricula', 'jovemController@salvaFamilia')->name('salva-familia');
+
+
 Route::get('/perfil-gestor', 'jovemController@jovemGestor')->name('gestor');
 Route::get( '/avaliacao-programa', 'jovemController@avaliacaoPrograma')->name('avaliacao-programa');
 Route::get('/desempenho-jovem', 'jovemController@jovemDesempenho')->name('desempenho');
@@ -51,7 +55,6 @@ Route::match(['get', 'post'], '/relacao-ocorrencia', 'ocorrenciaController@relac
 
 Route::match(['get', 'post'], '/gestores', 'gestorController@gestores')->name('gestores');
 Route::match(['get', 'post'], '/{gestor}', 'gestorController@show')->name('gestorId');
-
 
 
 
