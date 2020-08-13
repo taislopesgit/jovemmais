@@ -11,7 +11,7 @@ class Familia extends Model
   protected $table = 'tb_familia';
   protected $primaryKey = 'id_familia';
 
-  protected $fillable = ['id_jovem','id_parentesco','nome','email','telefone','celular','data_nascimento','sexo','raca'];
+  protected $fillable = ['id_jovem','id_parentesco','nome','email','telefone','celular','data_nascimento','sexo','raca','criado_por'];
   protected $guarded = [ 'id_familia','atualizado_em', 'atualizado_por', 'criado_em',];
 
   public $timestamps = false;

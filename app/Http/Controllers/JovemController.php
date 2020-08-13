@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Jovem;
 use App\Matricula;
 use App\Familia;
+use App\Parentesco;
 use App\Perfil;
 use App\Cliente;
 use App\Usuario;
@@ -272,12 +273,12 @@ class JovemController extends Controller
 
 
     //cadastra familiares jovem
-    public function cadastraFamilia( Request $request, Jovem $jovem, Familia $familia)
+    public function cadastraFamilia( Request $request, Jovem $jovem, Familia $familia, Parentesco $parentesco)
     {
+      $idJovem = Jovem::all();
+      $idParentesco = Parentesco::all();
 
-
-
-        return view('cadastra-familia');
+      return view('cadastra-familia', compact('idJovem','idParentesco'));
 
     }
 
@@ -287,7 +288,7 @@ class JovemController extends Controller
 
 
       $novoFamilia = $familia ->insert($request->except('_token'));
-
+      //dd($request);
 
       if ($novoFamilia)
           return redirect()

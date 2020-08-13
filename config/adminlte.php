@@ -141,31 +141,30 @@ return [
             ],
 
             [
-                'text' => 'Jovens',
+                'text' => 'Relação Jovens',
                 'icon'    => 'fa fa-id-badge',
+                'url' => 'home',
+                'can'     => 'adm',
+            ],
+            [
+                'text' => 'Cadastro',
+                'icon'  => "fa fa-plus",
                 'can'     => 'adm',
                 'submenu' => [
-                  [
-                    'text' => 'Relação Jovens',
-                    'icon'  => "fa fa-list",
-                    'url'  => 'home',
-                    'can'     => 'adm',
-                ],
-                  [
-                      'text' => 'Cadastrar Jovem',
-                      'icon'  => "fa fa-plus",
-                      'url'  => 'cadastra-jovem',
-                      'can'     => 'adm',
+                        [
+                          'text' => 'Cadastrar Jovem',
+                          'icon'  => "fa fa-user",
+                          'url'  => 'cadastra-jovem',
+                          'can'     => 'adm',
+                      ],
+                      [
+                        'text' => 'Cadastrar Família',
+                        'icon'  => "fa fa-heart",
+                        'url'  => 'cadastra-familia',
+                        'can'     => 'adm',
+                    ],
+                      ]
                   ],
-                  [
-                    'text' => 'Cadastrar Família',
-                    'icon'  => "fa fa-plus",
-                    'url'  => 'cadastra-familia',
-                    'can'     => 'adm',
-                ],
-
-            ]],
-
             [
 
                 'text' => 'Gestores',
