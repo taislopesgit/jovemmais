@@ -20,7 +20,7 @@
 @endforeach-->
 
       <div class="row">
-   <div class="col-md-3">
+       <div class="col-md-3">
       <div class="small-box bg-blue">
       <div class="inner">
          @foreach ($dashFrequencia as $jovens)
@@ -102,41 +102,41 @@
   <tbody>
     <tr>
     <td class="align-middle text-center">
-                        <div class="progress progress-xs">
-                           @if ($face->aulaconcluida <= 25)
-                           <div class="progress-bar progress-bar-success" style="width: {{$face->aulaconcluida}}%"></div>
-                           @else
-                           @if ($face->aulaconcluida <= 50)
-                           <div class="progress-bar progress-bar-primary" style="width: {{$face->aulaconcluida}}%"></div>
-                           @else
-                           @if ($face->aulaconcluida <= 75)
-                           <div class="progress-bar progress-bar-warning" style="width: {{$face->aulaconcluida}}%"></div>
-                           @else
-                           <div class="progress-bar progress-bar-danger" style="width: {{$face->aulaconcluida}}%"></div>
-                           @endif
-                           @endif
-                           @endif
-                        </div>
+         <div class="progress progress-xs">
+            @if ($face->aulaconcluida <= 25)
+            <div class="progress-bar progress-bar-success" style="width: {{$face->aulaconcluida}}%"></div>
+            @else
+            @if ($face->aulaconcluida <= 50)
+            <div class="progress-bar progress-bar-primary" style="width: {{$face->aulaconcluida}}%"></div>
+            @else
+            @if ($face->aulaconcluida <= 75)
+            <div class="progress-bar progress-bar-warning" style="width: {{$face->aulaconcluida}}%"></div>
+            @else
+            <div class="progress-bar progress-bar-danger" style="width: {{$face->aulaconcluida}}%"></div>
+            @endif
+            @endif
+            @endif
+      </div>
     <td class="align-middle text-center">
-                        @if ($face->aulaconcluida <= 25)
-                        <span class="badge bg-green">{{$face->aulaconcluida}}%</span>
-                        @else
-                        @if ($face->aulaconcluida <= 50)
-                        <span class="badge bg-blue">{{$face->aulaconcluida}}%</span>
-                        @else
-                        @if ($face->aulaconcluida <= 75)
-                        <span class="badge bg-yellow">{{$face->aulaconcluida}}%</span>
-                        @else
-                        <span class="badge bg-red">{{$face->aulaconcluida}}%</span>
-                        @endif
-                        @endif
-                        @endif
-                     </td>
-                     <td class="align-middle text-center">
-                        <a href="{{route('show', $face->id_jovem)}}" class="text-blue" title="Visualizar" data-toggle="tooltip" data-placement="top">
-                        <i class="fa fa-eye">&nbsp;</i>
-                        </a>
-                     </td>
+         @if ($face->aulaconcluida <= 25)
+         <span class="badge bg-green">{{$face->aulaconcluida}}%</span>
+         @else
+         @if ($face->aulaconcluida <= 50)
+         <span class="badge bg-blue">{{$face->aulaconcluida}}%</span>
+         @else
+         @if ($face->aulaconcluida <= 75)
+         <span class="badge bg-yellow">{{$face->aulaconcluida}}%</span>
+         @else
+         <span class="badge bg-red">{{$face->aulaconcluida}}%</span>
+         @endif
+         @endif
+         @endif
+   </td>
+   <td class="align-middle text-center">
+      <a href="{{route('show', $face->id_jovem)}}" class="text-blue" title="Visualizar" data-toggle="tooltip" data-placement="top">
+      <i class="fa fa-eye">&nbsp;</i>
+      </a>
+   </td>
     </tr>
   </tbody>
 </table>
@@ -146,12 +146,12 @@
    </div>
    </div>
    <div class="box-tools">
-                @if (isset($RelacaoJovemGestor))
-                {{ $relatorioJovem->appends($RelacaoJovemGestor)->links() }}
-                @else
-                {{ $relatorioJovem->links() }}
-                @endif
-                </div>
+      @if (isset($RelacaoJovemGestor))
+      {{ $relatorioJovem->appends($RelacaoJovemGestor)->links() }}
+      @else
+      {{ $relatorioJovem->links() }}
+      @endif
+   </div>
 
 
 

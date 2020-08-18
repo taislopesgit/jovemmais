@@ -79,15 +79,7 @@ class HomeController extends Controller
 
     }
 
-    /*public function update(Jovem $jovem, Request $request)
-      {
-      $product->product_line_id = $request->product_line_id;
-      $product->description = $request->description;
-      $product->expiration_time = $request->expiration_time;
-      $product->price = $request->price;
-      $product->save();
-      return redirect('product');
-      }*/
+    
 
 
     public function perfilGestor($id)

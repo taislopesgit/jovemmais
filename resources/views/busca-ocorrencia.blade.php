@@ -57,7 +57,7 @@
   <div class="row">
   <div class="col-md-12">
   <div class="box box-warning">
-    <div class="box-header with-border"></div>
+    <div class="box-header with-border">
       <h4 class="box-title">Resultado busca</h4>
       <br><br>
       <div class="table-responsive">
@@ -96,6 +96,7 @@
     </div>
   </div>
 </section>
+
 <style>
   .avatar {
   vertical-align: middle;
@@ -104,4 +105,5 @@
   border-radius: 50%;
   }
 </style>
+
 @stop

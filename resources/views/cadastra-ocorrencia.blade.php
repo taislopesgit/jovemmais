@@ -28,25 +28,42 @@
       <br> <br>
       <form method="post" action="{{ route('salvar-ocorrencia') }}">
         {{ csrf_field() }}
+        
         <div class="form-group col-md-4" >
-          <label>#Tipo</label>
-          <input type="text" class="form-control" name="id_tipo_ocorrencia">
+        <label>Tipo de ocorrência</label>
+          <select id="id_tipo_ocorrencia" class="form-control" name="id_tipo_ocorrencia">
+          @foreach($nomeTipoOcorrencia as $nome)
+            <option value="{{$nome->id_tipo_ocorrencia}}">{{$nome->nome}}</option>
+            @endforeach
+          </select>
         </div>
         <div class="form-group col-md-4" >
-          <label>#Jovem</label>
-          <input type="text" class="form-control" name="id_jovem">
+        <label>Nome do Jovem</label>
+          <select id="id_jovem" class="form-control" name="id_jovem">
+          @foreach($nomeDoJovem as $jovem)
+            <option value="{{$jovem->id_jovem}}">{{$jovem->nome}}</option>
+          @endforeach
+          </select>
         </div>
-        <div class="form-group col-md-4">
-          <label >#Matrícula</label>
-          <input type="text" class="form-control" name="id_matricula">
+        <div class="form-group col-md-4" >
+        <label>Matrícula</label>
+          <select id="id_matricula" class="form-control" name="id_matricula">
+          @foreach($idMatricula as $matricula)
+            <option value="{{$matricula->id_matricula}}">{{$matricula->id_matricula}}</option>
+          @endforeach
+          </select>
         </div>
         <div class="form-group  col-md-4" >
           <label >Responsável</label>
           <input type="text" class="form-control" name="responsavel">
         </div>
-        <div class="form-group  col-md-4" >
-          <label >Criado por</label>
-          <input type="text" class="form-control" name="criado_por">
+        <div class="form-group col-md-4" >
+        <label>Criado por</label>
+          <select id="criado_por" class="form-control" name="criado_por">
+          @foreach($idUsuario as $usuario)
+            <option value="{{$usuario->name}}">{{$usuario->name}}</option>
+          @endforeach
+          </select>
         </div>
         <div class="form-group col-md-4">
           <label >Data do acontecimento</label>

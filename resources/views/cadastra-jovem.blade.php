@@ -97,9 +97,14 @@
                 <label>Tipo de deficiência </label>
                 <input type="text" class="form-control" name="deficiencia_tipo">
               </div>
-              <div class="form-group col-md-4">
-                <label>Estado Civil </label>
-                <input type="text" class="form-control" name="estado_civil">
+              <div class="form-group  col-md-4" >
+                <label>Estado Cívil</label>
+                <select id="estado_civil" class="form-control" name="estado_civil">
+                  <option value="solteiro">Solteiro (a)</option>
+                  <option value="casado">Casado (a)</option>
+                  <option value="divorciado">Divorciado (a)</option>
+                  <option value="separado">Separado(a)</option>
+                </select>
               </div>
               <div class="form-group col-md-4">
                 <label>Nacionalidade</label>
@@ -176,7 +181,6 @@
           <label for="cidade">Cidade</label>
           <input type="text" class="form-control" name="cidade" id="cidade">
         </div>
-
         <a href="#pessoal" data-toggle="tab" aria-expanded="true" class="previous round">&#8249;</a>
     <a href="#trabalhista" data-toggle="tab" aria-expanded="true" class="next round">&#8250;</a>
     </div>
@@ -243,9 +247,13 @@
           <label>Data Expedição</label>
           <input type="date" class="form-control" name="titulo_eleitoral_data_expedicao">
         </div>
-        <div class="form-group col-md-3">
-          <label>Criado por</label>
-          <input type="text" class="form-control" name="criado_por">
+        <div class="form-group col-md-1" >
+        <label>Criado por</label>
+          <select id="criado_por" class="form-control" name="criado_por">
+          @foreach($idUsuario as $usuario)
+            <option value="{{$usuario->name}}">{{$usuario->name}}</option>
+          @endforeach
+          </select>
         </div>
         <div class="form-group col-md-12">
           <button class="btn btn-primary" type="submit">Cadastrar</button>

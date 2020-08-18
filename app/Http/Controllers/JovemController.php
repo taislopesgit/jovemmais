@@ -128,7 +128,7 @@ class JovemController extends Controller
 
     return view('desempenho-jovem', compact('evolucoesJovem','chartEvolucao','jovemDesligado','desligamento','ferias','qtdFerias','face','faceToface','relatorioJovem','RelacaoJovemGestor',
     'dashFrequencia', 'frequencia', 'dashSatisfacao', 'satisfacao','jovemParticipante','participante',
-'nome','nomeGestor','RelacaoProgresso','progressoJovem','concluidoJovem', 'RelacaoConcluido'));
+    'nome','nomeGestor','RelacaoProgresso','progressoJovem','concluidoJovem', 'RelacaoConcluido'));
 
 }
 
@@ -247,9 +247,9 @@ class JovemController extends Controller
     public function cadastraJovem( Request $request, Jovem $jovem, Matricula $matricula)
     {
 
+        $idUsuario = Usuario::where('id_usuario', Auth::id())->get();
 
-
-        return view('cadastra-jovem');
+        return view('cadastra-jovem', compact('idUsuario'));
 
     }
 
@@ -276,11 +276,13 @@ class JovemController extends Controller
     public function cadastraFamilia( Request $request, Jovem $jovem, Familia $familia, Parentesco $parentesco)
     {
       $idJovem = Jovem::all();
+      $idUsuario = Usuario::where('id_usuario', Auth::id())->get();
       $idParentesco = Parentesco::all();
 
-      return view('cadastra-familia', compact('idJovem','idParentesco'));
+      return view('cadastra-familia', compact('idUsuario','idJovem','idParentesco'));
 
     }
+
 
     //salva dados familiares jovem
     public function salvaFamilia( Request $request, Jovem $jovem, Familia $familia)
@@ -288,7 +290,7 @@ class JovemController extends Controller
 
 
       $novoFamilia = $familia ->insert($request->except('_token'));
-      //dd($request);
+      dd($request);
 
       if ($novoFamilia)
           return redirect()

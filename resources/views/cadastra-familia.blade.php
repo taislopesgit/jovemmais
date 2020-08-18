@@ -42,26 +42,25 @@
       <div class="tab-pane active" id="pessoal">
         <div class="row">
           <div class="col-md-12">
-
             <form method="post" action="{{ route('salva-familia') }}">
             {{ csrf_field() }}
-              <div class="form-group col-md-1">
-                <label>#Jovem</label>
+              <div class="form-group col-md-3">
+                <label>Jovem</label>
                   <select id="id_jovem" class="form-control" name="id_jovem">
                     @foreach($idJovem as $jovem)
-                    <option value="{{$jovem->id_jovem}}">{{$jovem->id_jovem}}</option>
+                    <option value="{{$jovem->id_jovem}}">{{$jovem->nome}}</option>
                     @endforeach
                   </select>
               </div>
-              <div class="form-group col-md-1">
-                <label>#Parentesco</label>
+              <div class="form-group col-md-2">
+                <label>Parentesco</label>
                   <select id="id_parentesco" class="form-control" name="id_parentesco">
                     @foreach($idParentesco as $parente)
-                    <option value="{{$parente->id_parentesco}}">{{$parente->id_parentesco}}</option>
+                    <option value="{{$parente->id_parentesco}}">{{$parente->nome}}</option>
                     @endforeach
                   </select>
               </div>
-              <div class="form-group col-md-4" >
+              <div class="form-group col-md-3" >
                 <label>Nome</label>
                 <input type="text" class="form-control" name="nome">
               </div>
@@ -94,31 +93,37 @@
                     <option value="não">Não</option>
                   </select>
               </div>
-              <div class="form-group col-md-2" >
-                <label>Lateralidade</label>
-                <input type="text" class="form-control" name="lateralidade">
-              </div>
               <div class="form-group col-md-2">
                 <label>Tipo de deficiência </label>
                 <input type="text" class="form-control" name="deficiencia_tipo">
               </div>
-              <div class="form-group col-md-2">
-                <label>Estado Civil </label>
-                <input type="text" class="form-control" name="estado_civil">
+              <div class="form-group col-md-2" >
+                <label>Lateralidade</label>
+                <input type="text" class="form-control" name="lateralidade">
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group  col-md-2" >
+                <label>Estado Cívil</label>
+                <select id="estado_civil" class="form-control" name="estado_civil">
+                  <option value="solteiro">Solteiro (a)</option>
+                  <option value="casado">Casado (a)</option>
+                  <option value="divorciado">Divorciado (a)</option>
+                  <option value="separado">Separado(a)</option>
+                </select>
+              </div>
+              <div class="form-group col-md-1">
                 <label>Nacionalidade</label>
                 <input type="text" class="form-control" name="nacionalidade">
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group col-md-1">
                 <label>Naturalidade</label>
                 <input type="text" class="form-control" name="naturalidade">
               </div>
+              <br>
               <a href="#contato" data-toggle="tab" aria-expanded="true" class="next round">&#8250;</a>
           </div>
         </div>
       </div>
-    <!--contato-->
+     <!--contato-->
               <div class="tab-pane" id="contato">
                 <div class="row">
                   <div class="col-md-12">
@@ -213,21 +218,25 @@
                       <div class="form-group col-md-4">
                         <label>Está trabalhando?</label>
                           <select class="form-control" name="status_emprego">
-                              <option value="sim">Sim</option>
-                              <option value="não">Não</option>
-                            </select>
+                            <option value="sim">Sim</option>
+                            <option value="não">Não</option>
+                          </select>
                       </div>
                       <div class="form-group col-md-2">
                         <label>Situação trabalhista</label>
                         <input type="text" class="form-control" name="status_emprego_registro">
                       </div>
-                      <div class="form-group col-md-4">
-                        <label>Por que não trablha?</label>
+                      <div class="form-group col-md-5">
+                        <label>Por que não trabalha?</label>
                         <input type="text" class="form-control" name="porque_nao_trabalha">
                       </div>
-                      <div class="form-group col-md-2">
-                        <label>Criado por</label>
-                        <input type="text" class="form-control" name="criado_por">
+                      <div class="form-group col-md-1" >
+                      <label>Criado por</label>
+                        <select id="criado_por" class="form-control" name="criado_por">
+                        @foreach($idUsuario as $usuario)
+                          <option value="{{$usuario->name}}">{{$usuario->name}}</option>
+                        @endforeach
+                        </select>
                       </div>
                       <div class="form-group col-md-12">
                       <a href="#trabalhista" data-toggle="tab" aria-expanded="true" class="previous round">&#8249;</a>
@@ -287,9 +296,6 @@ a:hover {
 
 }
 </style>
-
-
-
 
 
 

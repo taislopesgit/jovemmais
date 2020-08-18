@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 use App\Ocorrencia;
 use App\Tipo_ocorrencia;
 use App\Jovem;
 use App\User;
+use App\Usuario;
 use App\Cliente;
 use App\Curso;
 use App\Polo;
 use App\Disciplina;
 use App\Disciplina_diaria;
+use App\Matricula;
 
 
 
@@ -39,11 +43,16 @@ class OcorrenciaController extends Controller
     public function cadastraOcorrencia (Request $request, Ocorrencia $ocorrencia, Jovem $jovem, Tipo_ocorrencia $tipo_ocorrencia)
     {
 
+
+      $nomeTipoOcorrencia = tipo_ocorrencia::all();
+      $nomeDoJovem = jovem::all();
+      $idMatricula = matricula::all();
+      $idUsuario = Usuario::where('id_usuario', Auth::id())->get();
       $dadosTipoOcorrencia = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
       $dadoOcorrencia=$jovem->dadosOcorrencia();
       $verOcorrencia = $jovem ->ocorrenciaJovem();
 
-      return view('cadastra-ocorrencia',compact('dadosTipoOcorrencia','verOcorrencia','ocorrenciaJovem','dadoOcorrencia','dadosOcorrencia'));
+      return view('cadastra-ocorrencia',compact('idUsuario','idMatricula','nomeDoJovem','nomeTipoOcorrencia','dadosTipoOcorrencia','verOcorrencia','ocorrenciaJovem','dadoOcorrencia','dadosOcorrencia'));
 
     }
 
