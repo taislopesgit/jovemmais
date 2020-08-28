@@ -147,6 +147,25 @@ return [
                 'can'     => 'adm',
             ],
             [
+              'text' => 'Matricula',
+              'icon'  => "fa fa-university",
+              'can'     => 'adm',
+              'submenu' => [
+                    [
+                      'text' => 'Matricular Jovem',
+                      'icon'  => "fa fa-file",
+                      'url'  => 'matricula-jovem',
+                      'can'     => 'adm',
+                  ],
+                  [
+                    'text' => 'Gerar Calendário',
+                    'icon'  => "fa fa-calendar",
+                    'url'  => 'cria-calendario',
+                    'can'     => 'adm',
+                ],
+                    ]
+                ],
+            [
                 'text' => 'Cadastro',
                 'icon'  => "fa fa-plus",
                 'can'     => 'adm',

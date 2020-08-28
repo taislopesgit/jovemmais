@@ -30,9 +30,8 @@
             </a>
         </li>
       </ul>
-
     <div class= "tab-content">
-      <!--pessoal-->
+  <!--pessoal-->
     <div class="tab-pane active" id="pessoal">
       <div class="row">
           <div class="col-md-12">
@@ -119,11 +118,10 @@
         </div>
         </div>
 
-      <!--endereco-->
+<!--endereco-->
       <div class="tab-pane" id="endereco">
-
       <div class="row">
-  <div class="col-md-12">
+        <div class="col-md-12">
         <div class="form-group col-md-4">
           <label for="cep">CEP</label>
           <input type="text" class="form-control" name="cep" id="cep">
@@ -264,7 +262,6 @@
 </div>
 </form>
       </div>
-      <!--fimLinha-->
        </div>
         </div>
       </div>

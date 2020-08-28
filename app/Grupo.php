@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
-class Disciplina_diaria extends Model
+class Grupo extends Model
 {
 
-    protected $table = 'tb_disciplina_diaria';
-    protected $primaryKey = 'data';
+  protected $table = 'tb_grupo';
+  protected $primaryKey = 'id_grupo';
 
 
 

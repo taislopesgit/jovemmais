@@ -7,9 +7,9 @@
 
 
 
-        <title>Jovem+ 
+        <title>Jovem+
         </title>
-       
+
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -66,11 +66,11 @@
                 color: #fcfffe;
             }
 
-           
+
         </style>
     </head>
     <body>
-    
+
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">

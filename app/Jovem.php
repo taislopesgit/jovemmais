@@ -10,6 +10,7 @@ use App\Ocorrencia;
 use App\Matricula;
 use App\Cliente;
 use App\Gestor;
+use Carbon\Carbon;
 
 class Jovem extends Model
 {
@@ -952,7 +953,113 @@ class Jovem extends Model
     }
 
 
+    public function getCicloseCuros($idGrupo )
+    {
 
+
+      $definicaoCiclo = DB::table('tb_grupo')
+      ->join('tb_matricula', 'tb_grupo.id_grupo', '=', 'tb_matricula.id_grupo')
+      ->join('tb_curso', 'tb_grupo.id_curso', '=', 'tb_curso.id_curso')
+      ->join('tb_ciclo_curso', 'tb_grupo.id_curso', '=', 'tb_ciclo_curso.id_curso')
+      ->join('tb_ciclo', 'tb_ciclo_curso.id_ciclo', '=', 'tb_ciclo.id_ciclo')
+      ->join('tb_plano_curricular', 'tb_ciclo.id_ciclo', '=', 'tb_plano_curricular.id_ciclo')
+
+
+      ->select('tb_ciclo.nome',
+                'tb_ciclo.id_ciclo',
+                'tb_ciclo.tipo',
+                'tb_ciclo.sigla',
+                'tb_ciclo_curso.id_ciclo_anterior',
+                'tb_ciclo_curso.nivel',
+                'tb_ciclo_curso.intervalo',
+                'tb_matricula.id_grupo',
+                'tb_matricula.data_inicio',
+                'tb_curso.treinamento_teorico',
+                'tb_curso.treinamento_pratico',
+
+
+                DB::raw('COUNT(tb_plano_curricular.id_plano_curricular) as qtd')
+              )
+      ->where( 'tb_grupo.id_grupo','=', $idGrupo)
+
+      ->groupBy('tb_ciclo.nome',
+                'tb_ciclo.tipo',
+                'tb_ciclo.sigla',
+                'tb_ciclo.id_ciclo',
+                'tb_ciclo_curso.id_ciclo_anterior',
+                'tb_ciclo_curso.nivel',
+                 'tb_matricula.id_grupo',
+                'tb_matricula.data_inicio',
+                'tb_ciclo_curso.intervalo',
+                'tb_curso.treinamento_teorico',
+                'tb_curso.treinamento_pratico'
+
+    )
+
+      ->orderBy('tb_ciclo.nome','tb_ciclo_curso.intervalo','asc','tb_ciclo_curso.nivel' )
+      ->get();
+      //->toSql();
+      //dd($definicaoCiclo);
+        return $definicaoCiclo;
+
+    }
+
+    public function getDisciplinasPorCicloEDiaSemana($idCiclo, $qtdAula, $dataInicial, $diaSemana = null)
+    {
+       $cicloData = DB::table('tb_disciplina_diaria')
+        ->select(
+          'tb_disciplina_diaria.data',
+          'tb_disciplina_diaria.id_ciclo',
+          'tb_disciplina_diaria.id_disciplina'
+        );
+
+        $cicloData = $cicloData
+        ->where('tb_disciplina_diaria.id_ciclo', $idCiclo)
+        ->where('tb_disciplina_diaria.data', '>=', $dataInicial);
+
+        if($diaSemana != NULL){
+          $cicloData = $cicloData
+          ->where(DB::raw('DAYOFWEEK(tb_disciplina_diaria.data)'), '=', $diaSemana);
+        }
+
+        $cicloData = $cicloData
+          ->orderBy('tb_disciplina_diaria.data', 'ASC')
+          ->limit($qtdAula)
+          ->get();
+      return $cicloData;
+    }
+
+
+    public function dadosGrupo($idGrupo)
+    {
+      $dadosGrupo = DB::table('tb_grupo')
+
+      ->select(
+        'tb_grupo.dia_fixo',
+        'tb_grupo.dia_complementar',
+        'tb_grupo.nome',
+        'tb_grupo.id_grupo'
+      )
+      ->first();
+     // dd($dadosGrupo);
+
+      return $dadosGrupo;
+    }
+
+    public function dadosQtdTreinamento()
+    {
+      $dadosQtdTreinamento = DB::table('tb_curso')
+
+      ->select(
+        'tb_curso.id_curso',
+        'tb_curso.treinamento_teorico',
+        'tb_curso.treinamento_pratico'
+      )
+      ->first();
+     //dd($dadosQtdTreinamento);
+
+      return $dadosQtdTreinamento;
+    }
 
 
 }

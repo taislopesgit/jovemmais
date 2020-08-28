@@ -16,6 +16,9 @@ use App\Usuario;
 use App\Papel;
 use App\Permissao;
 use App\Ocorrencia;
+use App\Grupo;
+use App\Disciplina_diaria;
+use Carbon\Carbon;
 
 
 class JovemController extends Controller
@@ -243,7 +246,7 @@ class JovemController extends Controller
 
 
 
-    //cadastra novo jovem no banco de dados
+
     public function cadastraJovem( Request $request, Jovem $jovem, Matricula $matricula)
     {
 
@@ -253,7 +256,7 @@ class JovemController extends Controller
 
     }
 
-    //salva dados do novo jovem no banco de dados
+
     public function salvaJovem( Request $request, Jovem $jovem, Matricula $matricula)
     {
 
@@ -272,7 +275,9 @@ class JovemController extends Controller
     }
 
 
-    //cadastra familiares jovem
+
+
+
     public function cadastraFamilia( Request $request, Jovem $jovem, Familia $familia, Parentesco $parentesco)
     {
       $idJovem = Jovem::all();
@@ -282,15 +287,12 @@ class JovemController extends Controller
       return view('cadastra-familia', compact('idUsuario','idJovem','idParentesco'));
 
     }
-
-
-    //salva dados familiares jovem
     public function salvaFamilia( Request $request, Jovem $jovem, Familia $familia)
     {
 
 
       $novoFamilia = $familia ->insert($request->except('_token'));
-      dd($request);
+
 
       if ($novoFamilia)
           return redirect()
@@ -307,6 +309,103 @@ class JovemController extends Controller
 
 
 
+    public function matricularJovem(  Request $request, Jovem $jovem, Matricula $matricula)
+    {
 
+      $jovem = jovem::all();
+      $usuario =Usuario::where('id_usuario', Auth::id())->get();
+      $grupo = grupo::all();
+      $cliente = cliente::all();
+      $disciplina = disciplina_diaria::all();
+
+
+      return view('matricula-jovem', compact('jovem','usuario','grupo','cliente','disciplina'));
+
+    }
+
+    public function salvarMatricula( Request $request, Jovem $jovem)
+
+    {
+      $idGrupo = $request->input('id_grupo');
+      $definicaoCiclo = $jovem->getCicloseCuros($idGrupo);
+
+      $dataInicial = $request->input('data_inicio');
+      $grupo = $jovem->dadosGrupo($idGrupo);
+
+
+
+    $ciclos = array();
+    $cronograma = array();
+    $i=0;
+
+      foreach ($definicaoCiclo as $ciclo) {
+        $ciclos[$ciclo->id_ciclo]['nome'] = $ciclo->nome;
+        $ciclos[$ciclo->id_ciclo]['tipo'] = $ciclo->tipo;
+        $ciclos[$ciclo->id_ciclo]['sigla'] =
+        $ciclos[$ciclo->id_ciclo]['id_ciclo'] = $ciclo->id_ciclo;
+        $ciclos[$ciclo->id_ciclo]['id_ciclo_anterior'] = $ciclo->id_ciclo_anterior;
+        $ciclos[$ciclo->id_ciclo]['nivel'] = $ciclo->nivel;
+        $ciclos[$ciclo->id_ciclo]['intervalo'] = $ciclo->intervalo;
+        $ciclos[$ciclo->id_ciclo]['qtd'] = $ciclo->qtd;
+
+
+        if($ciclo->intervalo == 1){
+          $cicloData = $jovem->getDisciplinasPorCicloEDiaSemana($ciclo->id_ciclo, $ciclo->qtd, $dataInicial);
+        }
+        else{
+          $dtInicial = date('Y-m-d', strtotime('+1 day', strtotime($ciclos[$ciclo->id_ciclo_anterior]['data_fim'])));
+
+            if($ciclo->intervalo == 7){
+              $cicloData = $jovem->getDisciplinasPorCicloEDiaSemana($ciclo->id_ciclo, $ciclo->qtd,  $dtInicial, $grupo->dia_fixo);
+            }
+            else{
+              $cicloData = $jovem->getDisciplinasPorCicloEDiaSemana($ciclo->id_ciclo, $ciclo->qtd, $dtInicial,  $grupo->dia_complementar);
+            }
+        }
+
+        $j=0;
+
+        foreach($cicloData as $dataDisciplina){
+          if ($j==0){
+            $ciclos[$ciclo->id_ciclo]['data_inicio'] = $dataDisciplina->data;
+          }
+          if($j == count($cicloData) - 1) {
+            $ciclos[$ciclo->id_ciclo]['data_fim'] = $dataDisciplina->data;
+          }
+
+          $cronograma[$dataDisciplina->data] = $dataDisciplina->id_disciplina;
+          $j++;
+        }
+
+      }
+
+
+    ksort($cronograma);
+
+    $dadosQtdTreinamento = $jovem->dadosQtdTreinamento();
+
+    $qtdTreinamento = array();
+    $i=0;
+
+    foreach($dadosQtdTreinamento as $dados)
+
+    $qtdTreinamento[$dadosQtdTreinamento->id_curso]['id_curso'] = $dadosQtdTreinamento->id_curso;
+    $qtdTreinamento[$dadosQtdTreinamento->id_curso]['treinamento_teorico'] = $dadosQtdTreinamento->treinamento_teorico;
+    $qtdTreinamento[$dadosQtdTreinamento->id_curso]['treinamento_pratico'] = $dadosQtdTreinamento->treinamento_pratico;
+
+      dd($qtdTreinamento);
+
+      if ($i==0){
+        $qtdTreinamento[$dadosQtdTreinamento->id_curso]['treinamento_teorico']['treinamento_pratica'] = $dataDisciplina->data;
+      }
+
+      $qtdTreinamento[$dataDisciplina->data] = $dataDisciplina->id_disciplina;
+      $j++;
+
+
+   //dd($qtdTreinamento);
+
+
+    }
 
 }
