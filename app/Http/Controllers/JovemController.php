@@ -393,11 +393,17 @@ class JovemController extends Controller
     $qtdTreinamento[$dadosQtdTreinamento->id_curso]['treinamento_teorico'] = $dadosQtdTreinamento->treinamento_teorico;
     $qtdTreinamento[$dadosQtdTreinamento->id_curso]['treinamento_pratico'] = $dadosQtdTreinamento->treinamento_pratico;
 
-      dd($qtdTreinamento);
+      dd($dadosQtdTreinamento->id_curso);
 
       if ($i==0){
         $qtdTreinamento[$dadosQtdTreinamento->id_curso]['treinamento_teorico']['treinamento_pratica'] = $dataDisciplina->data;
       }
+
+
+
+
+
+
 
       $qtdTreinamento[$dataDisciplina->data] = $dataDisciplina->id_disciplina;
       $j++;
