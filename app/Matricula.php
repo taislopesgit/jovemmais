@@ -11,7 +11,9 @@ use App\Matricula;
 use App\Cliente;
 use App\Gestor;
 
+
 class Matricula extends Model
+
 {
     protected $fillable = ['data_inicio','registro_folha','centro_custo','data_inicio','data_fim','id_jovem','id_grupo',];
     protected $guarded = ['id_matricula', 'criado_em', 'atualizado_em'];

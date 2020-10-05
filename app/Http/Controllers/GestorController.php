@@ -70,6 +70,4 @@ class GestorController extends Controller
 
     }
 
-
-
 }

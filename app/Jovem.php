@@ -388,9 +388,6 @@ class Jovem extends Model
     }
 
 
-
-
-
     public function jovemEvolucaoId(int $id)
     {
 
@@ -604,7 +601,6 @@ class Jovem extends Model
     }
 
 
-
     public function testePesquisa()
     { {
 
@@ -796,9 +792,6 @@ class Jovem extends Model
                 DB::raw('CEIL((SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_contato_matricula.id_matricula AND c.data_disciplina) *
                    (SELECT COUNT(c.id_matricula) FROM tb_cronograma AS c WHERE c.id_matricula = tb_contato_matricula.id_matricula	AND c.data_disciplina <= CURRENT_DATE())
                      / 100)  as aulaconcluida'),
-
-
-
 
                 DB::raw('(SELECT REVERSE(SUBSTRING(GROUP_CONCAT(c.id_justificativa ORDER BY c.data_disciplina DESC) FROM 1 FOR 9))
                      FROM
@@ -1026,7 +1019,9 @@ class Jovem extends Model
           ->orderBy('tb_disciplina_diaria.data', 'ASC')
           ->limit($qtdAula)
           ->get();
+          //dd($cicloData);
       return $cicloData;
+
     }
 
 
@@ -1046,7 +1041,7 @@ class Jovem extends Model
       return $dadosGrupo;
     }
 
-    public function dadosQtdTreinamento()
+    public function getDadosQtdTreinamento()
     {
       $dadosQtdTreinamento = DB::table('tb_curso')
 
@@ -1056,6 +1051,7 @@ class Jovem extends Model
         'tb_curso.treinamento_pratico'
       )
       ->first();
+
      //dd($dadosQtdTreinamento);
 
       return $dadosQtdTreinamento;

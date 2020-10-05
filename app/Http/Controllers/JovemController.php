@@ -381,37 +381,10 @@ class JovemController extends Controller
 
 
     ksort($cronograma);
-
-    $dadosQtdTreinamento = $jovem->dadosQtdTreinamento();
-
-    $qtdTreinamento = array();
-    $i=0;
-
-    foreach($dadosQtdTreinamento as $dados)
-
-    $qtdTreinamento[$dadosQtdTreinamento->id_curso]['id_curso'] = $dadosQtdTreinamento->id_curso;
-    $qtdTreinamento[$dadosQtdTreinamento->id_curso]['treinamento_teorico'] = $dadosQtdTreinamento->treinamento_teorico;
-    $qtdTreinamento[$dadosQtdTreinamento->id_curso]['treinamento_pratico'] = $dadosQtdTreinamento->treinamento_pratico;
-
-      dd($dadosQtdTreinamento->id_curso);
-
-      if ($i==0){
-        $qtdTreinamento[$dadosQtdTreinamento->id_curso]['treinamento_teorico']['treinamento_pratica'] = $dataDisciplina->data;
-      }
+      dd($cronograma);
 
 
-
-
-
-
-
-      $qtdTreinamento[$dataDisciplina->data] = $dataDisciplina->id_disciplina;
-      $j++;
-
-
-   //dd($qtdTreinamento);
-
-
+  }
     }
 
-}
+
